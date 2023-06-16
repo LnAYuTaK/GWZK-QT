@@ -1,10 +1,9 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.12
 import Qt.Singleton 1.0
 import "qrc:/common"
-
 /*标题栏*/
 Rectangle {
     id: windowtitle
@@ -30,7 +29,6 @@ Rectangle {
             Layout.fillWidth: true
             Layout.leftMargin: 3
         }
-
 
         ImageButton {
             imageSrc: "qrc:/windowRes/minimize.png"
@@ -63,10 +61,7 @@ Rectangle {
                  text: scaleInput.shrink ? "最大化" : "恢复"
                  font.pixelSize: 12
                  delay: 1000
-
-
             }
-
             Layout.alignment : Qt.AlignTop | Qt.AlignRight
             focusPolicy: Qt.NoFocus
             onShrinkChanged: {
@@ -92,7 +87,6 @@ Rectangle {
             padding: 3
         }
     }
-
     SkinPopup {
         id: skin_popup
     }

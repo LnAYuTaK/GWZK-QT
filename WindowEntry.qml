@@ -1,9 +1,8 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtGraphicalEffects 1.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
 import Qt.Singleton 1.0
-import FluentUI 1.0
 import "qrc:/common"
 import "qrc:/common/qmlQianDialog"
 import "qrc:/common/qmlQianHints"
@@ -72,12 +71,11 @@ Rectangle {
             id :selectPrduct
             visible: true
             anchors.centerIn: parent
-            //Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-               rows: 2
-               columns: 3
-               rowSpacing: 50
-               columnSpacing: 50
-               BaseButton {
+            rows: 2
+            columns: 3
+            rowSpacing: 50
+            columnSpacing: 50
+            BaseButton {
                    id: product1
                    text: "Product 1"
                    backRadius: 4
@@ -89,9 +87,8 @@ Rectangle {
                    }
                    Layout.row: 0
                    Layout.column: 0
-               }
-
-               BaseButton {
+            }
+            BaseButton {
                    id: product2
                    text: "Product 2"
                    backRadius: 4
@@ -101,8 +98,8 @@ Rectangle {
                    }
                    Layout.row: 0
                    Layout.column: 1
-               }
-               BaseButton {
+            }
+            BaseButton {
                    id: product3
                    text: "Product 3"
                    backRadius: 4
@@ -112,9 +109,8 @@ Rectangle {
                    }
                    Layout.row: 1
                    Layout.column: 0
-               }
-
-               BaseButton {
+            }
+            BaseButton {
                    id: product4
                    text: "Product 4"
                    backRadius: 4
@@ -124,10 +120,9 @@ Rectangle {
                    }
                    Layout.row: 1
                    Layout.column: 1
-               }
+            }
                // 依此类推，创建5个按钮
-           }
-
+        }
         ContentList {
             id: contentList
             visible: false
@@ -135,5 +130,4 @@ Rectangle {
             Layout.fillWidth: true
         }
     }
-
 }

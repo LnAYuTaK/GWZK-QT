@@ -1,4 +1,4 @@
-#include <QtQml>
+﻿#include <QtQml>
 #include "Application.h"
 #include "ModuleBox.h"
 #include "NetWorkManager.h"
@@ -36,7 +36,6 @@ static QObject *QmlGlobalRegist(QQmlEngine*, QJSEngine*)
     return  qobject_cast<QObject *>(qmlGlobal);
 }
 //-----------------------------------------------------------------------------
-//这里将所有模块注册到QML 中使用 类似头文件
 void Application::initAppCommon()
 {
     qmlRegisterUncreatableType<NetWorkManager>  ("App.NetWorkManager",   1, 0, "NetWorkManager",  "Reference only");

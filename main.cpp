@@ -6,12 +6,12 @@
 #include <QQmlContext>
 #include <QDir>
 #include "appSrc/Application.h"
+#include <QTextCodec>
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QCoreApplication::setOrganizationName("Some organization");
-
     Application * app = new Application(argc,argv);
     Q_CHECK_PTR(app);
     app->initAppCommon();

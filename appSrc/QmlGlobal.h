@@ -4,7 +4,7 @@
 // *
 // * @file          QmlGlobal.h
 // * @brief         QmlGlobal
-// * @Description   将所有模块单例注册到QML
+// * @Description
 // * @author        liukuan<807874484@qq.com>
 // * @date          2023/06/15
 // * @history

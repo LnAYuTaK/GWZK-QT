@@ -1,4 +1,4 @@
-import QtQuick 2.14
+﻿import QtQuick 2.14
 import QtGraphicalEffects 1.12
 import Qt.Window 1.0
 import QtQuick.Window 2.14
@@ -7,7 +7,6 @@ import QtQuick.Controls.Material 2.12
 import Qt.labs.platform 1.1
 import Qt.labs.settings 1.0
 import App 1.0
-import FluentUI 1.0
 
 Frameless {
     id: rootWindow
@@ -59,13 +58,11 @@ Frameless {
         close();
     }
 
-
     WindowEntry {
         anchors.fill: parent
         anchors.margins: rootWindow.maximized ? 0 : 8
         radius: rootWindow.maximized ? 0 : 4
     }
-
     Settings {
         id: setting
         property int skinIndex: 1

@@ -1,4 +1,4 @@
-#ifndef Backed_H
+﻿#ifndef Backed_H
 #define Backed_H
 
 #include <QtNetwork/QNetworkReply>
@@ -56,5 +56,6 @@ static QObject *Backed_qobject_provider(QQmlEngine *engine, QJSEngine *scriptEng
     Q_UNUSED(scriptEngine)
     return Backed::instance();
 }
+
 
 #endif

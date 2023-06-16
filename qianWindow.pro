@@ -10,7 +10,6 @@ CONFIG += resources_big
 # depend on your compiler). Refer to the documentation for the
 # deprecated API to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
@@ -19,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     appSrc/Application.cpp \
     appSrc/NetWorkManager.cpp \
+    appSrc/Protocol.cpp \
     appSrc/QmlGlobal.cpp \
         main.cpp \
 
@@ -50,4 +50,5 @@ ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 HEADERS += \
     appSrc/Application.h \
     appSrc/NetWorkManager.h \
+    appSrc/Protocol.h \
     appSrc/QmlGlobal.h

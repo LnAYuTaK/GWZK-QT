@@ -1,4 +1,4 @@
-import QtQuick 2.14
+﻿import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
@@ -34,6 +34,7 @@ Item {
                     Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                 }
                 BaseComboBox{
+                    id:commSelct
                   Layout.alignment: Qt.AlignRight
                   Layout.preferredWidth:280
                   Layout.preferredHeight:40
@@ -51,6 +52,10 @@ Item {
                 }
                 BaseTextField{
                   id:hostField
+                  placeholderText:"请输入IP"
+                  validator: RegExpValidator {
+                      regExp: /^((([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.){3})([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$/
+                  }
                   Layout.preferredWidth:280
                 }
             }
@@ -65,19 +70,31 @@ Item {
                 }
                 BaseTextField{
                   id:portField
+                  placeholderText:"请输入端口号"
                   Layout.preferredWidth:280
+                  validator: RegExpValidator {
+                          regExp: /^(0|[1-9]\d{0,3}|[1-5]\d{4}|[6][0-4]\d{3}|[6][5][0-4]\d{2}|[6][5][5][0-2]\d|[6][5][5][3][0-5])$/
+                     }
                 }
             }
             RowLayout{
                 Layout.fillWidth: true
                 BaseButton {
-                    text: "连接"
+                    text:  App.netWorkManager.IsTcpConnected? "已连接":"连接"
                     font.pixelSize:  20
                     backRadius: 4
-                    bckcolor: "#4785FF"
+                    bckcolor:  App.netWorkManager.IsTcpConnected ? "#4785FF" : "gray"
                     Layout.alignment:Qt.AlignBottom
                     onClicked: {
-                        App.netWorkManager.tcpConnect(hostField.text,portField.text)
+                        if((hostField.text.length ===0)&&(portField.text.length===0))
+                        {
+                            message("error","IP或端口号为空")
+                            return
+                        }
+                        if(commSelct.currentText == "TCP")
+                        {
+                            App.netWorkManager.tcpConnect(hostField.text,portField.text)
+                        }
                     }
                 }
                 Rectangle {
@@ -87,15 +104,14 @@ Item {
                     text: "断开"
                     font.pixelSize:  20
                     backRadius: 4
-                    bckcolor: "#4785FF"
+                    bckcolor: App.netWorkManager.IsTcpConnected? "#EC3315":"gray"
                     Layout.alignment:Qt.AlignBottom
                     onClicked: {
-                        App.netWorkManager.witeString("123123123123")
-                    }
+                        App.netWorkManager.tcpDisConnect()
 
+                    }
                 }
             }
-            //填充最底部
             Rectangle {
                  width: parent.width
                  height: 10
@@ -103,14 +119,12 @@ Item {
         }
     }
 
-    //连接提示
-    function tcpConnectFun(type)
-    {
-        message('success', "TCP连接!")
-    }
     Component.onCompleted: {
+        //连接后端服务与qml的MSG 提示
+        App.netWorkManager.InfoMsg.connect(message)
+        //连接后端网络连接部分
 
-        App.netWorkManager.connected.connect(tcpConnectFun)
+
     }
     Message{
         id:messageTip
@@ -122,6 +136,7 @@ Item {
         if(type!=='success'&&type!=='error'&&type!=='info'){
             return false
         }
+
         messageTip.open(type, message)
     }
 
@@ -130,7 +145,6 @@ Item {
         backParent: windowEntry
         parent: Overlay.overlay
         onAccept: {
-           message('success', "You clicked the accept button!")
            skinQianDialog.close();
         }
     }

@@ -1,8 +1,10 @@
-#include "NetWorkManager.h"
+﻿#include "NetWorkManager.h"
+#include "Protocol.h"
 NetWorkManager::NetWorkManager(QObject *parent)
     : QObject{parent}
-    ,_socket(nullptr)
     ,_socketIsConnected(false)
+    ,_socket(nullptr)
+    ,_protocol(new Protocol(this))
 {
 
 }
@@ -12,9 +14,29 @@ NetWorkManager::~NetWorkManager()
     if(_socket)
     {
         _socketIsConnected =false;
+        emit ConnectedChanged(_socketIsConnected);
         _socket->deleteLater();
         _socket = nullptr;
     }
+}
+//-----------------------------------------------------------------------------
+bool NetWorkManager::tcpConnect(QString IP,QString port)
+{
+    if (_socket) {
+        emit InfoMsg("info",QStringLiteral("请勿重复TCP连接"));
+        return false;
+    }
+    return this->_tcpConnect(IP,port.toInt());
+}
+//-----------------------------------------------------------------------------
+void NetWorkManager::tcpDisConnect()
+{
+    if(!_socket)
+    {
+        emit InfoMsg("info",QStringLiteral("尚未创建TCP连接"));
+        return;
+    }
+    this->_tcpDisConnect();
 }
 //-----------------------------------------------------------------------------
 void NetWorkManager::_tcpReadBytes()
@@ -27,6 +49,7 @@ void NetWorkManager::_tcpReadBytes()
             buffer.resize(byteCount);
             _socket->read(buffer.data(), buffer.size());
             emit bytesReceived(nullptr,buffer);
+            qDebug()<<QThread::currentThreadId();
             qDebug()<<QString(buffer);
         }
     }
@@ -42,35 +65,42 @@ void NetWorkManager::_tcpWriteBytes(const QByteArray data)
 //-----------------------------------------------------------------------------
 bool NetWorkManager::_tcpConnect(QString IP,qint16 port)
 {
+
     _socket = new QTcpSocket(this);
     QObject::connect(_socket, &QIODevice::readyRead, this, &NetWorkManager::_tcpReadBytes);
-    QObject::connect(_socket, &QTcpSocket::disconnected, this, &NetWorkManager::tcpDisConnect);
+    QObject::connect(_socket, &QTcpSocket::disconnected, this, &NetWorkManager::_tcpDisConnect);
     _socket->connectToHost(IP,port);
     if (!_socket->waitForConnected(1000))
     {
         _socket->deleteLater();
         _socket = nullptr;
         _socketIsConnected = false;
-        emit errorMsg(TCP_LINK,QString("connect falut"));
+        emit ConnectedChanged(_socketIsConnected);
+        emit InfoMsg("error",QStringLiteral("TCP连接失败"));
         return false;
     }
+    emit InfoMsg("success",QStringLiteral("TCP连接成功"));
     _socketIsConnected = true;
-    emit connected(TCP_LINK);
+    emit ConnectedChanged(_socketIsConnected);
+    //数据绑定//
+    QThread *tcpThread = new QThread();
+    connect(this,&NetWorkManager::bytesReceived,_protocol,&Protocol::ProtocolHandle);
+    _protocol->moveToThread(tcpThread);
+    tcpThread->start();
     return true;
 }
 //-----------------------------------------------------------------------------
-void NetWorkManager::tcpDisConnect()
+void NetWorkManager::_tcpDisConnect()
 {
-    //服务器断线处理 立即删除资源
-    qDebug()<<"DisConnect";
     if(_socket)
     {
         _socket->close();
         _socketIsConnected =false;
+        emit ConnectedChanged(_socketIsConnected);
         _socket->deleteLater();
         _socket = nullptr;
     }
-    emit disConnect(TCP_LINK);
+    emit InfoMsg("info",QStringLiteral("与服务器断开链接"));
 }
 //-----------------------------------------------------------------------------
 

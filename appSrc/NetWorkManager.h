@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
  * Copyright 2023-xxxx xxx Co., Ltd.
  * All right reserved. See COPYRIGHT for detailed Information.
  *
@@ -13,6 +13,9 @@
 #define NETWORKMANAGER_H
 #include <QObject>
 #include <QTcpSocket>
+#include <QThread>
+class Protocol;
+
 enum LinkType{
     TCP_LINK,
     MQTT_LINK,
@@ -26,43 +29,59 @@ public:
     Q_ENUM(LinkType)
     explicit NetWorkManager(QObject *parent = nullptr);
     ~NetWorkManager();
-    //属性
-    //Q_PROPERTY()
-    //函数
-    //Q_INVOKABLE()
 
-    Q_INVOKABLE bool tcpConnect(QString IP,QString port)
+    //绑定前端
+    Q_PROPERTY(bool IsTcpConnected READ IsTcpConnected NOTIFY ConnectedChanged);
+public:
+    bool IsTcpConnected ()const
     {
-
-        if (_socket) {
-            qWarning() << "connect called while already connected";
-            return true;
-        }
-        return this->_tcpConnect(IP,port.toInt());
+        return this->_socketIsConnected;
     }
 
-    Q_INVOKABLE void witeString(QString Str){
-        this->_tcpWriteBytes(Str.toUtf8());
-    }
+    //*********TCP*********//
+    //连接函数
+    Q_INVOKABLE bool tcpConnect(QString IP,QString port);
+    //断开函数
+    Q_INVOKABLE void tcpDisConnect();
+    //*********UDP*********//
+    // Q_INVOKABLE bool ucpConnect(QString IP,QString port);
+    // Q_INVOKABLE void ucpDisConnect();
+
+//    void handel()
+//    {
+//        QThread *Test       = new QThread();
+//        Protocol * protocol = new Protocol();
+//         connect(this,&NetWorkManager::bytesReceived,protocol,&protocol::Thread_Fun);
+////        thread_class->moveToThread(Thread_Test);
+////        Thread_Test->start();
+////        emit ToThread();
+//    }
+
 
 signals:
-    void connected          (LinkType type);
-    void errorMsg           (LinkType type,QString errorMsg);
-    void disConnect         (LinkType type);
+    /**
+     * @brief InfoMsg
+     * @param type 1. success 2.error 3.info
+     * @param Msg
+     */
+    void InfoMsg            (QString  type,QString Msg);
+
     void bytesReceived      (QObject* link, QByteArray data);
     void bytesSent          (QObject* link, QByteArray data);
-
+    void ConnectedChanged (bool isconnect);
 private slots:
+    //*********TCP*********//
     bool _tcpConnect(QString IP,qint16 port);
     void _tcpReadBytes  ();
     void _tcpWriteBytes (const QByteArray data);
-    //断线处理
-    void tcpDisConnect();
+    void _tcpDisConnect();
+    //*********UDP*********//
+
 private:
     bool          _socketIsConnected;
     QTcpSocket *  _socket;
-
-
+    Protocol   *  _protocol;
+    QThread *     _tcpThread;
 };
 
 #endif // NETWORKMANAGER_H

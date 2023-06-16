@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
 import QtCharts 2.14
@@ -10,7 +10,6 @@ Rectangle {
     id: contentList
 
     color: mainColor
-
     RowLayout {
         anchors.fill: parent
         anchors.rightMargin: 14
@@ -29,9 +28,7 @@ Rectangle {
             layoutPreferredWidth: skin.gradSupport  ? 175 : 198
             bckColor: !skin.gradSupport && !skin.imageSupport ? skin.contentBackColor:
                         !skin.light  ? Qt.rgba(0,0,0, 0.7 - setting.skinOpacity * 0.38) : Qt.rgba(1,1,1, 0.20 + setting.skinOpacity * 0.68)
-
         }
-
         Rectangle {
             Layout.leftMargin: -leftSidebar.tailWidth
             Layout.fillHeight: true
