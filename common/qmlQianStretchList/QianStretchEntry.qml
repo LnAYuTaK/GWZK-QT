@@ -16,9 +16,6 @@ Item {
             stretch: false,
             subItem: [
                 {
-                    name: "串口连接",
-                },
-                {
                     name: "网络连接",
                 }
            ]
@@ -28,22 +25,7 @@ Item {
             stretch: false,
             subItem: [
                 {
-                    name: "微气象",
-                },
-                {
-                    name: "杆塔倾斜",
-                },
-                {
-                    name: "微风振动",
-                },
-                {
-                    name: "导线弧垂",
-                },
-                {
-                    name:"覆冰"
-                },
-                {
-                    name:"舞动"
+                    name:"气体监测"
                 },
                 {
                     name:"图像"
@@ -83,8 +65,7 @@ Item {
                 },
                 {
                     name: "网络连接",
-                }//,
-
+                }
            ]
         },
         {
@@ -106,7 +87,6 @@ Item {
            ]
         }
     ]
-
 
     ListModel {
         id: stretchModel

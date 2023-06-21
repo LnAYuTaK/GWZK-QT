@@ -19,11 +19,9 @@ class QmlGlobal : public QObject
 public:
     explicit QmlGlobal(QObject *parent = nullptr);
     Q_PROPERTY(NetWorkManager *  netWorkManager  READ   netWorkManager    CONSTANT)
-
     NetWorkManager * netWorkManager(){return this->_netWorkManager;}
 private:
     NetWorkManager *_netWorkManager;
-
 };
 
 #endif // QMLGLOBAL_H

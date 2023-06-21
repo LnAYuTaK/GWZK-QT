@@ -57,7 +57,6 @@ Frameless {
     function closeFunc() {
         close();
     }
-
     WindowEntry {
         anchors.fill: parent
         anchors.margins: rootWindow.maximized ? 0 : 8

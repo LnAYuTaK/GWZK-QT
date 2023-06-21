@@ -3,14 +3,16 @@
 #include "ModuleBox.h"
 #include "NetWorkManager.h"
 #include "QmlGlobal.h"
-
+#include "ParaFactManager.h"
 Application* Application::_app = nullptr;
 Application::Application(int &argc, char* argv[])
     :QApplication(argc, argv)
+    ,_paraFactMgr(nullptr)
     ,_netWorkMgr(nullptr)
 {
     _app = this;
-    _netWorkMgr = new NetWorkManager(this);
+    _paraFactMgr = new ParaFactManager(this);
+    _netWorkMgr =  new NetWorkManager(this);
 }
 //-----------------------------------------------------------------------------
 Application::~Application()

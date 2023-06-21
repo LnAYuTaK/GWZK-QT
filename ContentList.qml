@@ -16,11 +16,9 @@ Rectangle {
         anchors.leftMargin: leftSidebar.isOpen ? 14 : 0
         anchors.topMargin: 14
         anchors.bottomMargin: 14
-
         Behavior on anchors.leftMargin {
             NumberAnimation { duration: 100 }
         }
-
         spacing: 20
         LeftSidebar {
             id: leftSidebar
@@ -33,11 +31,9 @@ Rectangle {
             Layout.leftMargin: -leftSidebar.tailWidth
             Layout.fillHeight: true
             Layout.fillWidth: true
-
             radius: skin.gradSupport || skin.imageSupport ? 14 : 8
             color: !skin.gradSupport && !skin.imageSupport ? skin.contentBackColor :
                             !skin.light  ? Qt.rgba(0,0,0, 0.7 - setting.skinOpacity * 0.38) : Qt.rgba(1,1,1, 0.10 + setting.skinOpacity * 0.88)
-
 
             layer.enabled: skin.shadow
             layer.effect: DropShadow {
@@ -45,7 +41,6 @@ Rectangle {
                 radius: 8
                 samples: 17
             }
-
             PageManager {
                 id: pages
                 anchors.fill: parent
@@ -53,7 +48,6 @@ Rectangle {
         }
 
     }
-
     Connections {
         target: leftSidebar.stretchEntry
         onSwitchPage:  pages.switchPage(name)

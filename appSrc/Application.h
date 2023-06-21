@@ -15,6 +15,7 @@
 #include <QObject>
 #include <QQmlEngine>
 #include <QSettings>
+class ParaFactManager;
 class NetWorkManager;
 class QmlGlobal;
 class Application : public QApplication
@@ -31,8 +32,8 @@ public :
     void initAppCommon();
     void initAppView();
 private:
-    NetWorkManager * _netWorkMgr;
-
+    ParaFactManager * _paraFactMgr;
+    NetWorkManager  * _netWorkMgr;
 };
 Application* app(void);
 #endif // FREEKAPPLICATION_H

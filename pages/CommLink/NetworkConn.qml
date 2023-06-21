@@ -108,7 +108,16 @@ Item {
                     Layout.alignment:Qt.AlignBottom
                     onClicked: {
                         App.netWorkManager.tcpDisConnect()
-
+                    }
+                }
+                BaseButton {
+                    text: "测试发送"
+                    font.pixelSize:  20
+                    backRadius: 4
+                    bckcolor:"gray"
+                    Layout.alignment:Qt.AlignBottom
+                    onClicked: {
+                        App.netWorkManager.WiteTest();
                     }
                 }
             }
@@ -123,8 +132,6 @@ Item {
         //连接后端服务与qml的MSG 提示
         App.netWorkManager.InfoMsg.connect(message)
         //连接后端网络连接部分
-
-
     }
     Message{
         id:messageTip
@@ -136,7 +143,6 @@ Item {
         if(type!=='success'&&type!=='error'&&type!=='info'){
             return false
         }
-
         messageTip.open(type, message)
     }
 

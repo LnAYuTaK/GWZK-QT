@@ -14,8 +14,7 @@
 #include <QObject>
 #include <QTcpSocket>
 #include <QThread>
-class Protocol;
-
+#include "Protocol.h"
 enum LinkType{
     TCP_LINK,
     MQTT_LINK,
@@ -47,17 +46,10 @@ public:
     // Q_INVOKABLE bool ucpConnect(QString IP,QString port);
     // Q_INVOKABLE void ucpDisConnect();
 
-//    void handel()
-//    {
-//        QThread *Test       = new QThread();
-//        Protocol * protocol = new Protocol();
-//         connect(this,&NetWorkManager::bytesReceived,protocol,&protocol::Thread_Fun);
-////        thread_class->moveToThread(Thread_Test);
-////        Thread_Test->start();
-////        emit ToThread();
-//    }
+    Q_INVOKABLE void WiteTest()
+    {
 
-
+    }
 signals:
     /**
      * @brief InfoMsg
@@ -81,7 +73,7 @@ private:
     bool          _socketIsConnected;
     QTcpSocket *  _socket;
     Protocol   *  _protocol;
-    QThread *     _tcpThread;
+    QThread    *  _tcpThread;
 };
 
 #endif // NETWORKMANAGER_H

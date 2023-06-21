@@ -1,0 +1,73 @@
+{
+    "version":      1.0,
+    "componentid":  1,
+    "NetParaSettingReg":
+    [
+        {
+            "address":     "0x0228",
+            "operate":     "R/W",
+            "content":     "主站IP地址1",
+            "format" :     "192.168.0.12:其中,192是0x0210地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0229",
+            "operate":     "R/W",
+            "content":     "主站IP地址2",
+            "format" :     "192.168.0.12:其中,192是0x0210地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x022A",
+            "operate":     "R/W",
+            "content":     "主站端口地址",
+            "format" :     "0~65535"
+        },
+        {
+            "address":     "0x022B",
+            "operate":     "R/W",
+            "content":     "主站连接方式",
+            "format" :     "0:TCP;1:UDP"
+        },
+        {
+            "address":     "0x022C",
+            "operate":     "R/W",
+            "content":     "SIM1卡APN",
+            "format" :     "占用16个地址,32个字节.自动补0"
+        },
+        {
+            "address":     "0x023C",
+            "operate":     "R/W",
+            "content":     "SIM1卡用户名",
+            "format" :     "占用16个地址,32个字节.自动补0"
+        },
+        {
+            "address":     "0x024C",
+            "operate":     "R/W",
+            "content":     "SIM1卡密码",
+            "format" :     "占用16个地址,32个字节.自动补0"
+        },
+        {
+            "address":     "0x025C",
+            "operate":     "R/W",
+            "content":     "备用IP地址1",
+            "format" :     "192.168.0.12;其中,192是0x0210地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x025D",
+            "operate":     "R/W",
+            "content":     "备用IP地址2",
+            "format" :     "192.168.0.12;其中,192是0x0210地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x025E",
+            "operate":     "R/W",
+            "content":     "备用端口地址",
+            "format" :     "0~65535"
+        },
+        {
+            "address":     "0x025F",
+            "operate":     "R/W",
+            "content":     "备用连接方式",
+            "format" :     "0:TCP;1:UDP"
+        }
+    ]
+}

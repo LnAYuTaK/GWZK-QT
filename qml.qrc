@@ -66,5 +66,7 @@
         <file>pages/ParaSettingQuery/MqttPata.qml</file>
         <file>pages/CommLink/NetworkConn.qml</file>
         <file>pages/CommLink/SerialConn.qml</file>
+        <file>pages/DeviceList/DevicerList_GasMonitor.qml</file>
+        <file>RegFact.json</file>
     </qresource>
 </RCC>

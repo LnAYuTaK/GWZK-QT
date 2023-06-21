@@ -7,6 +7,7 @@
 #include <QDir>
 #include "appSrc/Application.h"
 #include <QTextCodec>
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

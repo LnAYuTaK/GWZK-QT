@@ -30,7 +30,6 @@ Item {
                   indeterminate: false
                   implicitWidth: 220
                   value: 0
-
                   NumberAnimation on value {
                       id: progressAnimation
                       from: 0

@@ -20,7 +20,6 @@ public:
 
 };
 
-
 class FramelessWindow : public QQuickWindow
 {
     Q_OBJECT
@@ -111,8 +110,8 @@ private:
 
     bool m_resizable;
     MouseEvent m_event;
-    QPoint m_globalPressPos;    // 鼠标按下的全局坐标
-    QPoint m_pressPos;          // 鼠标按下的应用程序内的坐标
+    QPoint m_globalPressPos;
+    QPoint m_pressPos;
     bool m_move;
     QSize  m_preSize;
     QList<QRect> m_moveArea;

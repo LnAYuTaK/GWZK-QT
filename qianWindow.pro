@@ -2,7 +2,6 @@ QT += quick
 QT += quickcontrols2
 QT += widgets
 QT += network
-
 CONFIG += c++17
 CONFIG += resources_big
 # The following define makes your compiler emit warnings if you use
@@ -18,8 +17,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     appSrc/Application.cpp \
     appSrc/NetWorkManager.cpp \
+    appSrc/ParaFactManager.cpp \
     appSrc/Protocol.cpp \
     appSrc/QmlGlobal.cpp \
+    fact/JsonFactGroup.cpp \
         main.cpp \
 
 
@@ -50,5 +51,7 @@ ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 HEADERS += \
     appSrc/Application.h \
     appSrc/NetWorkManager.h \
+    appSrc/ParaFactManager.h \
     appSrc/Protocol.h \
-    appSrc/QmlGlobal.h
+    appSrc/QmlGlobal.h \
+    fact/JsonFactGroup.h

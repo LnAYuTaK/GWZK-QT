@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.12
 import "qrc:/common"
-/*装置列表 ------导线弧垂 */
+/*装置列表 ------气体监测 */
 Item {
     id:root
     property int leftWidth: 182
@@ -51,6 +51,7 @@ Item {
                             }
                             BaseTextField {
                                  width :90
+
                             }
                         }
                         Row {
@@ -79,7 +80,7 @@ Item {
                             spacing:10
                             YaheiText {
                                 anchors.centerIn: parent.Center
-                                text: "导线弧垂编码"+(index+1)
+                                text: "气体监测编码"+(index+1)
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment: Qt.AlignTop | Qt.AlignLeft
@@ -121,4 +122,3 @@ Item {
         }
 
 }
-
