@@ -1,0 +1,103 @@
+{
+    "version":      1.0,
+    "componentid":  2,
+    "TunnelGasData":
+    [
+        {
+            "address":     "0x0160",
+            "operate":     "R",
+            "content":     "氧气含量",
+            "format" :     "单位:VOL;扩大100倍"
+        },
+        {
+            "address":     "0x0161",
+            "operate":     "R",
+            "content":     "一氧化碳含量",
+            "format" :     "单位:ppm;扩大100倍"
+        },
+        {
+            "address":     "0x0162",
+            "operate":     "R",
+            "content":     "氯气含量",
+            "format" :     "单位:ppm;扩大100倍"
+        },
+        {
+            "address":     "0x0163",
+            "operate":     "R",
+            "content":     "硫化氢含量",
+            "format" :     "单位:ppm;扩大100倍"
+        },
+        {
+            "address":     "0x0164",
+            "operate":     "R",
+            "content":     "氢气含量",
+            "format" :     "单位:ppm;扩大100倍"
+        },
+        {
+            "address":     "0x0165",
+            "operate":     "R",
+            "content":     "二氧化碳含量",
+            "format" :     "单位:ppm;扩大100倍"
+        },
+        {
+            "address":     "0x0166",
+            "operate":     "R",
+            "content":     "甲烷含量",
+            "format" :     "单位:%LEL;扩大100倍"
+        },
+        {
+            "address":     "0x0167",
+            "operate":     "R",
+            "content":     "环境温度",
+            "format" :     "单位:℃扩大100倍"
+        },
+        {
+            "address":     "0x0168",
+            "operate":     "R",
+            "content":     "环境湿度",
+            "format" :     "单位:%RH;扩大10倍"
+        },
+        {
+            "address":     "0x0169",
+            "operate":     "R",
+            "content":     "备用1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x016A",
+            "operate":     "R",
+            "content":     "备用2",
+            "format" :     ""
+        },
+        {
+            "address":     "0x016B",
+            "operate":     "R/W",
+            "content":     "备用3",
+            "format" :     ""
+        },
+        {
+            "address":     "0x016C",
+            "operate":     "R",
+            "content":     "O2/CO/Cl2/H2S/H2/CO2/CH4报警等级",
+            "format" :     "Bit1~bit0为res;bit15~bit14代表O2;0:正常,1:一般;2:重要;3:严重"
+        },
+        {
+            "address":     "0x016D",
+            "operate":     "R",
+            "content":     "环境温度/湿度报警等级",
+            "format" :     "Bit1~bit0为res;bit15~bit14代表O2;0:正常,1:一般;2:重要;3:严重"
+        },
+        {
+            "address":     "0x016E",
+            "operate":     "R",
+            "content":     "备用",
+            "format" :     ""
+        },
+        {
+            "address":     "0x016F",
+            "operate":     "R",
+            "content":     "备用",
+            "format" :     ""
+        }
+    ]
+}

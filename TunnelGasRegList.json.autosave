@@ -1,0 +1,103 @@
+{
+    "version":      1.0,
+    "componentid":  1,
+    "TunnelGas":
+    [
+        {
+            "address":     "0x00E0",
+            "operate":     "R/W",
+            "content":     "气体ID地址1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00E1",
+            "operate":     "R/W",
+            "content":     "主站IP地址2",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00E2",
+            "operate":     "R/W",
+            "content":     "气体ID地址3",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00E3",
+            "operate":     "R/W",
+            "content":     "气体ID地址4",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00E4",
+            "operate":     "R/W",
+            "content":     "气体ID地址5",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00E5",
+            "operate":     "R/W",
+            "content":     "气体ID地址6",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00E6",
+            "operate":     "R/W",
+            "content":     "气体ID地址7",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00E7",
+            "operate":     "R/W",
+            "content":     "气体ID地址8",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00E8",
+            "operate":     "R/W",
+            "content":     "气体ID地址9",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00E9",
+            "operate":     "R/W",
+            "content":     "气体ID地址格式",
+            "format" :     "0:递增；1:相同,默认为0"
+        },
+        {
+            "address":     "0x00EA",
+            "operate":     "R/W",
+            "content":     "气体单元数量",
+            "format" :     "无量纲，默认为0"
+        },
+        {
+            "address":     "0x00EB",
+            "operate":     "R/W",
+            "content":     "气体单元周期",
+            "format" :     "单位min，默认为0"
+        },
+        {
+            "address":     "0x00EC",
+            "operate":     "R/W",
+            "content":     "气体单元通道",
+            "format" :     "无量纲,默认为0,备用"
+        },
+        {
+            "address":     "0x00ED",
+            "operate":     "R/W",
+            "content":     "",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x00EE",
+            "operate":     "R/W",
+            "content":     "",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x00EF",
+            "operate":     "R/W",
+            "content":     "",
+            "format" :     "备用"
+        }
+    ]
+}

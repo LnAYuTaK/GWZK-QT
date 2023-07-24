@@ -1,7 +1,7 @@
 {
     "version":      1.0,
-    "componentid":  1,
-    "NetParaSettingReg":
+    "componentid":  5,
+    "NetParaSetting":
     [
         {
             "address":     "0x0228",

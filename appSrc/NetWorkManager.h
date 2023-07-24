@@ -57,7 +57,6 @@ signals:
      * @param Msg
      */
     void InfoMsg            (QString  type,QString Msg);
-
     void bytesReceived      (QObject* link, QByteArray data);
     void bytesSent          (QObject* link, QByteArray data);
     void ConnectedChanged (bool isconnect);
@@ -68,6 +67,14 @@ private slots:
     void _tcpWriteBytes (const QByteArray data);
     void _tcpDisConnect();
     //*********UDP*********//
+
+
+    //*********MQTT*******//
+
+
+
+
+
 
 private:
     bool          _socketIsConnected;

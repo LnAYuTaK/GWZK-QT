@@ -1,0 +1,25 @@
+{
+    "version":      1.0,
+    "componentid":  4,
+    "MainControl":
+    [
+        {
+            "address":     "0x0400",
+            "operate":     "R/W",
+            "content":     "系统时间地址1",
+            "format" :     "世纪秒;0代表1970年1月1日8时0分0秒."
+        },
+        {
+            "address":     "0x0401",
+            "operate":     "R/W",
+            "content":     "系统时间地址2",
+            "format" :     "世纪秒;0代表1970年1月1日8时0分0秒."
+        },
+        {
+            "address":     "0x0402",
+            "operate":     "W",
+            "content":     "系统操作使能",
+            "format" :     "Bit0:系统重启;bit1:重新拨号连接主站."
+        }
+    ]
+}

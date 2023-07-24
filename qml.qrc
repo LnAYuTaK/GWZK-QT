@@ -65,8 +65,13 @@
         <file>pages/ParaSettingQuery/ModelPara.qml</file>
         <file>pages/ParaSettingQuery/MqttPata.qml</file>
         <file>pages/CommLink/NetworkConn.qml</file>
-        <file>pages/CommLink/SerialConn.qml</file>
         <file>pages/DeviceList/DevicerList_GasMonitor.qml</file>
-        <file>RegFact.json</file>
+        <file>NetParaSettingRegList.json</file>
+        <file>TunnelGasDeviceRegList.json</file>
+        <file>MainControlParaSettingRegList.json</file>
+        <file>MainControlRegList.json</file>
+        <file>TunnelGasData.json</file>
+        <file>GasParaSettingRegList.json</file>
+        <file>LocalNetParaSettingRegList.json</file>
     </qresource>
 </RCC>

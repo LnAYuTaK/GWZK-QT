@@ -110,16 +110,6 @@ Item {
                         App.netWorkManager.tcpDisConnect()
                     }
                 }
-                BaseButton {
-                    text: "测试发送"
-                    font.pixelSize:  20
-                    backRadius: 4
-                    bckcolor:"gray"
-                    Layout.alignment:Qt.AlignBottom
-                    onClicked: {
-                        App.netWorkManager.WiteTest();
-                    }
-                }
             }
             Rectangle {
                  width: parent.width

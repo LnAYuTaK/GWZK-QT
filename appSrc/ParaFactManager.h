@@ -31,7 +31,6 @@ public:
 signals:
 
 private:
-
     //Json Fact Group NetParaSettingReg
     JsonFactGroup *TunnelGasRegList;            //隧道气体装置寄存器列表
     JsonFactGroup *MainConParaSetRegList;       //主控参数设置寄存器列表
@@ -39,8 +38,6 @@ private:
     JsonFactGroup *NetParaSetRegList;           //网络参数设置寄存器列表
     JsonFactGroup *GasParaSetRegList;           //气体参数设置寄存器列表
     JsonFactGroup *EncryParaSetRegList;         //加密参数设置寄存器列表
-
-
 };
 
 #endif // PARAFACTMANAGER_H

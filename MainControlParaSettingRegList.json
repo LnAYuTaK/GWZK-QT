@@ -1,0 +1,103 @@
+{
+    "version":      1.0,
+    "componentid":  3,
+    "MainControlParaSetting":
+    [
+        {
+            "address":     "0x0200",
+            "operate":     "R/W",
+            "content":     "主板ID地址1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0201",
+            "operate":     "R/W",
+            "content":     "主板IP地址2",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0202",
+            "operate":     "R/W",
+            "content":     "主板ID地址3",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0203",
+            "operate":     "R/W",
+            "content":     "主板ID地址4",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0204",
+            "operate":     "R/W",
+            "content":     "主板ID地址5",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0205",
+            "operate":     "R/W",
+            "content":     "主板ID地址6",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0206",
+            "operate":     "R/W",
+            "content":     "主板ID地址7",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0207",
+            "operate":     "R/W",
+            "content":     "主板ID地址8",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0208",
+            "operate":     "R/W",
+            "content":     "主板ID地址9",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0209",
+            "operate":     "R/W",
+            "content":     "通讯方式",
+            "format" :     "0:GPRS;1:本地串口;2:本地网络;3:其它"
+        },
+        {
+            "address":     "0x020A",
+            "operate":     "R/W",
+            "content":     "是否加密/加密方式",
+            "format" :     "高字节代表是否加密(0:不加密;1:加密);低字节代表加密方式(0:南瑞加密芯片;1:普华加密芯片;2:SD卡加密;3:其它)"
+        },
+        {
+            "address":     "0x020B",
+            "operate":     "R",
+            "content":     "软件版本地址1",
+            "format" :     "V12.0.1.3;其中,12是0x020B地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x020C",
+            "operate":     "R",
+            "content":     "软件版本地址2",
+            "format" :     "V12.0.1.3;其中,12是0x020B地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x020D",
+            "operate":     "R/W",
+            "content":     "备用1",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x020E",
+            "operate":     "R/W",
+            "content":     "备用2",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x020F",
+            "operate":     "R/W",
+            "content":     "备用3",
+            "format" :     "备用"
+        }
+    ]
+}
