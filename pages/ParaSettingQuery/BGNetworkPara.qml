@@ -31,11 +31,11 @@ Item {
                         YaheiText {
                             text:qsTr("服务器地址")
                             font.pixelSize: fontsize
-                            Layout.alignment: Qt.AlignLeft
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
                         }
                         BaseComboBox{
-                          Layout.preferredWidth:280
-                          Layout.alignment: Qt.AlignRight
+                          Layout.preferredWidth:120
                           Layout.preferredHeight: 45
                           model: ["无IP地址", "有IP地址"]
                         }
@@ -45,12 +45,12 @@ Item {
                         Layout.fillWidth: true
                         YaheiText {
                             text:qsTr("通信方式")
+                            Layout.preferredWidth: leftWidth
                             font.pixelSize: fontsize
-                            Layout.alignment: Qt.AlignLeft
+                            Layout.alignment: Qt.AlignTop |Qt.AlignLeft
                         }
                         BaseComboBox{
-                          Layout.alignment: Qt.AlignRight
-                          Layout.preferredWidth:280
+                          Layout.preferredWidth:120
                           Layout.preferredHeight: 45
                           model: ["UDP", "TCP"]
                         }
@@ -65,7 +65,6 @@ Item {
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
-
                           Layout.preferredWidth:280
                         }
                     }

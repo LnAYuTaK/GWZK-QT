@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.12
 import "qrc:/common"
-/*参数设置查询 ------主控参数 */
+/*参数设置查询 ------气体参数*/
 Item {
     id:root
     property int leftWidth: 182
@@ -23,63 +23,54 @@ Item {
                     anchors.bottomMargin: 30
                     anchors.fill: parent
                     spacing: 20
-//                    BaseCheckBox{
-//                        font.pixelSize: fontsize
-//                        text: "数据加密"
-//                    }
+                    //本机IP
                     RowLayout{
                         spacing:20
-                        Layout.fillWidth: true
                         YaheiText {
-                            text:qsTr("加密芯片")
+                            anchors.centerIn: parent.Center
+                            text:qsTr("本机IP")
                             font.pixelSize: fontsize
-                            Layout.alignment: Qt.AlignLeft
-                        }
-                        BaseComboBox{
-                          Layout.preferredWidth:120
-                          Layout.preferredHeight: 40
-                          model: ["南瑞", "中电普华","SD卡加密","其他"]
-                        }
-                        BaseTextField{
-                            Layout.preferredWidth:140
-                        }
-                    }
-                    RowLayout{
-                        spacing:20
-                        Layout.fillWidth: true
-                        YaheiText {
-                            text:qsTr("通讯方式")
-                            font.pixelSize: fontsize
-                            Layout.alignment: Qt.AlignLeft
-                        }
-                        BaseComboBox{
-                          Layout.preferredWidth:120
-                          Layout.preferredHeight: 40
-                          model: ["GPRS", "本地串口","本地网络","其他"]
-                        }
-                        BaseTextField{
-                            Layout.preferredWidth:140
-                        }
-                    }
-                    RowLayout{
-                        Layout.fillWidth: true
-                        spacing:20
-                        YaheiText {
-                            text:qsTr("主控地址")
-                            font.pixelSize: fontsize
-                            Layout.alignment: Qt.AlignLeft
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
                             Layout.preferredWidth:280
                         }
                     }
                     RowLayout{
-                        Layout.fillWidth: true
                         spacing:20
                         YaheiText {
-                            text:qsTr("软件版本")
+                            anchors.centerIn: parent.Center
+                            text:qsTr("网关")
                             font.pixelSize: fontsize
-                            Layout.alignment: Qt.AlignLeft
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            Layout.preferredWidth:280
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text:qsTr("子网掩码")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                          Layout.preferredWidth:280
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text:qsTr("MAC地址")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
                             Layout.preferredWidth:280
@@ -109,6 +100,7 @@ Item {
                          height: 10
                      }
                 }
+        //}
     }
         Item {
             Layout.fillHeight: true

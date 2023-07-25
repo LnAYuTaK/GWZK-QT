@@ -64,6 +64,7 @@ Protocol::Protocol(QObject *parent)
  */
 void Protocol::ProtocolHandle(QObject *sender , QByteArray data)
 {
+
   Q_UNUSED(sender)
   Q_UNUSED(data)
 }

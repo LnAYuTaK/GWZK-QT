@@ -36,6 +36,40 @@ QVector<quint16> JsonFactGroup::getAddress()
     return addressVector;
 }
 //-----------------------------------------------------------------------------
-
-
+QVector<QString> JsonFactGroup::getOperate()
+{
+    QVector<QString> operateVector{};
+    for(auto i= _jsonArrayObj.begin();i!= _jsonArrayObj.end();i++)
+    {
+        QJsonObject obj =  i->toObject();
+        QString value = obj["operate"].toString();
+        operateVector.push_back(value);
+    }
+    return operateVector;
+}
+//-----------------------------------------------------------------------------
+QVector<QString> JsonFactGroup::getContent()
+{
+    QVector<QString>contentVector{};
+    for(auto i= _jsonArrayObj.begin();i!= _jsonArrayObj.end();i++)
+    {
+        QJsonObject obj =  i->toObject();
+        QString value = obj["content"].toString();
+        contentVector.push_back(value);
+    }
+    return contentVector;
+}
+//-----------------------------------------------------------------------------
+QVector<QString> JsonFactGroup::getFormat()
+{
+    QVector<QString>formatVector{};
+    for(auto i= _jsonArrayObj.begin();i!= _jsonArrayObj.end();i++)
+    {
+        QJsonObject obj =  i->toObject();
+        QString value = obj["format"].toString();
+        formatVector.push_back(value);
+    }
+    return formatVector;
+}
+//-----------------------------------------------------------------------------
 

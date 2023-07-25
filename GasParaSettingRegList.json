@@ -1,0 +1,175 @@
+{
+    "version":      1.0,
+    "componentid":  5,
+    "GasParaSetting":
+    [
+        {
+            "address":     "0x0300",
+            "operate":     "R/W",
+            "content":     "O2报警阈值Level-1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0301",
+            "operate":     "R/W",
+            "content":     "O2报警阈值Level-2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0302",
+            "operate":     "R/W",
+            "content":     "O2报警阈值Level-3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0303",
+            "operate":     "R/W",
+            "content":     "CO报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0304",
+            "operate":     "R/W",
+            "content":     "CO报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0305",
+            "operate":     "R/W",
+            "content":     "CO报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0306",
+            "operate":     "R/W",
+            "content":     "Cl2报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0307",
+            "operate":     "R/W",
+            "content":     "Cl2报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0308",
+            "operate":     "R/W",
+            "content":     "Cl2报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0309",
+            "operate":     "R/W",
+            "content":     "H2S报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x030A",
+            "operate":     "R/W",
+            "content":     "H2S报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x030B",
+            "operate":     "R/W",
+            "content":     "H2S报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x030C",
+            "operate":     "R/W",
+            "content":     "H2报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x030D",
+            "operate":     "R/W",
+            "content":     "H2报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x030E",
+            "operate":     "R/W",
+            "content":     "H2报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x030F",
+            "operate":     "R/W",
+            "content":     "CO2报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0310",
+            "operate":     "R/W",
+            "content":     "CO2报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0311",
+            "operate":     "R/W",
+            "content":     "CO2报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0311",
+            "operate":     "R/W",
+            "content":     "CO2报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0312",
+            "operate":     "R/W",
+            "content":     "CH4报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0313",
+            "operate":     "R/W",
+            "content":     "CH4报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0314",
+            "operate":     "R/W",
+            "content":     "CH4报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0315",
+            "operate":     "R/W",
+            "content":     "温度报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0316",
+            "operate":     "R/W",
+            "content":     "温度报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0317",
+            "operate":     "R/W",
+            "content":     "温度报警阈值Level-1/2/3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0318",
+            "operate":     "R/W",
+            "content":     "湿度报警阈值Level-1/2/3",
+            "format" :     "扩大10倍"
+        },
+        {
+            "address":     "0x0319",
+            "operate":     "R/W",
+            "content":     "湿度报警阈值Level-1/2/3",
+            "format" :     "扩大10倍"
+        },
+        {
+            "address":     "0x031A",
+            "operate":     "R/W",
+            "content":     "湿度报警阈值Level-1/2/3",
+            "format" :     "扩大10倍"
+        }
+    ]
+}

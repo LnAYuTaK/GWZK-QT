@@ -25,10 +25,10 @@ Item {
             stretch: false,
             subItem: [
                 {
-                    name:"气体监测"
+                    name:"隧道气体"
                 },
                 {
-                    name:"图像"
+                    name:"隧道风机"
                 }
            ]
         },
@@ -40,19 +40,13 @@ Item {
                     name:"主控参数",
                 },
                 {
-                    name:"后台网络参数",
+                    name:"本地网络",
                 },
                 {
-                    name:"模型参数",
+                    name:"网络参数",
                 },
                 {
-                    name:"加密参数",
-                },
-                {
-                    name:"mqtt参数",
-                },
-                {
-                    name:"本地网络参数",
+                    name:"气体参数",
                 }
            ]
         },
@@ -61,10 +55,7 @@ Item {
             stretch: false,
             subItem: [
                 {
-                    name: "设置操作",
-                },
-                {
-                    name: "网络连接",
+                    name: "主控操作",
                 }
            ]
         },
@@ -74,15 +65,6 @@ Item {
             subItem: [
                 {
                     name: "数据召测",
-                }
-           ]
-        },
-        {
-            name: "联系我们",
-            stretch: false,
-            subItem: [
-                {
-                    name: "联系我们",
                 }
            ]
         }

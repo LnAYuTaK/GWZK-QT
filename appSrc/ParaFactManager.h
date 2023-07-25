@@ -30,14 +30,17 @@ public:
 
 signals:
 
+public slots:
+
 private:
-    //Json Fact Group NetParaSettingReg
     JsonFactGroup *TunnelGasRegList;            //隧道气体装置寄存器列表
     JsonFactGroup *MainConParaSetRegList;       //主控参数设置寄存器列表
     JsonFactGroup *LocalNetParaSetRegList;      //本地网络参数设置寄存器列表
     JsonFactGroup *NetParaSetRegList;           //网络参数设置寄存器列表
     JsonFactGroup *GasParaSetRegList;           //气体参数设置寄存器列表
-    JsonFactGroup *EncryParaSetRegList;         //加密参数设置寄存器列表
+    JsonFactGroup *TunnelGasDataRegList;        //隧道气体数据寄存器列表
+    JsonFactGroup *TunnelFanRegList;            //隧道风机装置寄存器列表
+    JsonFactGroup *MainControlRegList;          //主控操作寄存器列表
 };
 
 #endif // PARAFACTMANAGER_H

@@ -4,8 +4,8 @@ NetWorkManager::NetWorkManager(QObject *parent)
     : QObject{parent}
     ,_socketIsConnected(false)
     ,_socket(nullptr)
-    ,_protocol(new Protocol())
-    ,_tcpThread(new QThread())
+    ,_protocol(new Protocol(this))
+    ,_tcpThread(new QThread(this))
 {
 
 }
@@ -82,6 +82,7 @@ bool NetWorkManager::_tcpConnect(QString IP,qint16 port)
     _socketIsConnected = true;
     emit ConnectedChanged(_socketIsConnected);
     _tcpThread = new QThread();
+    //Bind ProtolHandle
     connect(this,&NetWorkManager::bytesReceived,_protocol,&Protocol::ProtocolHandle);
     _protocol->moveToThread(_tcpThread);
     _tcpThread->start();

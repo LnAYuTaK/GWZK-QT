@@ -25,9 +25,7 @@
         <file>common/SkinPopup.qml</file>
         <file>common/SkinBaseButton.qml</file>
         <file>PageManager.qml</file>
-        <file>pages/BaseControlPage.qml</file>
         <file>common/SkinBaseButton2.qml</file>
-        <file>pages/BaseOtherControlPage.qml</file>
         <file>common/DropPopup.qml</file>
         <file>common/BaseCheckBox.qml</file>
         <file>common/qmlQianStretchList/QianStretchDalegate.qml</file>
@@ -46,7 +44,6 @@
         <file>common/qmlQianDialog/error.png</file>
         <file>common/qmlQianDialog/ok.png</file>
         <file>common/qmlQianDialog/question.png</file>
-        <file>pages/HintPage.qml</file>
         <file>common/qmlQianDialog/BlogDialog.qml</file>
         <file>pages/DeviceList/DeviceList_Dance.qml</file>
         <file>pages/DeviceList/DeviceList_Image.qml</file>
@@ -59,11 +56,8 @@
         <file>pages/DeviceList/DevicerList_FrostySensor.qml</file>
         <file>common/BaseComboBox.qml</file>
         <file>pages/ParaSettingQuery/BGNetworkPara.qml</file>
-        <file>pages/ParaSettingQuery/EncryptionPara.qml</file>
         <file>pages/ParaSettingQuery/LocalNetPara.qml</file>
         <file>pages/ParaSettingQuery/MainControlPara.qml</file>
-        <file>pages/ParaSettingQuery/ModelPara.qml</file>
-        <file>pages/ParaSettingQuery/MqttPata.qml</file>
         <file>pages/CommLink/NetworkConn.qml</file>
         <file>pages/DeviceList/DevicerList_GasMonitor.qml</file>
         <file>NetParaSettingRegList.json</file>
@@ -73,5 +67,8 @@
         <file>TunnelGasData.json</file>
         <file>GasParaSettingRegList.json</file>
         <file>LocalNetParaSettingRegList.json</file>
+        <file>TunnelFanDeviceRegList.json</file>
+        <file>pages/DeviceList/DeviceList_TunnelFan.qml</file>
+        <file>pages/ParaSettingQuery/GasParaSetting.qml</file>
     </qresource>
 </RCC>

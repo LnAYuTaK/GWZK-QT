@@ -1,0 +1,151 @@
+{
+    "version":      1.0,
+    "componentid":  5,
+    "LocalNetParaSetting":
+    [
+        {
+            "address":     "0x0210",
+            "operate":     "R/W",
+            "content":     "本地IP1地址1",
+            "format" :     "192.168.0.12;其中,192是0x0210地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0211",
+            "operate":     "R/W",
+            "content":     "主板IP地址2",
+            "format" :     "192.168.0.12;其中,192是0x0210地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0212",
+            "operate":     "R/W",
+            "content":     "本地IP1网关地址1",
+            "format" :     "192.168.0.1;其中,192是0x0212地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0213",
+            "operate":     "R/W",
+            "content":     "本地IP1网关地址2",
+            "format" :     "192.168.0.1;其中,192是0x0212地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0214",
+            "operate":     "R/W",
+            "content":     "本地IP1子网掩码地址1",
+            "format" :     "255.254.253.0;其中,255是0x0214地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0215",
+            "operate":     "R/W",
+            "content":     "本地IP1子网掩码地址2",
+            "format" :     "255.254.253.0;其中,255是0x0214地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0216",
+            "operate":     "R/W",
+            "content":     "本地IP1 MAC地址1",
+            "format" :     "01:02:03:04:05:06;其中,01是0x0216地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0217",
+            "operate":     "R/W",
+            "content":     "本地IP1 MAC地址2",
+            "format" :     "01:02:03:04:05:06;其中,01是0x0216地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0218",
+            "operate":     "R/W",
+            "content":     "主板ID地址9",
+            "format" :     "01:02:03:04:05:06;其中,01是0x0216地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0219",
+            "operate":     "R/W",
+            "content":     "本地IP2地址1",
+            "format" :     "192.168.0.12;其中,192是0x0210地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x021A",
+            "operate":     "R/W",
+            "content":     "本地IP2地址2",
+            "format" :     "192.168.0.12;其中,192是0x0210地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x021B",
+            "operate":     "R/W",
+            "content":     "本地IP2网关地址1",
+            "format" :     "192.168.0.1;其中,192是0x0212地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x021C",
+            "operate":     "R/W",
+            "content":     "本地IP2网关地址2",
+            "format" :     "192.168.0.1;其中,192是0x0212地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x021D",
+            "operate":     "R/W",
+            "content":     "本地IP2子网掩码地址1",
+            "format" :     "255.254.253.0;其中,255是0x0214地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x021E",
+            "operate":     "R/W",
+            "content":     "本地IP2子网掩码地址2",
+            "format" :     "255.254.253.0;其中,255是0x0214地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x021F",
+            "operate":     "R/W",
+            "content":     "本地IP2 MAC地址1",
+            "format" :     "01:02:03:04:05:06;其中,01是0x0216地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0220",
+            "operate":     "R/W",
+            "content":     "本地IP2 MAC地址2",
+            "format" :     "01:02:03:04:05:06;其中,01是0x0216地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0221",
+            "operate":     "R/W",
+            "content":     "本地IP2 MAC地址3",
+            "format" :     "01:02:03:04:05:06;其中,01是0x0216地址高字节数据,依次类推"
+        },
+        {
+            "address":     "0x0222",
+            "operate":     "R/W",
+            "content":     "备用1",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x0223",
+            "operate":     "R/W",
+            "content":     "备用2",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x0224",
+            "operate":     "R/W",
+            "content":     "备用3",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x0225",
+            "operate":     "R/W",
+            "content":     "备用4",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x0226",
+            "operate":     "R/W",
+            "content":     "备用5",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x0227",
+            "operate":     "R/W",
+            "content":     "备用6",
+            "format" :     "备用"
+        }
+    ]
+}

@@ -28,7 +28,7 @@ Item {
                         spacing:20
                         YaheiText {
                             anchors.centerIn: parent.Center
-                            text:qsTr("本机IP")
+                            text:qsTr("本机IP1")
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
@@ -41,7 +41,7 @@ Item {
                         spacing:20
                         YaheiText {
                             anchors.centerIn: parent.Center
-                            text:qsTr("网关")
+                            text:qsTr("本地网关1")
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
@@ -54,7 +54,7 @@ Item {
                         spacing:20
                         YaheiText {
                             anchors.centerIn: parent.Center
-                            text:qsTr("子网掩码")
+                            text:qsTr("子网掩码1")
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
@@ -67,7 +67,59 @@ Item {
                         spacing:20
                         YaheiText {
                             anchors.centerIn: parent.Center
-                            text:qsTr("MAC地址")
+                            text:qsTr("MAC地址1")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            Layout.preferredWidth:280
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text:qsTr("本机IP2")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            Layout.preferredWidth:280
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text:qsTr("本地网关2")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            Layout.preferredWidth:280
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text:qsTr("子网掩码2")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                          Layout.preferredWidth:280
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text:qsTr("MAC地址2")
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft

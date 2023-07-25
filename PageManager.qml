@@ -25,72 +25,18 @@ StackLayout {
         width: stack.width
         height: stack.height
     }
-//    BaseControlPage {
-//        property string name: "串口连接"
-//        width: stack.width
-//        height: stack.height
-
-//    }
-//    BaseOtherControlPage {
-//        property string name: "网络连接"
-//        width: stack.width
-//        height: stack.height
-//    }
-//    HintPage{
-//        property string name: "提示"
-//        width: stack.width
-//        height: stack.height
-//    }
-
     /***********************************************************************
                           装置列表  /pages/DeviceList
     ***********************************************************************/
     DevicerList_GasMonitor{
-         property string name: "气体监测"
+         property string name: "隧道气体"
          width: stack.width
          height: stack.height
     }
-//    DeviceList_TowerIncline{
-//        property string name: "杆塔倾斜"
-//        width: stack.width
-//        height: stack.height
-//    }
-//    DeviceList_WindYaw{
-//        property string name: "微风振动"
-//        width: stack.width
-//        height: stack.height
-//    }
-//    DeviceList_WireSag{
-//        property string name: "导线弧垂"
-//        width: stack.width
-//        height: stack.height
-//    }
-//    DeviceList_WireTemp{
-//        property string name: "导线温度"
-//        width: stack.width
-//        height: stack.height
-//    }
-//    DevicerList_FrostySensor{
-//        property string name: "覆冰"
-//        width: stack.width
-//        height: stack.height
-
-//    }
-//    DevicerList_BreezeScope{
-//        property string name: "风偏"
-//        width: stack.width
-//        height: stack.height
-//    }
-//    DeviceList_Dance{
-//        property string name: "舞动"
-//        width: stack.width
-//        height: stack.height
-
-//    }
-    DeviceList_Image{
-        property string name: "图像"
-        width: stack.width
-        height: stack.height
+    DeviceList_TunnelFan{
+         property string name: "隧道风机"
+         width: stack.width
+         height: stack.height
     }
    /***********************************************************************
                     参数设置查询   /pages/ParaSettingQuery/
@@ -100,11 +46,35 @@ StackLayout {
        width: stack.width
        height: stack.height
    }
-   BGNetworkPara {
-       property string name: "后台网络参数"
+   LocalNetPara {
+       property string name: "本地网络"
        width: stack.width
        height: stack.height
    }
-
+   BGNetworkPara {
+       property string name: "网络参数"
+       width: stack.width
+       height: stack.height
+   }
+   BGNetworkPara {
+       property string name: "气体参数"
+       width: stack.width
+       height: stack.height
+   }
+   /**********************************************************************
+                设置操作   /pages/OperationSet/
    /**********************************************************************/
+   BGNetworkPara {
+       property string name: "主控操作"
+       width: stack.width
+       height: stack.height
+   }
+   /**********************************************************************
+                数据召测   /pages/DataAcquisition/
+   /**********************************************************************/
+   BGNetworkPara {
+       property string name: "隧道气体"
+       width: stack.width
+       height: stack.height
+   }
  }

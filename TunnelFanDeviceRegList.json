@@ -1,0 +1,85 @@
+{
+    "version":      1.0,
+    "componentid":  2,
+    "TunnelFanDevice":
+    [
+        {
+            "address":     "0x00F0",
+            "operate":     "R/W",
+            "content":     "风机ID地址1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00F1",
+            "operate":     "R/W",
+            "content":     "风机ID地址2",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00F2",
+            "operate":     "R/W",
+            "content":     "风机ID地址2",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00F3",
+            "operate":     "R/W",
+            "content":     "风机ID地址4",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00F4",
+            "operate":     "R/W",
+            "content":     "风机ID地址5",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00F5",
+            "operate":     "R/W",
+            "content":     "风机ID地址6",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00F6",
+            "operate":     "R/W",
+            "content":     "风机ID地址7",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00F7",
+            "operate":     "R/W",
+            "content":     "风机ID地址8",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00F8",
+            "operate":     "R/W",
+            "content":     "风机ID地址9",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00F9",
+            "operate":     "R/W",
+            "content":     "风机ID地址格式",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00FA",
+            "operate":     "R/W",
+            "content":     "风机数量",
+            "format" :     ""
+        },
+        {
+            "address":     "0x00FB",
+            "operate":     "R/W",
+            "content":     "",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x00FC",
+            "operate":     "R/W",
+            "content":     "",
+            "format" :     "备用"
+        }
+    ]
+}
