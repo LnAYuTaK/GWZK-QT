@@ -14,7 +14,7 @@
 #include <QObject>
 #include <QTcpSocket>
 #include <QThread>
-#include "Protocol.h"
+class ProtocolManager;
 enum LinkType{
     TCP_LINK,
     MQTT_LINK,
@@ -29,27 +29,15 @@ public:
     explicit NetWorkManager(QObject *parent = nullptr);
     ~NetWorkManager();
 
-    //绑定前端
-    Q_PROPERTY(bool IsTcpConnected READ IsTcpConnected NOTIFY ConnectedChanged);
+    Q_PROPERTY(bool  IsTcpConnected READ IsTcpConnected NOTIFY ConnectedChanged);
 public:
-    bool IsTcpConnected ()const
-    {
-        return this->_socketIsConnected;
-    }
-
+    bool IsTcpConnected ()const{ return this->_socketIsConnected;}
     //*********TCP*********//
     //连接函数
     Q_INVOKABLE bool tcpConnect(QString IP,QString port);
     //断开函数
     Q_INVOKABLE void tcpDisConnect();
-    //*********UDP*********//
-    // Q_INVOKABLE bool ucpConnect(QString IP,QString port);
-    // Q_INVOKABLE void ucpDisConnect();
 
-    Q_INVOKABLE void WiteTest()
-    {
-
-    }
 signals:
     void InfoMsg            (QString  type,QString Msg);
     void bytesReceived      (QObject* link, QByteArray data);
@@ -61,13 +49,11 @@ private slots:
     void _tcpReadBytes  ();
     void _tcpWriteBytes (const QByteArray data);
     void _tcpDisConnect();
-    //*********UDP*********//
-
 private:
-    bool          _socketIsConnected;
-    QTcpSocket *  _socket;
-    Protocol   *  _protocol;
-    QThread    *  _tcpThread;
+    bool              _socketIsConnected;
+    QTcpSocket *      _socket;
+    QThread    *      _tcpThread;
+    ProtocolManager * _protocolMgr;
 };
 
 #endif // NETWORKMANAGER_H

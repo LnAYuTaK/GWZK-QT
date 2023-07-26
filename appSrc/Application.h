@@ -17,6 +17,7 @@
 #include <QSettings>
 class ParaFactManager;
 class NetWorkManager;
+class ProtocolManager;
 class QmlGlobal;
 class Application : public QApplication
 {
@@ -27,13 +28,17 @@ public:
     bool event(QEvent *e) override;
     static Application*  _app;
 
-    NetWorkManager * netWorkMgr(){return this->_netWorkMgr;}
+    NetWorkManager *  netWorkMgr(){return this->_netWorkMgr;}
+    ParaFactManager * paraFactMgr(){return this->_paraFactMgr;}
+    ProtocolManager * protocolMgr(){return this->_protocolMgr;}
+
 public :
     void initAppCommon();
     void initAppView();
 private:
     ParaFactManager * _paraFactMgr;
     NetWorkManager  * _netWorkMgr;
+    ProtocolManager * _protocolMgr;
 };
 Application* app(void);
 #endif // FREEKAPPLICATION_H

@@ -1,10 +1,10 @@
 ﻿#include "NetWorkManager.h"
-
+#include "ProtocolManager.h"
+#include "Application.h"
 NetWorkManager::NetWorkManager(QObject *parent)
     : QObject{parent}
     ,_socketIsConnected(false)
     ,_socket(nullptr)
-    ,_protocol(new Protocol(this))
     ,_tcpThread(new QThread(this))
 {
 
@@ -50,7 +50,6 @@ void NetWorkManager::_tcpReadBytes()
             buffer.resize(byteCount);
             _socket->read(buffer.data(), buffer.size());
             emit bytesReceived(nullptr,buffer);
-            qDebug()<<QThread::currentThreadId();
         }
     }
 }
@@ -65,6 +64,7 @@ void NetWorkManager::_tcpWriteBytes(const QByteArray data)
 //-----------------------------------------------------------------------------
 bool NetWorkManager::_tcpConnect(QString IP,qint16 port)
 {
+    _protocolMgr = app()->protocolMgr();
     _socket = new QTcpSocket(this);
     QObject::connect(_socket, &QIODevice::readyRead, this, &NetWorkManager::_tcpReadBytes);
     QObject::connect(_socket, &QTcpSocket::disconnected, this, &NetWorkManager::_tcpDisConnect);
@@ -83,8 +83,8 @@ bool NetWorkManager::_tcpConnect(QString IP,qint16 port)
     emit ConnectedChanged(_socketIsConnected);
     _tcpThread = new QThread();
     //Bind ProtolHandle
-    connect(this,&NetWorkManager::bytesReceived,_protocol,&Protocol::ProtocolHandle);
-    _protocol->moveToThread(_tcpThread);
+    connect(this,&NetWorkManager::bytesReceived,_protocolMgr,&ProtocolManager::ProtocolHandle);
+    _protocolMgr->moveToThread(_tcpThread);
     _tcpThread->start();
     return true;
 }

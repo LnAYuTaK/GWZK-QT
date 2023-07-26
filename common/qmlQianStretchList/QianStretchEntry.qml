@@ -64,7 +64,7 @@ Item {
             stretch: false,
             subItem: [
                 {
-                    name: "数据召测",
+                    name: "气体召测",
                 }
            ]
         }
@@ -74,7 +74,6 @@ Item {
         id: stretchModel
         dynamicRoles : true
     }
-
 
     property int itemHeight: 60   // 184 * 60
     property string strechCurrentName:  ""

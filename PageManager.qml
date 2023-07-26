@@ -6,6 +6,8 @@ import "qrc:/pages"
 import "qrc:/pages/DeviceList"
 import "qrc:/pages/ParaSettingQuery"
 import "qrc:/pages/CommLink"
+import "qrc:/pages/DataAcquisition"
+import "qrc:/pages/MasterOperation"
 StackLayout {
     id: stack
     clip: true
@@ -56,7 +58,7 @@ StackLayout {
        width: stack.width
        height: stack.height
    }
-   BGNetworkPara {
+   GasParaSetting {
        property string name: "气体参数"
        width: stack.width
        height: stack.height
@@ -64,7 +66,7 @@ StackLayout {
    /**********************************************************************
                 设置操作   /pages/OperationSet/
    /**********************************************************************/
-   BGNetworkPara {
+   MainConOperation {
        property string name: "主控操作"
        width: stack.width
        height: stack.height
@@ -72,8 +74,8 @@ StackLayout {
    /**********************************************************************
                 数据召测   /pages/DataAcquisition/
    /**********************************************************************/
-   BGNetworkPara {
-       property string name: "隧道气体"
+   GasDataAcquisition {
+       property string name: "气体召测"
        width: stack.width
        height: stack.height
    }

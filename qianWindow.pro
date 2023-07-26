@@ -18,8 +18,10 @@ SOURCES += \
     appSrc/Application.cpp \
     appSrc/NetWorkManager.cpp \
     appSrc/ParaFactManager.cpp \
-    appSrc/Protocol.cpp \
+    appSrc/ProtocolEvent.cpp \
+    appSrc/ProtocolManager.cpp \
     appSrc/QmlGlobal.cpp \
+    appSrc/TunnelGasDev.cpp \
     fact/JsonFactGroup.cpp \
         main.cpp \
 
@@ -52,6 +54,8 @@ HEADERS += \
     appSrc/Application.h \
     appSrc/NetWorkManager.h \
     appSrc/ParaFactManager.h \
-    appSrc/Protocol.h \
+    appSrc/ProtocolEvent.h \
+    appSrc/ProtocolManager.h \
     appSrc/QmlGlobal.h \
+    appSrc/TunnelGasDev.h \
     fact/JsonFactGroup.h

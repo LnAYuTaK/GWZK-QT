@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.12
 import App 1.0
+import App.NetWorkManager 1.0
 import "qrc:/common"
 import "qrc:/common/qmlQianHints"
 import "qrc:/common/qmlQianDialog"
@@ -18,10 +19,7 @@ Item {
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
         ColumnLayout {
             id: contents
-            anchors.rightMargin: 60
-            anchors.topMargin: 30
-            anchors.leftMargin: 60
-            anchors.bottomMargin: 30
+            anchors.margins: 30
             anchors.fill: parent
             spacing: 10
             RowLayout {

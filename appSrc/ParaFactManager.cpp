@@ -3,23 +3,23 @@
 
 ParaFactManager::ParaFactManager(QObject *parent)
     : QObject{parent}
-    ,TunnelGasRegList(nullptr)
-    ,MainConParaSetRegList(nullptr)
-    ,LocalNetParaSetRegList(nullptr)
-    ,NetParaSetRegList(nullptr)
-    ,GasParaSetRegList(nullptr)
-    ,TunnelGasDataRegList(nullptr)
-    ,TunnelFanRegList(nullptr)
-    ,MainControlRegList(nullptr)
+    ,TunnelGasRegList_(nullptr)
+    ,MainConParaSetRegList_(nullptr)
+    ,LocalNetParaSetRegList_(nullptr)
+    ,NetParaSetRegList_(nullptr)
+    ,GasParaSetRegList_(nullptr)
+    ,TunnelGasDataRegList_(nullptr)
+    ,TunnelFanRegList_(nullptr)
+    ,MainControlRegList_(nullptr)
 {
-    TunnelGasRegList       = new JsonFactGroup("TunnelGasDevice",":/TunnelGasDeviceRegList.json");
-    MainConParaSetRegList  = new JsonFactGroup("MainControlParaSetting",":/MainControlParaSettingRegList.json");
-    LocalNetParaSetRegList = new JsonFactGroup("LocalNetParaSetting",":/LocalNetParaSettingRegList.json");
-    NetParaSetRegList      = new JsonFactGroup("NetParaSetting",":/NetParaSettingRegList.json");
-    GasParaSetRegList      = new JsonFactGroup("GasParaSetting",":/GasParaSettingRegList.json");
-    TunnelGasDataRegList   = new JsonFactGroup("TunnelGasData",":/TunnelGasData.json");
-    TunnelFanRegList       = new JsonFactGroup("TunnelFanDevice",":/TunnelFanDeviceRegList.json");
-    MainControlRegList     = new JsonFactGroup("MainControl",":/MainControlRegList.json");
+    TunnelGasRegList_       = new JsonFactGroup("TunnelGasDevice",":/TunnelGasDeviceRegList.json");
+    MainConParaSetRegList_  = new JsonFactGroup("MainControlParaSetting",":/MainControlParaSettingRegList.json");
+    LocalNetParaSetRegList_ = new JsonFactGroup("LocalNetParaSetting",":/LocalNetParaSettingRegList.json");
+    NetParaSetRegList_      = new JsonFactGroup("NetParaSetting",":/NetParaSettingRegList.json");
+    GasParaSetRegList_      = new JsonFactGroup("GasParaSetting",":/GasParaSettingRegList.json");
+    TunnelGasDataRegList_   = new JsonFactGroup("TunnelGasData",":/TunnelGasData.json");
+    TunnelFanRegList_       = new JsonFactGroup("TunnelFanDevice",":/TunnelFanDeviceRegList.json");
+    MainControlRegList_     = new JsonFactGroup("MainControl",":/MainControlRegList.json");
 }
 
 

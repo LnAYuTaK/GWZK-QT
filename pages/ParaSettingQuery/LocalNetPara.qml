@@ -17,10 +17,7 @@ Item {
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
                 ColumnLayout {
                     id: contents
-                    anchors.rightMargin: 60
-                    anchors.topMargin: 30
-                    anchors.leftMargin: 60
-                    anchors.bottomMargin: 30
+                    anchors.margins: 30
                     anchors.fill: parent
                     spacing: 20
                     //本机IP

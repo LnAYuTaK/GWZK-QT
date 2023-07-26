@@ -18,10 +18,7 @@ Item {
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
                 ColumnLayout {
                     id: contents
-                    anchors.rightMargin: 60
-                    anchors.topMargin: 30
-                    anchors.leftMargin: 60
-                    anchors.bottomMargin: 30
+                    anchors.margins: 30
                     anchors.fill: parent
                     spacing: 20
                     //服务器地址
@@ -29,15 +26,26 @@ Item {
                         spacing:20
                         Layout.fillWidth: true
                         YaheiText {
-                            text:qsTr("服务器地址")
+                            text:qsTr("主站IP地址")
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
                             Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
                         }
-                        BaseComboBox{
-                          Layout.preferredWidth:120
-                          Layout.preferredHeight: 45
-                          model: ["无IP地址", "有IP地址"]
+                        BaseTextField{
+                          Layout.preferredWidth:280
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        Layout.fillWidth: true
+                        YaheiText {
+                            text:qsTr("主站IP端口地址")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                        }
+                        BaseTextField{
+                          Layout.preferredWidth:280
                         }
                     }
                     RowLayout{
@@ -54,12 +62,16 @@ Item {
                           Layout.preferredHeight: 45
                           model: ["UDP", "TCP"]
                         }
+                        BaseTextField{
+                          Layout.preferredWidth:140
+                        }
+
                     }
                     RowLayout{
                         spacing:20
                         YaheiText {
                             anchors.centerIn: parent.Center
-                            text:"服务器IP"
+                            text:"SIM1卡APN"
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
@@ -72,13 +84,83 @@ Item {
                         spacing:20
                         YaheiText {
                             anchors.centerIn: parent.Center
-                            text:"MAC地址"
+                            text:"SIM1卡用户名"
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                          Layout.preferredWidth:280
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text:"SIM1卡密码"
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                          Layout.preferredWidth:280
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text:"备用IP地址1"
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
                             Layout.preferredWidth:280
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text:"备用IP地址2"
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            Layout.preferredWidth:280
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text:"备用端口地址"
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            Layout.preferredWidth:280
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text:"备用链接方式"
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseComboBox{
+                          Layout.preferredWidth:120
+                          Layout.preferredHeight: 45
+                          model: ["UDP", "TCP"]
+                        }
+                        BaseTextField{
+                          Layout.preferredWidth:140
                         }
                     }
                     RowLayout{

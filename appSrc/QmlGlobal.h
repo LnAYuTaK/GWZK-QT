@@ -12,16 +12,24 @@
 #ifndef QMLGLOBAL_H
 #define QMLGLOBAL_H
 #include <QObject>
-class NetWorkManager;
+#include "NetWorkManager.h"
+#include "ProtocolManager.h"
+
 class QmlGlobal : public QObject
 {
     Q_OBJECT
 public:
     explicit QmlGlobal(QObject *parent = nullptr);
-    Q_PROPERTY(NetWorkManager *  netWorkManager  READ   netWorkManager    CONSTANT)
-    NetWorkManager * netWorkManager(){return this->_netWorkManager;}
+
+    Q_PROPERTY(NetWorkManager  * netWorkManager  READ   netWorkManager CONSTANT)
+    Q_PROPERTY(ProtocolManager * protoManager    READ   protoManager    CONSTANT)
+
+    NetWorkManager       * netWorkManager(){return this->_netWorkManager;}
+    ProtocolManager      * protoManager  (){return this->_protocolManager;}
 private:
-    NetWorkManager *_netWorkManager;
+    NetWorkManager  *_netWorkManager;
+    ProtocolManager *_protocolManager;
+
 };
 
 #endif // QMLGLOBAL_H

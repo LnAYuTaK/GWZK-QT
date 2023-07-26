@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.12
 import "qrc:/common"
-/*参数设置查询 ------主控参数 */
+/*设置操作 ------主控操作 */
 Item {
     id:root
     property int leftWidth: 182
@@ -24,14 +24,9 @@ Item {
                         spacing:20
                         Layout.fillWidth: true
                         YaheiText {
-                            text:qsTr("加密芯片")
+                            text:qsTr("系统时间")
                             font.pixelSize: fontsize
                             Layout.alignment: Qt.AlignLeft
-                        }
-                        BaseComboBox{
-                          Layout.preferredWidth:120
-                          Layout.preferredHeight: 40
-                          model: ["南瑞", "中电普华","SD卡加密","其他"]
                         }
                         BaseTextField{
                             Layout.preferredWidth:140
@@ -41,41 +36,17 @@ Item {
                         spacing:20
                         Layout.fillWidth: true
                         YaheiText {
-                            text:qsTr("通讯方式")
+                            text:qsTr("系统操作")
                             font.pixelSize: fontsize
                             Layout.alignment: Qt.AlignLeft
                         }
                         BaseComboBox{
                           Layout.preferredWidth:120
                           Layout.preferredHeight: 40
-                          model: ["GPRS", "本地串口","本地网络","其他"]
+                          model: ["系统重启","重新拨号"]
                         }
                         BaseTextField{
                             Layout.preferredWidth:140
-                        }
-                    }
-                    RowLayout{
-                        Layout.fillWidth: true
-                        spacing:20
-                        YaheiText {
-                            text:qsTr("主控地址")
-                            font.pixelSize: fontsize
-                            Layout.alignment: Qt.AlignLeft
-                        }
-                        BaseTextField{
-                            Layout.preferredWidth:280
-                        }
-                    }
-                    RowLayout{
-                        Layout.fillWidth: true
-                        spacing:20
-                        YaheiText {
-                            text:qsTr("软件版本")
-                            font.pixelSize: fontsize
-                            Layout.alignment: Qt.AlignLeft
-                        }
-                        BaseTextField{
-                            Layout.preferredWidth:280
                         }
                     }
                     RowLayout{
@@ -103,9 +74,9 @@ Item {
                      }
                 }
     }
-        Item {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-        }
+    Item {
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+    }
 
 }
