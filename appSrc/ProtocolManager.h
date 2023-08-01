@@ -14,7 +14,6 @@
 #include <QObject>
 #include <QVector>
 #include <QDebug>
-#include "TunnelGasDev.h"
 enum FrameType{
     ModuleSend,//主站→装置
     ModuleRecv
@@ -24,30 +23,63 @@ enum  ProtocolType{
     TunnelFanDevType
 };
 
+class TunnelGasDev;
+class TunnelGasMonitor;
+class TunnelFanControl;
+class MainParaController;
+
 class ProtocolManager : public QObject
 {
     Q_OBJECT
 public:
     Q_ENUM(ProtocolType)
+
     explicit ProtocolManager(QObject *parent = nullptr);
 
-    Q_PROPERTY(TunnelGasDev*  TunnelGas  READ  TunnelGas CONSTANT)
+    Q_PROPERTY(TunnelGasDev*        TunnelGas           READ  TunnelGas          CONSTANT)
+    Q_PROPERTY(TunnelGasMonitor*    TunnelGasMon        READ  TunnelGasMon       CONSTANT)
+    Q_PROPERTY(TunnelFanControl*    tunnelFanControl    READ  tunnelFanControl   CONSTANT)
+    Q_PROPERTY(MainParaController*  mainParaController  READ  mainParaController CONSTANT)
 
-    Q_INVOKABLE void PrintF(){qDebug()<< "2323";}
-
-    TunnelGasDev  *TunnelGas(){return this->tunnelGasDev_;}
-    //协议流处理
+    TunnelGasDev    *   TunnelGas()        {return this->tunnelGasDev_;}
+    TunnelGasMonitor*   TunnelGasMon()     {return this->tunnelGasMon_;}
+    TunnelFanControl*   tunnelFanControl() {return this->tunnelFanControl_;}
+    MainParaController* mainParaController() {return this->mainParaController_;}
+    /**
+     * @brief ProtocolHandle
+     * @param sender
+     * @param data
+     */
     void ProtocolHandle(QObject *sender , QByteArray data);
-    //设置单元
-    Q_INVOKABLE void SetUnit(int type);
-    //查询单元
-    Q_INVOKABLE void GetUnit(int type);
+
+    /**
+     * @brief makeWriteRegProto 主站 --> 装置 写寄存器
+     * @param start  寄存器起始地址2Byte
+     * @param regCount 寄存器个数
+     * @param Data  寄存器数据
+     */
+    static QByteArray makeWriteRegProto(QByteArray start,int count,QByteArray Data);
+
+    /**
+     * @brief makeReadRegProto 主站-->装置 读寄存器
+     * @param start 寄存器起始地址2Byte
+     * @param regCount 寄存器个数
+     */
+    static QByteArray makeReadRegProto(QByteArray start,int count);
+    //int 转换为字节数组 2字节高低位
+    static QByteArray intToHexByteArray(int data);
+public slots:
+
 signals:
 
 private:
-    quint16 modbusCrc16(quint8 *data, qint16 length);
+    static quint16 modbusCrc16(quint8 *data, qint16 length);
 
-    TunnelGasDev  *tunnelGasDev_;
+    TunnelGasDev     * tunnelGasDev_;
+    TunnelGasMonitor * tunnelGasMon_;
+    TunnelFanControl * tunnelFanControl_;
+    MainParaController * mainParaController_;
+
 };
 
 #endif // PROTOCOL_H

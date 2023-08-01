@@ -29,13 +29,15 @@ class JsonFactGroup : public QObject
 public:
     explicit JsonFactGroup(QString jsonObjName,QString jsonfile);
 
-    QVector<quint16> getAddress();
+    QVector<QString> getAddress();
 
     QVector<QString> getOperate();
 
     QVector<QString> getContent();
 
     QVector<QString> getFormat();
+
+    int              getRegConunt();
 signals:
 
 private:

@@ -33,6 +33,7 @@ class FramelessWindow : public QQuickWindow
     Q_PROPERTY(bool     isMacOS             READ isMacOS            CONSTANT)
     Q_PROPERTY(bool     isLinux             READ isLinux            CONSTANT)
     Q_PROPERTY(bool     isWindows           READ isWindows          CONSTANT)
+
     enum MouseEvent {
         Mouse_None  = 0,
         Mouse_Pressed ,

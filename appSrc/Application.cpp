@@ -46,7 +46,6 @@ void Application::initAppCommon()
 {
     qmlRegisterUncreatableType<NetWorkManager>  ("App.NetWorkManager",   1, 0, "NetWorkManager",  "Reference only");
     qmlRegisterUncreatableType<ProtocolManager> ("App.ProtocolManager",   1, 0, "ProtocolManager",  "Reference only");
-
     qmlRegisterSingletonType<QmlGlobal>("App",1,0,"App",QmlGlobalRegist);
 }
 //-----------------------------------------------------------------------------

@@ -6,17 +6,18 @@ import QtQuick.Controls.Material 2.12
 import App 1.0
 import App.NetWorkManager 1.0
 import "qrc:/common"
-/*设置操作 ------主控操作 */
+/*数据召测 ------隧道气体召测 */
 Item {
     id:root
-    property int leftWidth: 182
-    property int fontsize: 19
+    property int leftWidth: 120
+    property int fontsize: 18
     ScrollView {
         id:flickable
         anchors.fill: parent
         clip:         true
         ScrollBar.vertical.interactive: true
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+        property var strArray:[]
                 ColumnLayout {
                     id: contents
                     anchors.margins: 30
@@ -24,19 +25,31 @@ Item {
                     spacing: 20
                     Repeater{
                         id:repeater
-                        model: ["O2","CO","H2", "Cl2","H2S","CO2","CH4","温度","湿度"]
+                        model: ["O2","CO","H2", "Cl2","H2S","CO2","CH4","温度","环境"]
                         delegate:RowLayout{
-                            spacing:20
+                            spacing:10
                             Layout.fillWidth: true
                             YaheiText {
-                                text:qsTr(modelData+"含量")
+                                text:qsTr(modelData)
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
                             }
                             BaseTextField{
-                                id:textfield
-                                Layout.preferredWidth:280
+                                id:dataField
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                            YaheiText {
+                                text:qsTr("报警等级")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                id:lecelField
+                                readOnly: true
+                                Layout.preferredWidth:100
                             }
                         }
                     }
@@ -46,7 +59,7 @@ Item {
                         backRadius: 4
                         bckcolor: "#4785FF"
                         onClicked: {
-
+                               App.protoManager.TunnelGas.queryData()
                         }
                     }
                     //填充最底部

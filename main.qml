@@ -16,8 +16,8 @@ Frameless {
             Qt.rect(0, 0, 99999, 42)
     ]
     property int skintype :0
-    width:    Screen.width/1.5
     height:    Screen.height/1.5
+     width:    Screen.width/1.5
     x: (Screen.width - width) / 2
     y: (Screen.height - height) / 2
     property color accentColor: SkinSingleton.skins[skintype].accentColor              // 皮肤深色
@@ -36,8 +36,28 @@ Frameless {
                               !skin.light  ? Qt.rgba(0,0,0, skin.gradMainOpacity - setting.skinOpacity * 0.48)    : Qt.rgba(1,1,1, skin.gradMainOpacity + setting.skinOpacity * 0.28)
 
     property var skin: SkinSingleton.skins[skintype]
+//    property int xOffset: 0 // 自定义的属性
+//    property int yOffset: 0 // 自定义的属性
+//    MouseArea {
+//        anchors.fill: parent
+//        onPressed: {
+//            // 记录鼠标按下时的窗口位置
+//            rootWindow.xOffset = mainWindow.x - mouse.x
+//            rootWindow.yOffset = mainWindow.y - mouse.y
+//        }
+//    }
 
-
+//    // 鼠标移动事件
+//    MouseArea {
+//        anchors.fill: parent
+//        onPositionChanged: {
+//            // 当鼠标按下并移动时，更新窗口位置
+//            if (mouse.buttons === Qt.LeftButton) {
+//                rootWindow.x = mouse.x + rootWindow.xOffset
+//                rootWindow.y = mouse.y + rootWindow.yOffset
+//            }
+//        }
+//    }
     Material.accent: accentColor
     Material.theme:  Material.Light
     Material.foreground: tingeColor

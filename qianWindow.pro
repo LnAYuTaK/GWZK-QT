@@ -15,13 +15,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Control/MainParaController.cpp \
+    Control/TunnelFanControl.cpp \
     appSrc/Application.cpp \
     appSrc/NetWorkManager.cpp \
     appSrc/ParaFactManager.cpp \
     appSrc/ProtocolEvent.cpp \
     appSrc/ProtocolManager.cpp \
     appSrc/QmlGlobal.cpp \
-    appSrc/TunnelGasDev.cpp \
+    Control/TunnelGasDev.cpp \
+    Control/TunnelGasMonitor.cpp \
     fact/JsonFactGroup.cpp \
         main.cpp \
 
@@ -30,11 +33,9 @@ RESOURCES += qml.qrc
 include(./common/Frameless/frameless.pri)
 include(./common/Backed/Backed.pri)
 
-
 win32 {
     RC_FILE += ./windowRes/Icon.rc
 }
-
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -47,15 +48,17 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 HEADERS += \
+    Control/MainParaController.h \
+    Control/TunnelFanControl.h \
     appSrc/Application.h \
     appSrc/NetWorkManager.h \
     appSrc/ParaFactManager.h \
     appSrc/ProtocolEvent.h \
     appSrc/ProtocolManager.h \
     appSrc/QmlGlobal.h \
-    appSrc/TunnelGasDev.h \
+    Control/TunnelGasDev.h \
+    Control/TunnelGasMonitor.h \
     fact/JsonFactGroup.h

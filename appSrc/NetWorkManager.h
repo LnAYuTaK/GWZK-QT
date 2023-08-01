@@ -37,13 +37,12 @@ public:
     Q_INVOKABLE bool tcpConnect(QString IP,QString port);
     //断开函数
     Q_INVOKABLE void tcpDisConnect();
-
 signals:
     void InfoMsg            (QString  type,QString Msg);
     void bytesReceived      (QObject* link, QByteArray data);
     void bytesSent          (QObject* link, QByteArray data);
     void ConnectedChanged (bool isconnect);
-private slots:
+public  slots:
     //*********TCP*********//
     bool _tcpConnect(QString IP,qint16 port);
     void _tcpReadBytes  ();

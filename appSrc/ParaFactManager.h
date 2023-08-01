@@ -36,7 +36,7 @@ public:
     JsonFactGroup *LocalNetParaSet(){return this->LocalNetParaSetRegList_;}
     JsonFactGroup *NetParaSet(){return this->NetParaSetRegList_;}
     JsonFactGroup *GasParaSet(){return this->GasParaSetRegList_;}
-    JsonFactGroup *TunnelGasData(){return TunnelGasRegList_;}
+    JsonFactGroup *TunnelGasData(){return TunnelGasDataRegList_;}
     JsonFactGroup *TunnelFan(){return this->TunnelFanRegList_;}
     JsonFactGroup *MainControl(){return this->MainControlRegList_;}
 

@@ -61,7 +61,7 @@
         <file>pages/CommLink/NetworkConn.qml</file>
         <file>pages/DeviceList/DevicerList_GasMonitor.qml</file>
         <file>NetParaSettingRegList.json</file>
-        <file>TunnelGasDeviceRegList.json</file>
+        <file>TunnelGasDevice.json</file>
         <file>MainControlParaSettingRegList.json</file>
         <file>MainControlRegList.json</file>
         <file>TunnelGasData.json</file>

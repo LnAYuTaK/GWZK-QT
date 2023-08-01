@@ -12,7 +12,7 @@
         {
             "address":     "0x00E1",
             "operate":     "R/W",
-            "content":     "主站IP地址2",
+            "content":     "气体IP地址2",
             "format" :     ""
         },
         {

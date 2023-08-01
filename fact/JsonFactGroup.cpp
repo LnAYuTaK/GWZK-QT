@@ -24,13 +24,14 @@ JsonFactGroup::JsonFactGroup(QString  jsonObjName ,QString jsonfile)
 
 }
 //-----------------------------------------------------------------------------
-QVector<quint16> JsonFactGroup::getAddress()
+QVector<QString> JsonFactGroup::getAddress()
 {
-    QVector<quint16>addressVector{};
+    QVector<QString>addressVector{};
     for(auto i= _jsonArrayObj.begin();i!= _jsonArrayObj.end();i++)
     {
         QJsonObject obj =  i->toObject();
-        quint16 value = obj["address"].toString().toUInt(nullptr, 16);
+        QString value = obj["address"].toString();
+        value.remove(0, 2); // 去除开头的"0x"
         addressVector.push_back(value);
     }
     return addressVector;

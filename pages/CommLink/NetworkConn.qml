@@ -32,11 +32,11 @@ Item {
                     Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                 }
                 BaseComboBox{
-                    id:commSelct
+                  id:commSelct
                   Layout.alignment: Qt.AlignRight
                   Layout.preferredWidth:280
                   Layout.preferredHeight:40
-                  model: ["UDP", "TCP"]
+                  model: ["TCP", "UDP"]
                 }
             }
             RowLayout{

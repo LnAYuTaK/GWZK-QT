@@ -3,6 +3,10 @@ import QtQuick.Window 2.14
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.12
+import App 1.0
+import App.NetWorkManager 1.0
+import "qrc:/common/qmlQianHints"
+import "qrc:/common/qmlQianDialog"
 import "qrc:/common"
 /*参数设置查询 ------主控参数 */
 Item {
@@ -32,7 +36,11 @@ Item {
                           Layout.preferredWidth:120
                           Layout.preferredHeight: 40
                           model: ["南瑞", "中电普华","SD卡加密","其他"]
+                          onCurrentIndexChanged: {
+
+                          }
                         }
+
                         BaseTextField{
                             Layout.preferredWidth:140
                         }
