@@ -14,41 +14,36 @@
 #include <QObject>
 #include <QVector>
 #include <QDebug>
-enum FrameType{
-    ModuleSend,//主站→装置
-    ModuleRecv
-};
-enum  ProtocolType{
-    TunnelGasDevType,
-    TunnelFanDevType
-};
+
 
 class TunnelGasDev;
 class TunnelGasMonitor;
 class TunnelFanControl;
 class MainParaController;
+class LocalNetParaController;
 
 class ProtocolManager : public QObject
 {
     Q_OBJECT
 public:
-    Q_ENUM(ProtocolType)
-
     explicit ProtocolManager(QObject *parent = nullptr);
 
-    Q_PROPERTY(TunnelGasDev*        TunnelGas           READ  TunnelGas          CONSTANT)
-    Q_PROPERTY(TunnelGasMonitor*    TunnelGasMon        READ  TunnelGasMon       CONSTANT)
-    Q_PROPERTY(TunnelFanControl*    tunnelFanControl    READ  tunnelFanControl   CONSTANT)
-    Q_PROPERTY(MainParaController*  mainParaController  READ  mainParaController CONSTANT)
+    Q_PROPERTY(TunnelGasDev*            TunnelGas               READ  TunnelGas              CONSTANT)
+    Q_PROPERTY(TunnelGasMonitor*        TunnelGasMon            READ  TunnelGasMon           CONSTANT)
+    Q_PROPERTY(TunnelFanControl*        tunnelFanControl        READ  tunnelFanControl       CONSTANT)
+    Q_PROPERTY(MainParaController*      mainParaController      READ  mainParaController     CONSTANT)
+    Q_PROPERTY(LocalNetParaController*  localNetParaController  READ  localNetParaController CONSTANT)
 
-    TunnelGasDev    *   TunnelGas()        {return this->tunnelGasDev_;}
-    TunnelGasMonitor*   TunnelGasMon()     {return this->tunnelGasMon_;}
-    TunnelFanControl*   tunnelFanControl() {return this->tunnelFanControl_;}
-    MainParaController* mainParaController() {return this->mainParaController_;}
+    TunnelGasDev    *       TunnelGas()              {return this->tunnelGasDev_;}
+    TunnelGasMonitor*       TunnelGasMon()           {return this->tunnelGasMon_;}
+    TunnelFanControl*       tunnelFanControl()       {return this->tunnelFanControl_;}
+    MainParaController*     mainParaController()     {return this->mainParaController_;}
+    LocalNetParaController* localNetParaController() {return this->localNetParaController_;}
+
     /**
-     * @brief ProtocolHandle
-     * @param sender
-     * @param data
+     * @brief ProtocolHandle 协议处理负责接收设备数据解析
+     * @param sender    发送者
+     * @param data      数据
      */
     void ProtocolHandle(QObject *sender , QByteArray data);
 
@@ -66,7 +61,11 @@ public:
      * @param regCount 寄存器个数
      */
     static QByteArray makeReadRegProto(QByteArray start,int count);
-    //int 转换为字节数组 2字节高低位
+    /**
+     * @brief intToHexByteArray int 转双字节高低位Byte
+     * @param data
+     * @return
+     */
     static QByteArray intToHexByteArray(int data);
 public slots:
 
@@ -75,10 +74,11 @@ signals:
 private:
     static quint16 modbusCrc16(quint8 *data, qint16 length);
 
-    TunnelGasDev     * tunnelGasDev_;
-    TunnelGasMonitor * tunnelGasMon_;
-    TunnelFanControl * tunnelFanControl_;
-    MainParaController * mainParaController_;
+    TunnelGasDev     *      tunnelGasDev_;
+    TunnelGasMonitor *      tunnelGasMon_;
+    TunnelFanControl *      tunnelFanControl_;
+    MainParaController *    mainParaController_;
+    LocalNetParaController* localNetParaController_;
 
 };
 

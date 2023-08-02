@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Control/LocalNetParaController.cpp \
     Control/MainParaController.cpp \
     Control/TunnelFanControl.cpp \
     appSrc/Application.cpp \
@@ -51,6 +52,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 HEADERS += \
+    Control/LocalNetParaController.h \
     Control/MainParaController.h \
     Control/TunnelFanControl.h \
     appSrc/Application.h \

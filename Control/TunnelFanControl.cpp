@@ -12,7 +12,7 @@ TunnelFanControl::TunnelFanControl(QObject *parent)
     ,regList_(app()->paraFactMgr()->TunnelFan())
     ,count_(0)
     ,format_(0)
-    ,address_("00000000000000000")
+    ,address_("0000000000000000")
 {
 
 }
@@ -32,25 +32,24 @@ void TunnelFanControl::setData()
 {
     if(app()->netWorkMgr()->IsTcpConnected())
     {
-        //地址
-        QByteArray byteArray =QByteArray(address_.toUtf8())+QByteArray::fromHex("00");
-        //格式
-        auto formatData = ProtocolManager::intToHexByteArray(format_);
-        //数量
-        auto countData = ProtocolManager::intToHexByteArray(count_);
         auto adressVector = regList_->getAddress();
-        //起始地址
         auto start =  QByteArray::fromHex(adressVector.at(0).toLatin1());
-        //备用字节
-        QByteArray standby{3,0};
-
-        QByteArray data = byteArray +
+        //地址 17字节
+        QByteArray addressData = QByteArray(address_.toUtf8())+QByteArray(1, '\x00');
+        //格式 2字节
+        auto formatData = ProtocolManager::intToHexByteArray(format_);
+        //数量 2字节
+        auto countData = ProtocolManager::intToHexByteArray(count_);
+        //备用字节 4字节
+        QByteArray standby{4, '\x00'};
+        //数据包总共25字节
+        QByteArray packData = addressData +
                           formatData +
                           countData +
                           standby;
-
-        auto sendMsg = ProtocolManager::makeWriteRegProto(start,adressVector.count(),data);
-
+        qDebug() << "TunnelFanControl SendPack Size: " << packData.size();
+        auto sendMsg = ProtocolManager::makeWriteRegProto(start,adressVector.count(), packData);
+        qDebug() << "TunnelFanControl SendMsg Size: " <<sendMsg.size();
         app()->netWorkMgr()->_tcpWriteBytes(sendMsg);
     }
 }

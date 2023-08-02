@@ -4,7 +4,10 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.12
 import App 1.0
+import App.NetWorkManager 1.0
 import "qrc:/common"
+import "qrc:/common/qmlQianHints"
+import "qrc:/common/qmlQianDialog"
 /*参数设置查询 ------后台网络模块 */
 Item {
     id:root
@@ -29,10 +32,17 @@ Item {
                             text:qsTr("主站IP地址")
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
+
                             Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
                         }
                         BaseTextField{
                           Layout.preferredWidth:280
+                          validator: RegExpValidator {
+                              regExp: /^((([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.){3})([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$/
+                          }
+                          onTextChanged: {
+
+                          }
                         }
                     }
                     RowLayout{

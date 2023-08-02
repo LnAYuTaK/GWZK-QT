@@ -90,7 +90,7 @@ Item {
                         }
                         BaseTextField{
                             Layout.preferredWidth:280
-                            maximumLength: 17
+                            maximumLength: 16
                             validator: RegExpValidator {
                                 regExp: /^[a-zA-Z0-9]*$/ // 只允许输入字母和数字
                             }

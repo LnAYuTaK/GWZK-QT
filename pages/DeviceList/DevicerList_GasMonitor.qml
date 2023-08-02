@@ -139,7 +139,7 @@ Item {
                         BaseTextField{
                             id:gasCode
                             Layout.preferredWidth:280
-                            maximumLength: 17
+                            maximumLength: 16
                             validator: RegExpValidator {
                                 regExp: /^[a-zA-Z0-9]*$/ // 只允许输入字母和数字
                             }
@@ -184,7 +184,7 @@ Item {
                                     message("error","通道设置格式错误")
                                     return
                                 }
-                                if(gasCode.text.length <17)
+                                if(gasCode.text.length <16)
                                 {
                                     message("error","气体编码设置格式错误")
                                     return

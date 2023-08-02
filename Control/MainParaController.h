@@ -19,7 +19,7 @@ public:
     //通讯方式
     Q_PROPERTY(int  commType       READ commType    WRITE setCommType)
     //是否加密
-    Q_PROPERTY(int isEncrypted     READ isEncrypted WRITE setEncrypt)
+    Q_PROPERTY(int encrypted     READ encrypted WRITE setEncrypt)
     //加密类型
     Q_PROPERTY(int encrypType      READ encrypType  WRITE setEncrypType)
     //软件版本地址
@@ -29,7 +29,7 @@ public:
     void    setAddress(QString address){this->address_ = address;}
     int     commType()const{return commType_;}
     void    setCommType(int commType) {this->commType_ = commType;}
-    int     isEncrypted(){return isEncrypted_;}
+    int     encrypted(){return isEncrypted_;}
     void    setEncrypt(int isEncrypted) {this->isEncrypted_ = isEncrypted;}
     int     encrypType (){return encrypType_;}
     void    setEncrypType(int encrypType) {this->encrypType_ = encrypType;}

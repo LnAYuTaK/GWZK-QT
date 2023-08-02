@@ -16,6 +16,7 @@
 #include "Control/TunnelGasMonitor.h"
 #include "Control/TunnelFanControl.h"
 #include "Control/MainParaController.h"
+#include "Control/LocalNetParaController.h"
 //从站地址
 const QByteArray SlaveAddr {QByteArray::fromHex("FF")};
 //读取保持寄存器值功能码
@@ -31,11 +32,13 @@ ProtocolManager::ProtocolManager(QObject *parent)
     ,tunnelGasMon_(new TunnelGasMonitor(this))
     ,tunnelFanControl_(new TunnelFanControl(this))
     ,mainParaController_(new MainParaController(this))
+    ,localNetParaController_(new LocalNetParaController(this))
 {
-    qmlRegisterUncreatableType<TunnelGasDev>("App.ProtocolManager",       1, 0, "TunnelGasDev",       "Reference only");
-    qmlRegisterUncreatableType<TunnelGasMonitor>("App.ProtocolManager",   1, 0, "TunnelGasMonitor",   "Reference only");
-    qmlRegisterUncreatableType<TunnelFanControl>("App.ProtocolManager",   1, 0, "TunnelFanControl",   "Reference only");
-    qmlRegisterUncreatableType<MainParaController>("App.ProtocolManager", 1, 0, "MainParaController", "Reference only");
+    qmlRegisterUncreatableType<TunnelGasDev>          ("App.ProtocolManager", 1, 0, "TunnelGasDev",          "Reference only");
+    qmlRegisterUncreatableType<TunnelGasMonitor>      ("App.ProtocolManager", 1, 0, "TunnelGasMonitor",      "Reference only");
+    qmlRegisterUncreatableType<TunnelFanControl>      ("App.ProtocolManager", 1, 0, "TunnelFanControl",      "Reference only");
+    qmlRegisterUncreatableType<MainParaController>    ("App.ProtocolManager", 1, 0, "MainParaController",    "Reference only");
+    qmlRegisterUncreatableType<LocalNetParaController>("App.ProtocolManager", 1, 0, "LocalNetParaController","Reference only");
 }
 //-----------------------------------------------------------------------------
 /**
