@@ -52,14 +52,6 @@ public:
     Q_INVOKABLE void setData();
     Q_INVOKABLE void queryData();
 
-    enum  ParaType{
-        Ip,
-        Gateway,
-        Mask,
-        MACAddr
-    };
-    //处理 网络参数字符串
-    QByteArray ParseNetLocalString(ParaType type,QString paraStr);
 
 private:
 

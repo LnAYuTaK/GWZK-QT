@@ -17,6 +17,7 @@
 #include "Control/TunnelFanControl.h"
 #include "Control/MainParaController.h"
 #include "Control/LocalNetParaController.h"
+#include "Control/NetParaController.h"
 //从站地址
 const QByteArray SlaveAddr {QByteArray::fromHex("FF")};
 //读取保持寄存器值功能码
@@ -33,12 +34,15 @@ ProtocolManager::ProtocolManager(QObject *parent)
     ,tunnelFanControl_(new TunnelFanControl(this))
     ,mainParaController_(new MainParaController(this))
     ,localNetParaController_(new LocalNetParaController(this))
+    ,netParaController_(new NetParaController(this))
+
 {
     qmlRegisterUncreatableType<TunnelGasDev>          ("App.ProtocolManager", 1, 0, "TunnelGasDev",          "Reference only");
     qmlRegisterUncreatableType<TunnelGasMonitor>      ("App.ProtocolManager", 1, 0, "TunnelGasMonitor",      "Reference only");
     qmlRegisterUncreatableType<TunnelFanControl>      ("App.ProtocolManager", 1, 0, "TunnelFanControl",      "Reference only");
     qmlRegisterUncreatableType<MainParaController>    ("App.ProtocolManager", 1, 0, "MainParaController",    "Reference only");
     qmlRegisterUncreatableType<LocalNetParaController>("App.ProtocolManager", 1, 0, "LocalNetParaController","Reference only");
+    qmlRegisterUncreatableType<NetParaController>     ("App.ProtocolManager", 1, 0, "NetParaController",     "Reference only");
 }
 //-----------------------------------------------------------------------------
 /**
@@ -50,6 +54,10 @@ void ProtocolManager::ProtocolHandle(QObject *sender,QByteArray data)
 {
   Q_UNUSED(sender)
   Q_UNUSED(data)
+
+
+
+
 }
 //-----------------------------------------------------------------------------
 QByteArray ProtocolManager::makeWriteRegProto(QByteArray start,int count,QByteArray Data)
@@ -107,6 +115,49 @@ quint16 ProtocolManager::modbusCrc16(quint8 *data, qint16 length)
   }
   return crc;
 }
+//-----------------------------------------------------------------------------
+//先暂时做一个只分割不校验
+QByteArray ProtocolManager::ParseNetLocalString(ParaType type,QString paraStr)
+{
+  QByteArray res{};
+  switch (type) {
+  case Ip:
+  {
+      auto ipList = paraStr.split(".");
+      for(auto str:ipList){
+          res += QByteArray(str.toUtf8());
+      }
+  }
+  break;
+  case Gateway:
+  {
+      auto gatewayList = paraStr.split(".");
+      for(auto str:gatewayList){
+          res += QByteArray(str.toUtf8());
+      }
+  }
+  break;
+  case Mask:
+  {
+      auto maskList = paraStr.split(".");
+      for(auto str:maskList){
+          res += QByteArray(str.toUtf8());
+      }
+  }
+  break;
+  case MACAddr:
+  {
+      auto maskList = paraStr.split("-");
+      for(auto str:maskList){
+          res += QByteArray(str.toUtf8());
+      }
+  }
+  break;
+  }
+  return res;
+}
+
+
 
 
 

@@ -35,14 +35,18 @@ Item {
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
+                            id:ip1
+                            Layout.preferredWidth:280
+                            color: acceptableInput  ? "black" : "#ff0000"
                             validator: RegExpValidator {
                                 regExp: /^((([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.){3})([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$/
                             }
-                            onTextChanged: {
-                                App.protoManager.localNetParaController.LocalIp1 = text
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.localNetParaController.LocalIp1 = text
+                                }
                             }
-
-                            Layout.preferredWidth:280
                         }
                     }
                     RowLayout{
@@ -55,13 +59,17 @@ Item {
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
+                            id:gateway1
                             Layout.preferredWidth:280
-                            //validator: RegExpValidator{regExp:/(?=(\b|\D))(((\d{1,2})|(1\d{1,2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{1,2})|(2[0-4]\d)|(25[0-5]))(?=(\b|\D))/}
+                            color: acceptableInput  ? "black" : "#ff0000"
                             validator: RegExpValidator {
                                 regExp: /^((([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.){3})([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$/
                             }
-                            onTextChanged: {
-                                App.protoManager.localNetParaController.LocalGateway1 = text
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.localNetParaController.LocalGateway1 = text
+                                }
                             }
                         }
                     }
@@ -75,12 +83,17 @@ Item {
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
+                          id:mask1
+                          color: acceptableInput  ? "black" : "#ff0000"
                           Layout.preferredWidth:280
                           validator: RegExpValidator {
                               regExp: /^((([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.){3})([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$/
                           }
-                          onTextChanged: {
-                              App.protoManager.localNetParaController.LocalMask1 = text
+                          onEditingFinished: {
+                              if(acceptableInput)
+                              {
+                                  App.protoManager.localNetParaController.LocalMask1 = text
+                              }
                           }
                         }
                     }
@@ -94,12 +107,17 @@ Item {
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
+                            id:macaddr1
                             Layout.preferredWidth:280
+                            color: acceptableInput  ? "black" : "#ff0000"
                             validator: RegExpValidator {
                                 regExp: /^(?:[0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$/
                             }
-                            onTextChanged: {
-                                App.protoManager.localNetParaController.LocalMACAddr1 = text
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.localNetParaController.LocalMACAddr1 = text
+                                }
                             }
                         }
                     }
@@ -113,19 +131,17 @@ Item {
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
+                            id:ip2
                             Layout.preferredWidth:280
+                            color: acceptableInput  ? "black" : "#ff0000"
                             validator: RegExpValidator {
                                 regExp: /^((([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.){3})([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$/
                             }
-                            onTextChanged: {
-                                App.protoManager.localNetParaController.LocalIp2 = text
-                            }
-                            //验证..
                             onEditingFinished: {
-                                   if(text.length < 16)
-                                   {
-                                       message("error","IP格式错误")
-                                   }
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.localNetParaController.LocalIp2 = text
+                                }
                             }
                         }
                     }
@@ -139,12 +155,17 @@ Item {
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
+                            id:gateway2
+                            color: acceptableInput  ? "black" : "#ff0000"
                             validator: RegExpValidator {
                                 regExp: /^((([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.){3})([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$/
                             }
                             Layout.preferredWidth:280
-                            onTextChanged: {
-                                App.protoManager.localNetParaController.LocalGateway2 =text
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.localNetParaController.LocalGateway2 = text
+                                }
                             }
                         }
                     }
@@ -158,12 +179,17 @@ Item {
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
+                            id:mask2
+                            color: acceptableInput  ? "black" : "#ff0000"
                             Layout.preferredWidth:280
                             validator: RegExpValidator {
                                 regExp: /^((([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.){3})([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$/
                             }
-                            onTextChanged: {
-                                App.protoManager.localNetParaController.LocalMask2 = text
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.localNetParaController.LocalMask2 = text
+                                }
                             }
                         }
                     }
@@ -177,12 +203,17 @@ Item {
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
+                            id:macaddr2
+                            color: acceptableInput  ? "black" : "#ff0000"
                             validator: RegExpValidator {
                                 regExp: /^(?:[0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$/
                             }
                             Layout.preferredWidth:280
-                            onTextChanged: {
-                                App.protoManager.localNetParaController.LocalMACAddr2 =text
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.localNetParaController.LocalMACAddr2 = text
+                                }
                             }
                         }
                     }
@@ -206,8 +237,19 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked: {
-
-                                App.protoManager.localNetParaController.setData()
+                                //校验//
+                                if(!(ip1.acceptableInput &&ip2.acceptableInput&&
+                                     gateway1.acceptableInput &&gateway2.acceptableInput &&
+                                     mask1.acceptableInput && mask2.acceptableInput &&
+                                     macaddr1.acceptableInput && macaddr2.acceptableInput))
+                                {
+                                    message("error","格式设置错误")
+                                    return
+                                }
+                                else
+                                {
+                                    App.protoManager.localNetParaController.setData()
+                                }
                             }
                         }
                     }
@@ -219,12 +261,12 @@ Item {
                 }
         //}
     }
+
     Message{
         id:messageTip
         z: 1
         parent: Overlay.overlay
     }
-
     function message(type, message) {
         if(type!=='success'&&type!=='error'&&type!=='info'){
             return false

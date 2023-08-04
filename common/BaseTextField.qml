@@ -13,6 +13,7 @@ TextField {
     bottomPadding: 3
     leftPadding: 2
     rightPadding: 2
+    color: acceptableInput  ? "black" : "#ff0000"
     background: Rectangle {
         color: "#FFFFFF"
         border.width: 1

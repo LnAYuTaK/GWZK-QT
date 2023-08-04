@@ -19,7 +19,6 @@ MainParaController::MainParaController(QObject *parent)
 
 }
 
-
 void MainParaController::queryData()
 {
     if(app()->netWorkMgr()->IsTcpConnected())

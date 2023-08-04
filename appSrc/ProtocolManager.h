@@ -21,6 +21,7 @@ class TunnelGasMonitor;
 class TunnelFanControl;
 class MainParaController;
 class LocalNetParaController;
+class NetParaController;
 
 class ProtocolManager : public QObject
 {
@@ -33,12 +34,14 @@ public:
     Q_PROPERTY(TunnelFanControl*        tunnelFanControl        READ  tunnelFanControl       CONSTANT)
     Q_PROPERTY(MainParaController*      mainParaController      READ  mainParaController     CONSTANT)
     Q_PROPERTY(LocalNetParaController*  localNetParaController  READ  localNetParaController CONSTANT)
+    Q_PROPERTY(NetParaController*       netParaController       READ  netParaController      CONSTANT)
 
     TunnelGasDev    *       TunnelGas()              {return this->tunnelGasDev_;}
     TunnelGasMonitor*       TunnelGasMon()           {return this->tunnelGasMon_;}
     TunnelFanControl*       tunnelFanControl()       {return this->tunnelFanControl_;}
     MainParaController*     mainParaController()     {return this->mainParaController_;}
     LocalNetParaController* localNetParaController() {return this->localNetParaController_;}
+    NetParaController *     netParaController()      {return this->netParaController_;}
 
     /**
      * @brief ProtocolHandle 协议处理负责接收设备数据解析
@@ -67,6 +70,17 @@ public:
      * @return
      */
     static QByteArray intToHexByteArray(int data);
+
+    enum  ParaType{
+        Ip,
+        Gateway,
+        Mask,
+        MACAddr
+    };
+
+    //处理 网络参数字符串
+   static QByteArray ParseNetLocalString(ParaType type,QString paraStr);
+
 public slots:
 
 signals:
@@ -79,7 +93,7 @@ private:
     TunnelFanControl *      tunnelFanControl_;
     MainParaController *    mainParaController_;
     LocalNetParaController* localNetParaController_;
-
+    NetParaController *     netParaController_;
 };
 
 #endif // PROTOCOL_H

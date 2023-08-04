@@ -22,48 +22,6 @@ LocalNetParaController::LocalNetParaController(QObject *parent)
 {
 
 }
-//先暂时做一个只分割不校验
- QByteArray LocalNetParaController::ParseNetLocalString(ParaType type,QString paraStr)
- {
-    QByteArray res{};
-     switch (type) {
-     case Ip:
-     {
-        auto ipList = paraStr.split(".");
-        for(auto str:ipList){
-            res += QByteArray(str.toUtf8());
-        }
-     }
-     break;
-     case Gateway:
-     {
-        auto gatewayList = paraStr.split(".");
-        for(auto str:gatewayList){
-            res += QByteArray(str.toUtf8());
-        }
-     }
-    break;
-    case Mask:
-    {
-        auto maskList = paraStr.split(".");
-        for(auto str:maskList){
-            res += QByteArray(str.toUtf8());
-        }
-    }
-    break;
-    case MACAddr:
-    {
-        auto maskList = paraStr.split("-");
-        for(auto str:maskList){
-            res += QByteArray(str.toUtf8());
-        }
-    }
-    break;
-    }
-    qDebug() << res;
-    return res;
-}
-
 
 void LocalNetParaController::queryData()
 {
@@ -84,21 +42,21 @@ void LocalNetParaController::setData()
         auto adressVector = regList_->getAddress();
         auto start =  QByteArray::fromHex(adressVector.at(0).toLatin1());
         //IP1地址 4个字节
-        auto ipAdd1Data   = ParseNetLocalString(ParaType::Ip,localIp1_);
+        auto ipAdd1Data   = ProtocolManager::ParseNetLocalString(ProtocolManager::Ip,localIp1_);
         //网关地址 4字节
-        auto gateway1Data = ParseNetLocalString(ParaType::Gateway,localGateway1_);
+        auto gateway1Data = ProtocolManager::ParseNetLocalString(ProtocolManager::Gateway,localGateway1_);
         //子网掩码地址 4字节
-        auto mask1Data    = ParseNetLocalString(ParaType::Gateway,localMask1_);
+        auto mask1Data    = ProtocolManager::ParseNetLocalString(ProtocolManager::Mask,localMask1_);
         //IPMA地址 6字节
-        auto macAddr1Data  = ParseNetLocalString(ParaType::MACAddr,localMACAddr1_);
+        auto macAddr1Data  = ProtocolManager::ParseNetLocalString(ProtocolManager::MACAddr,localMACAddr1_);
         //IP1地址 4个字节
-        auto ipAdd2Data   = ParseNetLocalString(ParaType::Ip,localIp2_);
+        auto ipAdd2Data   = ProtocolManager::ParseNetLocalString(ProtocolManager::Ip,localIp2_);
         //网关地址 4字节
-        auto gateway2Data = ParseNetLocalString(ParaType::Gateway,localGateway2_);
+        auto gateway2Data = ProtocolManager::ParseNetLocalString(ProtocolManager::Gateway,localGateway2_);
         //子网掩码地址 4字节
-        auto mask2Data    = ParseNetLocalString(ParaType::Gateway,localMask2_);
+        auto mask2Data    = ProtocolManager::ParseNetLocalString(ProtocolManager::Mask,localMask2_);
         //IPMA地址 6字节
-        auto macAddr2Data  = ParseNetLocalString(ParaType::MACAddr,localMACAddr2_);
+        auto macAddr2Data  = ProtocolManager::ParseNetLocalString(ProtocolManager::MACAddr,localMACAddr2_);
         //备用字节12个
         QByteArray standby(12,'\x00');
         //数据包总共 48

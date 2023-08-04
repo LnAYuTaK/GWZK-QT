@@ -79,7 +79,6 @@ Item {
                         }
                     }
                     RowLayout{
-
                         Layout.fillWidth: true
                         spacing:20
                         YaheiText {

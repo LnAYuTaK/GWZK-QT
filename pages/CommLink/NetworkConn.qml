@@ -72,7 +72,7 @@ Item {
                   Layout.preferredWidth:280
                   validator: RegExpValidator {
                           regExp: /^(0|[1-9]\d{0,3}|[1-5]\d{4}|[6][0-4]\d{3}|[6][5][0-4]\d{2}|[6][5][5][0-2]\d|[6][5][5][3][0-5])$/
-                     }
+                  }
                 }
             }
             RowLayout{
