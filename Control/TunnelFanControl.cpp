@@ -41,7 +41,7 @@ void TunnelFanControl::setData()
         //数量 2字节
         auto countData = ProtocolManager::intToHexByteArray(count_);
         //备用字节 4字节
-        QByteArray standby{4, '\x00'};
+        QByteArray standby(4, '\x00');
         //数据包总共25字节
         QByteArray packData = addressData +
                           formatData +

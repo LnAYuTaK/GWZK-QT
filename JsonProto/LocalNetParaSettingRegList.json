@@ -114,37 +114,37 @@
         {
             "address":     "0x0222",
             "operate":     "R/W",
-            "content":     "备用1",
-            "format" :     "备用"
+            "content":     "Wifi名称地址1",
+            "format" :     "wifi名称"
         },
         {
             "address":     "0x0223",
             "operate":     "R/W",
-            "content":     "备用2",
-            "format" :     "备用"
+            "content":     "Wifi名称地址2",
+            "format" :     "wifi名称"
         },
         {
             "address":     "0x0224",
             "operate":     "R/W",
-            "content":     "备用3",
-            "format" :     "备用"
+            "content":     "Wifi名称地址3",
+            "format" :     "wifi名称"
         },
         {
             "address":     "0x0225",
             "operate":     "R/W",
-            "content":     "备用4",
-            "format" :     "备用"
+            "content":     "Wifi名称地址4",
+            "format" :     "wifi名称"
         },
         {
             "address":     "0x0226",
             "operate":     "R/W",
-            "content":     "备用5",
+            "content":     "备用",
             "format" :     "备用"
         },
         {
             "address":     "0x0227",
             "operate":     "R/W",
-            "content":     "备用6",
+            "content":     "备用",
             "format" :     "备用"
         }
     ]

@@ -19,7 +19,7 @@ public:
     //通讯方式
     Q_PROPERTY(int  commType       READ commType    WRITE setCommType)
     //是否加密
-    Q_PROPERTY(int encrypted     READ encrypted WRITE setEncrypt)
+    Q_PROPERTY(int encrypted       READ encrypted WRITE setEncrypt)
     //加密类型
     Q_PROPERTY(int encrypType      READ encrypType  WRITE setEncrypType)
     //软件版本地址
@@ -41,11 +41,11 @@ public:
 
 private:
     JsonFactGroup *regList_;
-    QString address_;
-    int     commType_;
-    int    isEncrypted_;
-    int     encrypType_;
-    QString softVersion_;
+    QString        address_;
+    int            commType_;
+    int            isEncrypted_;
+    int            encrypType_;
+    QString        softVersion_;
 
 };
 

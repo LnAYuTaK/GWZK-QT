@@ -30,6 +30,8 @@ public:
     Q_PROPERTY(QString LocalMask2     READ LocalMask2     WRITE setLocalMask2)
     //本地IP2MAC地址
     Q_PROPERTY(QString LocalMACAddr2  READ LocalMACAddr2  WRITE setLocalMACAddr2)
+    //本地Wifi名称
+    Q_PROPERTY(QString LocalWifiName  READ LocalWifiName  WRITE setLocalWifiName)
     //Local IP 1
     QString LocalIp1()const {return localIp1_;}
     void setLocalIp1(QString localIp1 ){this->localIp1_ = localIp1;}
@@ -48,13 +50,13 @@ public:
     void setLocalMask2(QString localMask2){this->localMask2_ = localMask2;}
     QString LocalMACAddr2()const {return this->localMACAddr2_;}
     void setLocalMACAddr2(QString localMACAddr2){this->localMACAddr2_ = localMACAddr2;}
-
+    //wifi
+    QString LocalWifiName(){return this->localWifiName_;}
+    void   setLocalWifiName(QString localWifiName){this->localWifiName_ = localWifiName;}
     Q_INVOKABLE void setData();
     Q_INVOKABLE void queryData();
 
-
 private:
-
     JsonFactGroup *regList_;
     QString localIp1_;
     QString localGateway1_;
@@ -64,6 +66,7 @@ private:
     QString localGateway2_;
     QString localMask2_;
     QString localMACAddr2_;
+    QString localWifiName_;
 
 };
 

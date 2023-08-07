@@ -60,17 +60,17 @@
         <file>pages/ParaSettingQuery/MainControlPara.qml</file>
         <file>pages/CommLink/NetworkConn.qml</file>
         <file>pages/DeviceList/DevicerList_GasMonitor.qml</file>
-        <file>NetParaSettingRegList.json</file>
-        <file>TunnelGasDevice.json</file>
-        <file>MainControlParaSettingRegList.json</file>
-        <file>MainControlRegList.json</file>
-        <file>TunnelGasData.json</file>
-        <file>GasParaSettingRegList.json</file>
-        <file>LocalNetParaSettingRegList.json</file>
-        <file>TunnelFanDeviceRegList.json</file>
         <file>pages/DeviceList/DeviceList_TunnelFan.qml</file>
         <file>pages/ParaSettingQuery/GasParaSetting.qml</file>
         <file>pages/MasterOperation/MainConOperation.qml</file>
         <file>pages/DataAcquisition/GasDataAcquisition.qml</file>
+        <file>JsonProto/GasParaSettingRegList.json</file>
+        <file>JsonProto/LocalNetParaSettingRegList.json</file>
+        <file>JsonProto/MainControlParaSettingRegList.json</file>
+        <file>JsonProto/MainControlRegList.json</file>
+        <file>JsonProto/NetParaSettingRegList.json</file>
+        <file>JsonProto/TunnelFanDeviceRegList.json</file>
+        <file>JsonProto/TunnelGasData.json</file>
+        <file>JsonProto/TunnelGasDevice.json</file>
     </qresource>
 </RCC>

@@ -47,7 +47,7 @@ void TunnelGasMonitor::setData()
         //通道 2字节
         auto channelData = ProtocolManager::intToHexByteArray(channel_);
         //备用 6字节
-        QByteArray standby{6, '\x00'};
+        QByteArray standby(6, '\x00');
         //数据包总共 31字节
         QByteArray packData  = byteArray +
                           formatData +

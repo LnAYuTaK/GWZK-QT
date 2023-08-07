@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Control/LocalNetParaController.cpp \
+    Control/MainOptController.cpp \
     Control/MainParaController.cpp \
     Control/NetParaController.cpp \
     Control/TunnelFanControl.cpp \
@@ -54,6 +55,7 @@ ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 HEADERS += \
     Control/LocalNetParaController.h \
+    Control/MainOptController.h \
     Control/MainParaController.h \
     Control/NetParaController.h \
     Control/TunnelFanControl.h \

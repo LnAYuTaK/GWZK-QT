@@ -124,32 +124,44 @@ QByteArray ProtocolManager::ParseNetLocalString(ParaType type,QString paraStr)
   case Ip:
   {
       auto ipList = paraStr.split(".");
-      for(auto str:ipList){
-          res += QByteArray(str.toUtf8());
+      for(const QString& part:ipList){
+          int byteValue = part.toInt();
+          if (byteValue >= 0 && byteValue <= 255) {
+              res.append(static_cast<char>(byteValue));
+          }
       }
   }
   break;
   case Gateway:
   {
-      auto gatewayList = paraStr.split(".");
-      for(auto str:gatewayList){
-          res += QByteArray(str.toUtf8());
+      auto gateWayList = paraStr.split(".");
+      for(const QString& gateway:gateWayList){
+          int byteValue = gateway.toInt();
+          if ( byteValue >= 0 && byteValue <= 255) {
+              res.append(static_cast<char>(byteValue));
+          }
       }
   }
   break;
   case Mask:
   {
       auto maskList = paraStr.split(".");
-      for(auto str:maskList){
-          res += QByteArray(str.toUtf8());
+      for(const QString& mask:maskList){
+          int byteValue = mask.toInt();
+          if (byteValue >= 0 && byteValue <= 255) {
+              res.append(static_cast<char>(byteValue));
+          }
       }
   }
   break;
   case MACAddr:
   {
-      auto maskList = paraStr.split("-");
-      for(auto str:maskList){
-          res += QByteArray(str.toUtf8());
+      auto macAddrList = paraStr.split("-");
+      for(const QString& macAddr:macAddrList){
+          int byteValue =  macAddr.toInt();
+          if (byteValue >= 0 && byteValue <= 255) {
+              res.append(static_cast<char>(byteValue));
+          }
       }
   }
   break;

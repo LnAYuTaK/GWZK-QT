@@ -125,6 +125,28 @@ Item {
                         spacing:20
                         YaheiText {
                             anchors.centerIn: parent.Center
+                            text:qsTr("WIFI名称")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            id:wifiName
+                            Layout.preferredWidth:280
+                            color: acceptableInput  ? "black" : "#ff0000"
+                            maximumLength: 7
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                   App.protoManager.localNetParaController.LocalWifiName = text
+                                }
+                            }
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        YaheiText {
+                            anchors.centerIn: parent.Center
                             text:qsTr("本机IP2")
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
@@ -160,6 +182,7 @@ Item {
                             validator: RegExpValidator {
                                 regExp: /^((([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.){3})([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$/
                             }
+
                             Layout.preferredWidth:280
                             onEditingFinished: {
                                 if(acceptableInput)
@@ -239,6 +262,7 @@ Item {
                             onClicked: {
                                 //校验//
                                 if(!(ip1.acceptableInput &&ip2.acceptableInput&&
+                                     wifiName.acceptableInput &&
                                      gateway1.acceptableInput &&gateway2.acceptableInput &&
                                      mask1.acceptableInput && mask2.acceptableInput &&
                                      macaddr1.acceptableInput && macaddr2.acceptableInput))
