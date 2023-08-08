@@ -18,6 +18,7 @@
 #include "Control/MainParaController.h"
 #include "Control/LocalNetParaController.h"
 #include "Control/NetParaController.h"
+#include "Control/MainOptController.h"
 //从站地址
 const QByteArray SlaveAddr {QByteArray::fromHex("FF")};
 //读取保持寄存器值功能码
@@ -35,7 +36,7 @@ ProtocolManager::ProtocolManager(QObject *parent)
     ,mainParaController_(new MainParaController(this))
     ,localNetParaController_(new LocalNetParaController(this))
     ,netParaController_(new NetParaController(this))
-
+    ,mainOptController_(new MainOptController(this))
 {
     qmlRegisterUncreatableType<TunnelGasDev>          ("App.ProtocolManager", 1, 0, "TunnelGasDev",          "Reference only");
     qmlRegisterUncreatableType<TunnelGasMonitor>      ("App.ProtocolManager", 1, 0, "TunnelGasMonitor",      "Reference only");
@@ -43,6 +44,7 @@ ProtocolManager::ProtocolManager(QObject *parent)
     qmlRegisterUncreatableType<MainParaController>    ("App.ProtocolManager", 1, 0, "MainParaController",    "Reference only");
     qmlRegisterUncreatableType<LocalNetParaController>("App.ProtocolManager", 1, 0, "LocalNetParaController","Reference only");
     qmlRegisterUncreatableType<NetParaController>     ("App.ProtocolManager", 1, 0, "NetParaController",     "Reference only");
+    qmlRegisterUncreatableType<MainOptController>     ("App.ProtocolManager", 1, 0, "MainOptController",     "Reference only");
 }
 //-----------------------------------------------------------------------------
 /**

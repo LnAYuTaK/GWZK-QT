@@ -38,7 +38,7 @@ void MainParaController::setData()
         auto adressVector = regList_->getAddress();
         auto start =  QByteArray::fromHex(adressVector.at(0).toLatin1());
         //地址 17字节
-        QByteArray addressData =QByteArray(address_.toUtf8())+QByteArray(1, '\x00');
+        QByteArray addressData =QByteArray(address_.toLatin1())+QByteArray(1, '\x00');
         //通讯方式 2字节
         auto commTypeData = ProtocolManager::intToHexByteArray(commType_);
         //是否加密 2字节
@@ -51,12 +51,12 @@ void MainParaController::setData()
         QByteArray standby(6, '\x00');
         //数据包共33字节
         QByteArray packData  = addressData+
-                           commTypeData+
-                           encryptedData+
-                           encrypType +
-                           softVersion +
-                           standby;
-        qDebug() << "MainParaController SendPack Size: " << packData.size();
+                               commTypeData+
+                               encryptedData+
+                               encrypType +
+                               softVersion +
+                               standby;
+        qDebug() << "MainParaController Pack Size: " << packData.size();
         auto sendMsg = ProtocolManager::makeWriteRegProto(start,adressVector.count(),packData);
         qDebug() << "MainParaController SendMsg Size: " <<sendMsg.size();
         app()->netWorkMgr()->_tcpWriteBytes(sendMsg);

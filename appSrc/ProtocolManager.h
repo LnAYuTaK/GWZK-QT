@@ -22,7 +22,7 @@ class TunnelFanControl;
 class MainParaController;
 class LocalNetParaController;
 class NetParaController;
-
+class MainOptController;
 class ProtocolManager : public QObject
 {
     Q_OBJECT
@@ -35,6 +35,7 @@ public:
     Q_PROPERTY(MainParaController*      mainParaController      READ  mainParaController     CONSTANT)
     Q_PROPERTY(LocalNetParaController*  localNetParaController  READ  localNetParaController CONSTANT)
     Q_PROPERTY(NetParaController*       netParaController       READ  netParaController      CONSTANT)
+    Q_PROPERTY(MainOptController*       MainOptCtrl             READ  MainOptCtrl      CONSTANT)
 
     TunnelGasDev    *       TunnelGas()              {return this->tunnelGasDev_;}
     TunnelGasMonitor*       TunnelGasMon()           {return this->tunnelGasMon_;}
@@ -42,6 +43,7 @@ public:
     MainParaController*     mainParaController()     {return this->mainParaController_;}
     LocalNetParaController* localNetParaController() {return this->localNetParaController_;}
     NetParaController *     netParaController()      {return this->netParaController_;}
+    MainOptController *     MainOptCtrl()            {return this->mainOptController_;}
 
     /**
      * @brief ProtocolHandle 协议处理负责接收设备数据解析
@@ -94,6 +96,7 @@ private:
     MainParaController *    mainParaController_;
     LocalNetParaController* localNetParaController_;
     NetParaController *     netParaController_;
+    MainOptController *     mainOptController_;
 };
 
 #endif // PROTOCOL_H

@@ -72,5 +72,6 @@
         <file>JsonProto/TunnelFanDeviceRegList.json</file>
         <file>JsonProto/TunnelGasData.json</file>
         <file>JsonProto/TunnelGasDevice.json</file>
+        <file>JsonProto/MqttParaSetting.json</file>
     </qresource>
 </RCC>

@@ -3,7 +3,11 @@ import QtQuick.Window 2.14
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.12
+import App 1.0
+import App.NetWorkManager 1.0
 import "qrc:/common"
+import "qrc:/common/qmlQianHints"
+import "qrc:/common/qmlQianDialog"
 /*设置操作 ------主控操作 */
 Item {
     id:root
@@ -29,7 +33,16 @@ Item {
                             Layout.alignment: Qt.AlignLeft
                         }
                         BaseTextField{
+                            id:systime
                             Layout.preferredWidth:140
+                            color: acceptableInput  ? "black" : "#ff0000"
+                            validator: RegExpValidator { regExp: /^[0-9]*$/ }
+                            onEditingFinished:{
+                                if(acceptableInput)
+                                {
+                                   App.protoManager.MainOptCtrl.SysTime = text
+                                }
+                            }
                         }
                     }
                     RowLayout{
@@ -44,6 +57,9 @@ Item {
                           Layout.preferredWidth:120
                           Layout.preferredHeight: 40
                           model: ["系统重启","重新拨号"]
+                          onCurrentIndexChanged: {
+                              App.protoManager.MainOptCtrl.SysOpsAble = currentIndex
+                          }
                         }
                         BaseTextField{
                             Layout.preferredWidth:140
@@ -56,6 +72,9 @@ Item {
                             font.pixelSize:  20
                             backRadius: 4
                             bckcolor: "#4785FF"
+                            onClicked:{
+                               App.protoManager.MainOptCtrl.queryData()
+                            }
                         }
                         Rectangle {
                              width: 200
@@ -65,6 +84,16 @@ Item {
                             font.pixelSize:  20
                             backRadius: 4
                             bckcolor: "#4785FF"
+                            onClicked:{
+                                if(!(systime.acceptableInput))
+                                {
+                                    message("error","格式设置错误")
+                                }
+                                else
+                                {
+                                    App.protoManager.MainOptCtrl.setData()
+                                }
+                            }
                         }
                     }
                     //填充最底部
@@ -73,6 +102,21 @@ Item {
                          height: 10
                      }
                 }
+    }
+    function message(type, message) {
+        if(type!=='success'&&type!=='error'&&type!=='info'){
+            return false
+        }
+        messageTip.open(type, message)
+    }
+
+    SkinQianDialog {
+        id: skinQianDialog
+        backParent: windowEntry
+        parent: Overlay.overlay
+        onAccept: {
+           skinQianDialog.close();
+        }
     }
     Item {
         Layout.fillHeight: true

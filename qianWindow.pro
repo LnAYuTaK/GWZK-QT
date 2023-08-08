@@ -18,6 +18,7 @@ SOURCES += \
     Control/LocalNetParaController.cpp \
     Control/MainOptController.cpp \
     Control/MainParaController.cpp \
+    Control/MqttParaController.cpp \
     Control/NetParaController.cpp \
     Control/TunnelFanControl.cpp \
     appSrc/Application.cpp \
@@ -57,6 +58,7 @@ HEADERS += \
     Control/LocalNetParaController.h \
     Control/MainOptController.h \
     Control/MainParaController.h \
+    Control/MqttParaController.h \
     Control/NetParaController.h \
     Control/TunnelFanControl.h \
     appSrc/Application.h \

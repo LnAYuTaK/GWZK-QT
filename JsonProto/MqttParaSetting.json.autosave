@@ -1,0 +1,43 @@
+{
+    "version":      1.0,
+    "componentid":  7,
+    "MqttParaSetting":
+    [
+        {
+            "address":     "0x0412",
+            "operate":     "R/W",
+            "content":     "MqttIP地址1",
+            "format" :     "192.168.0.12其中192是0x0412地址高字节数据依次类推"
+        },
+        {
+            "address":     "0x0413",
+            "operate":     "R/W",
+            "content":     "MqttIP地址2",
+            "format" :     "192.168.0.12其中192是0x0412地址高字节数据依次类推"
+        },
+        {
+            "address":     "0x0414",
+            "operate":     "R/W",
+            "content":     "Mqtt端口号",
+            "format" :     "0-65535"
+        }
+        {
+            "address":     "0x0415",
+            "operate":     "R/W",
+            "content":     "mqtt客户端ID",
+            "format" :     "32字节以\0结尾"
+        }
+        {
+            "address":     "0x0416",
+            "operate":     "R/W",
+            "content":     "Mqtt用户名",
+            "format" :     "32字节以\0结尾"
+        }
+        {
+            "address":     "0x0417",
+            "operate":     "R/W",
+            "content":     "Mqtt端口号",
+            "format" :     "32字节以\0结尾"
+        }
+    ]
+}
