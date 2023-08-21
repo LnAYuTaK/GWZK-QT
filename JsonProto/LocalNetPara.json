@@ -1,7 +1,7 @@
-{
+﻿{
     "version":      1.0,
     "componentid":  5,
-    "LocalNetParaSetting":
+    "LocalNetPara":
     [
         {
             "address":     "0x0210",

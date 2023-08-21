@@ -1,4 +1,4 @@
-
+﻿
 #ifndef MAINOPTCONTROLLER_H
 #define MAINOPTCONTROLLER_H
 
@@ -10,6 +10,7 @@
 #include "appSrc/Application.h"
 #include "appSrc/ParaFactManager.h"
 
+//主控参数设置
 class MainOptController : public QObject
 {
     Q_OBJECT
@@ -26,6 +27,10 @@ public:
 
     Q_INVOKABLE void queryData();
     Q_INVOKABLE void setData();
+    //获取寄存器首地址
+    QByteArray getMainOptReg(){
+        return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
+    }
 
 private:
     JsonFactGroup * regList_;

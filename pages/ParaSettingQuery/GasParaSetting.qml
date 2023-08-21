@@ -1,241 +1,287 @@
-import QtQuick 2.14
+﻿import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.12
+import App 1.0
+import App.NetWorkManager 1.0
+import App.ProtocolManager 1.0
 import "qrc:/common"
+import "qrc:/common/qmlQianHints"
+import "qrc:/common/qmlQianDialog"
 /*参数设置查询 ------气体参数*/
 Item {
     id:root
     property int leftWidth: 182
     property int fontsize: 19
-    SwipeView {
-          id: swipeView
-          anchors.fill: parent
-          interactive: true
-          currentIndex: 0
-          Repeater {
-              model: ["O2","CO","H2", "Cl2","H2S","CO2","CH4","温度","湿度"]
+    visible:true
+    // 界面1
+    TabBar {
+        id: bar
+        width: parent.width
+        Repeater {
+            model: ["O2","H2", "Cl2","H2S","CH4","CO","CO2"]
+            TabButton {
+                text: modelData
+                width: Math.max(100, bar.width / 8)
+            }
+        }
+    }
+
+    function selectGasType(typename)
+    {
+        var temp = typename
+        if(temp  === "O2")
+        {
+            return GasParaController.O2
+        }
+        else if(temp  === "H2")
+        {
+            return GasParaController.H2
+        }
+        else if(temp  === "Cl2")
+        {
+            return GasParaController.Cl2
+        }
+        else if(temp  === "H2S")
+        {
+            return GasParaController.H2S
+        }
+        else if(temp  === "CH4")
+        {
+            return GasParaController.CH4
+        }
+        else if(temp  === "CO")
+        {
+            return GasParaController.CO
+        }
+        else if(temp  === "CO2")
+        {
+            return GasParaController.CO2
+        }
+    }
+
+    StackLayout {
+        anchors.top:bar.bottom
+        anchors.bottom: parent.bottom
+        width: parent.width
+        currentIndex: bar.currentIndex
+        Repeater {
+            model: ["O2","H2", "Cl2","H2S","CH4","CO","CO2"]
+            Item {
               ColumnLayout {
-                  spacing: 0
-                  RowLayout{
-                      spacing:20
-                      Layout.fillWidth: true
-                      YaheiText {
-                          text:qsTr(modelData +"报警阈值上限等级1")
-                          font.pixelSize: fontsize
-                          Layout.preferredWidth: leftWidth
-                          Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                      }
-                      BaseTextField{
-                          Layout.preferredWidth:240
-                      }
-                  }
-                  RowLayout{
-                      spacing:20
-                      Layout.fillWidth: true
-                      YaheiText {
-                          text:qsTr(modelData +"报警阈值下限等级1")
-                          font.pixelSize: fontsize
-                          Layout.preferredWidth: leftWidth
-                          Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                      }
-                      BaseTextField{
-                          Layout.preferredWidth:240
-                      }
-                  }
-                  RowLayout{
-                      spacing:20
-                      Layout.fillWidth: true
-                      YaheiText {
-                          text:qsTr(modelData +"报警阈值上限等级2")
-                          font.pixelSize: fontsize
-                          Layout.preferredWidth: leftWidth
-                          Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                      }
-                      BaseTextField{
-                          Layout.preferredWidth:240
-                      }
-                  }
-                  RowLayout{
-                      spacing:20
-                      Layout.fillWidth: true
-                      YaheiText {
-                          text:qsTr(modelData +"报警阈值下限等级2")
-                          font.pixelSize: fontsize
-                          Layout.preferredWidth: leftWidth
-                          Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                      }
-                      BaseTextField{
-                          Layout.preferredWidth:240
-                      }
-                  }
-                  RowLayout{
-                      spacing:20
-                      Layout.fillWidth: true
-                      YaheiText {
-                          text:qsTr(modelData +"报警阈值上限等级3")
-                          font.pixelSize: fontsize
-                          Layout.preferredWidth: leftWidth
-                          Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                      }
-                      BaseTextField{
-                          Layout.preferredWidth:240
-                      }
-                  }
-                  RowLayout{
-                      spacing:20
-                      Layout.fillWidth: true
-                      YaheiText {
-                          text:qsTr(modelData +"报警阈值下限等级3")
-                          font.pixelSize: fontsize
-                          Layout.preferredWidth: leftWidth
-                          Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                      }
-                      BaseTextField{
-                          Layout.preferredWidth:240
-                      }
-                  }
-                  RowLayout{
-                      spacing:20
-                      Layout.fillWidth: true
-                      YaheiText {
-                          text:qsTr(modelData +"防抖阈值")
-                          font.pixelSize: fontsize
-                          Layout.preferredWidth: leftWidth
-                          Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                      }
-                      BaseTextField{
-                          Layout.preferredWidth:240
-                      }
-                  }
-                  RowLayout{
-                      Layout.fillWidth: true
-                      BaseButton {
-                          text:qsTr("查询")
-                          font.pixelSize:  20
-                          backRadius: 4
-                          bckcolor: "#4785FF"
-                      }
-                      Rectangle {
-                           width: 200
-                      }
-                      BaseButton {
-                          text: qsTr("设置")
-                          font.pixelSize:  20
-                          backRadius: 4
-                          bckcolor: "#4785FF"
-                      }
-                  }
-              }
-          }
-      }
-    PageIndicator {
-        count: 9 // 页面数量
-        currentIndex: swipeView.currentIndex
+                   anchors.fill: parent
+                    RowLayout{
+                        spacing:20
+                        Layout.fillWidth: true
+                        YaheiText {
+                            text:qsTr(modelData +"报警阈值上限等级1")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            id:uplimit1
+                            Layout.preferredWidth:240
+                            color: acceptableInput  ? "black" : "#ff0000"
+                            //int 验证器
+                            validator: IntValidator {}
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.GasParaCtrl.UpThresholdLimitLevel1 = text
+                                }
+                            }
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        Layout.fillWidth: true
+                        YaheiText {
+                            text:qsTr(modelData +"报警阈值下限等级1")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            id:lowlimit1
+                            Layout.preferredWidth:240
+                            color: acceptableInput  ? "black" : "#ff0000"
+                            validator: IntValidator {}
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.GasParaCtrl.LowThresholdLimitLevel1 = text
+                                }
+                            }
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        Layout.fillWidth: true
+                        YaheiText {
+                            text:qsTr(modelData +"报警阈值上限等级2")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            id:uplimit2
+                            Layout.preferredWidth:240
+                            color: acceptableInput  ? "black" : "#ff0000"
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.GasParaCtrl.UpThresholdLimitLevel2 = text
+                                }
+                            }
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        Layout.fillWidth: true
+                        YaheiText {
+                            text:qsTr(modelData +"报警阈值下限等级2")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            id:lowlimit2
+                            Layout.preferredWidth:240
+                            color: acceptableInput  ? "black" : "#ff0000"
+                            validator: IntValidator {}
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.GasParaCtrl.LowThresholdLimitLevel2 = text
+                                }
+                            }
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        Layout.fillWidth: true
+                        YaheiText {
+                            text:qsTr(modelData +"报警阈值上限等级3")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            id:uplimit3
+                            Layout.preferredWidth:240
+                            color: acceptableInput  ? "black" : "#ff0000"
+                            validator: IntValidator {}
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.GasParaCtrl.UpThresholdLimitLevel3 = text
+                                }
+                            }
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        Layout.fillWidth: true
+                        YaheiText {
+                            text:qsTr(modelData +"报警阈值下限等级3")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            id:lowlimit3
+                            Layout.preferredWidth:240
+                            color: acceptableInput  ? "black" : "#ff0000"
+                            validator: IntValidator {}
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.GasParaCtrl.LowThresholdLimitLevel3 = text
+                                }
+                            }
+                        }
+                    }
+                    RowLayout{
+                        spacing:20
+                        Layout.fillWidth: true
+                        YaheiText {
+                            text:qsTr(modelData +"防抖阈值")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            id:keeplimit
+                            Layout.preferredWidth:240
+                            color: acceptableInput  ? "black" : "#ff0000"
+                            validator: IntValidator {}
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.GasParaCtrl.KeepThresholdLimit = text
+                                }
+                            }
+                        }
+                    }
+                    RowLayout{
+                        Layout.fillWidth: true
+                        BaseButton {
+                            text:qsTr("查询")
+                            font.pixelSize:  20
+                            backRadius: 4
+                            bckcolor: "#4785FF"
+                            onClicked: {
+                                App.protoManager.GasParaCtrl.queryData(selectGasType(modelData))
+                            }
+                        }
+                        Rectangle {
+                             width: 200
+                        }
+                        BaseButton {
+                            text: qsTr("设置")
+                            font.pixelSize:  20
+                            backRadius: 4
+                            bckcolor: "#4785FF"
+                            onClicked: {
+                                if(!(uplimit1.acceptableInput&&uplimit2.acceptableInput&&uplimit3.acceptableInput
+                                     &&lowlimit1.acceptableInput&&lowlimit2.acceptableInput&&lowlimit3.acceptableInput
+                                     &&keeplimit.acceptableInput))
+                                {
+                                    message("error","格式设置错误")
+                                    return
+                                }
+                                else
+                                {
+                                     App.protoManager.GasParaCtrl.setData(selectGasType(modelData))
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
     }
-    Item {
-        Layout.fillHeight: true
-        Layout.fillWidth: true
+    Message{
+        id:messageTip
+        z: 1
+        parent: Overlay.overlay
+    }
+    function message(type, message) {
+        if(type!=='success'&&type!=='error'&&type!=='info'){
+            return false
+        }
+        messageTip.open(type, message)
     }
 
-//    ScrollView {
-//        id:flickable
-//        anchors.fill: parent
-//        clip:         true
-//        ScrollBar.vertical.interactive: true
-//        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-//                ColumnLayout {
-//                    id: contents
-//                    anchors.rightMargin: 60
-//                    anchors.topMargin: 30
-//                    anchors.leftMargin: 60
-//                    anchors.bottomMargin: 30
-//                    anchors.fill: parent
-//                    spacing: 20
-//                    //本机IP
-//                    RowLayout{
-//                        spacing:20
-//                        YaheiText {
-//                            anchors.centerIn: parent.Center
-//                            text:qsTr("氧气")
-//                            font.pixelSize: fontsize
-//                            Layout.preferredWidth: leftWidth
-//                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-//                        }
-//                        BaseTextField{
-//                            Layout.preferredWidth:50
-//                        }
-//                    }
-//                    RowLayout{
-//                        spacing:20
-//                        YaheiText {
-//                            anchors.centerIn: parent.Center
-//                            text:qsTr("网关")
-//                            font.pixelSize: fontsize
-//                            Layout.preferredWidth: leftWidth
-//                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-//                        }
-//                        BaseTextField{
-//                            Layout.preferredWidth:280
-//                        }
-//                    }
-//                    RowLayout{
-//                        spacing:20
-//                        YaheiText {
-//                            anchors.centerIn: parent.Center
-//                            text:qsTr("子网掩码")
-//                            font.pixelSize: fontsize
-//                            Layout.preferredWidth: leftWidth
-//                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-//                        }
-//                        BaseTextField{
-//                          Layout.preferredWidth:280
-//                        }
-//                    }
-//                    RowLayout{
-//                        spacing:20
-//                        YaheiText {
-//                            anchors.centerIn: parent.Center
-//                            text:qsTr("MAC地址")
-//                            font.pixelSize: fontsize
-//                            Layout.preferredWidth: leftWidth
-//                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-//                        }
-//                        BaseTextField{
-//                            Layout.preferredWidth:280
-//                        }
-//                    }
-//                    RowLayout{
-//                        Layout.fillWidth: true
-//                        BaseButton {
-//                            text:qsTr("查询")
-//                            font.pixelSize:  20
-//                            backRadius: 4
-//                            bckcolor: "#4785FF"
-//                        }
-//                        Rectangle {
-//                             width: 200
-//                        }
-//                        BaseButton {
-//                            text: qsTr("设置")
-//                            font.pixelSize:  20
-//                            backRadius: 4
-//                            bckcolor: "#4785FF"
-//                        }
-//                    }
-//                    //填充最底部
-//                    Rectangle {
-//                         width: parent.width
-//                         height: 10
-//                     }
-//                }
-//        //}
-//    }
-//    Item {
-//        Layout.fillHeight: true
-//        Layout.fillWidth: true
-//    }
-
+    SkinQianDialog {
+        id: skinQianDialog
+        backParent: windowEntry
+        parent: Overlay.overlay
+        onAccept: {
+           skinQianDialog.close();
+        }
+    }
 }

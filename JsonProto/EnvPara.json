@@ -1,0 +1,175 @@
+﻿{
+    "version":      1.0,
+    "componentid":  5,
+    "TemperaturePara":
+    [
+        {
+            "address":     "0x033F",
+            "operate":     "R/W",
+            "content":     "温度报警阀值上限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0340",
+            "operate":     "R/W",
+            "content":     "温度报警阀值下限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0341",
+            "operate":     "R/W",
+            "content":     "温度报警阀值上限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0342",
+            "operate":     "R/W",
+            "content":     "温度报警阀值上限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0343",
+            "operate":     "R/W",
+            "content":     "温度报警阀值上限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0344",
+            "operate":     "R/W",
+            "content":     "温度报警阀值下限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0345",
+            "operate":     "R/W",
+            "content":     "O2防抖阈值",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0346",
+            "operate":     "R/W",
+            "content":     "备用1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0347",
+            "operate":     "R/W",
+            "content":     "备用2",
+            "format" :     ""
+        }
+    ],
+    "HumidityPara":
+    [
+        {
+            "address":     "0x0348",
+            "operate":     "R/W",
+            "content":     "湿度报警阈值上限等级1",
+            "format" :     "扩大10倍"
+        },
+        {
+            "address":     "0x0349",
+            "operate":     "R/W",
+            "content":     "湿度报警阈值下限等级1",
+            "format" :     "扩大10倍"
+        },
+        {
+            "address":     "0x034A",
+            "operate":     "R/W",
+            "content":     "湿度报警阈值上限等级2",
+            "format" :     "扩大10倍"
+        },
+        {
+            "address":     "0x034B",
+            "operate":     "R/W",
+            "content":     "湿度报警阈值下限等级2",
+            "format" :     "扩大10倍"
+        },
+        {
+            "address":     "0x034C",
+            "operate":     "R/W",
+            "content":     "湿度报警阈值上限等级3",
+            "format" :     "扩大10倍"
+        },
+        {
+            "address":     "0x034D",
+            "operate":     "R/W",
+            "content":     "湿度报警阈值下限等级3",
+            "format" :     "扩大10倍"
+        },
+        {
+            "address":     "0x034E",
+            "operate":     "R/W",
+            "content":     "湿度防抖阈值",
+            "format" :     "扩大10倍"
+        },
+        {
+            "address":     "0x034F",
+            "operate":     "R/W",
+            "content":     "备用1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0350",
+            "operate":     "R/W",
+            "content":     "备用2",
+            "format" :     ""
+        }
+    ],
+    "WaterLevelPara":
+    [
+        {
+            "address":     "0x0351",
+            "operate":     "R/W",
+            "content":     "液位报警阈值上限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0352",
+            "operate":     "R/W",
+            "content":     "液位报警阈值下限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0353",
+            "operate":     "R/W",
+            "content":     "液位报警阈值上限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0354",
+            "operate":     "R/W",
+            "content":     "液位报警阈值下限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0355",
+            "operate":     "R/W",
+            "content":     "液位报警阈值上限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0356",
+            "operate":     "R/W",
+            "content":     "液位报警阈值下限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0357",
+            "operate":     "R/W",
+            "content":     "液位防抖阈值",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0358",
+            "operate":     "R/W",
+            "content":     "备用1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0359",
+            "operate":     "R/W",
+            "content":     "备用2",
+            "format" :     ""
+        }
+    ]
+}

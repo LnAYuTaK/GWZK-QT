@@ -1,5 +1,5 @@
 ﻿
-#include "TunnelGasDevControl.h"
+#include "WaterLevelController.h"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -7,37 +7,37 @@
 #include "appSrc/ProtocolManager.h"
 #include "appSrc/NetWorkManager.h"
 
-TunnelGasDevControl::TunnelGasDevControl(QObject *parent)
+WaterLevelController::WaterLevelController(QObject *parent)
     : QObject{parent}
-    ,regList_(app()->paraFactMgr()->TunnelGas())
+    ,regList_(app()->paraFactMgr()->WaterLevel())
     ,count_(0)
     ,cycle_(0)
     ,channel_(0)
     ,format_(0)
-    ,address_("00000000000000000")
+    ,address_("DFEGWZD1234567890")
 {
 
 }
 
-void TunnelGasDevControl::queryData()
+void WaterLevelController::queryData()
 {
     if(app()->netWorkMgr()->IsTcpConnected())
     {
         auto adressVector  = regList_->getAddress();
         QByteArray start =QByteArray::fromHex(adressVector.at(0).toLatin1());
-        auto sendMsg = ProtocolManager::makeReadRegProto(ProtocolManager::TunnelGasDevControl_t,start,adressVector.count());
+        auto sendMsg = ProtocolManager::makeReadRegProto(ProtocolManager::WaterLevelController_t,start,adressVector.count());
         app()->netWorkMgr()->_tcpWriteBytes(sendMsg);
     }
 }
 
-void TunnelGasDevControl::setData()
+void WaterLevelController::setData()
 {
     if(app()->netWorkMgr()->IsTcpConnected())
     {
         auto adressVector = regList_->getAddress();
         auto start =  QByteArray::fromHex(adressVector.at(0).toLatin1());
         //地址 17字节
-        QByteArray byteArray =QByteArray(address_.toLatin1())+QByteArray(1, '\x00');;
+        QByteArray byteArray =QByteArray(address_.toUtf8())+QByteArray(1, '\x00');;
         //格式 2字节
         auto formatData = ProtocolManager::intToHexByteArray(format_);
         //数量 2字节
@@ -50,19 +50,15 @@ void TunnelGasDevControl::setData()
         QByteArray standby(6, '\x00');
         //数据包总共 31字节
         QByteArray packData  = byteArray +
-                          formatData +
-                          countData +
-                          cycleData +
-                          channelData +
-                          standby;
-        qDebug() << "TunnelGasDev SendPack Size: " << packData.size();
+                               formatData +
+                               countData +
+                               cycleData +
+                               channelData +
+                               standby;
+        qDebug() << "WaterLevelControllerSendPack Size: " << packData.size();
         auto sendMsg = ProtocolManager::makeWriteRegProto(start,adressVector.count(),packData);
-        qDebug() << "TunnelGasDev SendMsg Size: " <<sendMsg.size();
+        qDebug() << "WaterLevelController SendMsg Size: " <<sendMsg.size();
         app()->netWorkMgr()->_tcpWriteBytes(sendMsg);
     }
 }
-
-
-
-
 

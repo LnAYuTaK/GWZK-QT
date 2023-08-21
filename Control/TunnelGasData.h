@@ -1,6 +1,6 @@
-
-#ifndef TUNNELGASDEV_H
-#define TUNNELGASDEV_H
+﻿
+#ifndef TUNNELGASDATA_H
+#define TUNNELGASDATA_H
 #include <QObject>
 #include <QString>
 #include <QDebug>
@@ -8,7 +8,8 @@
 #include  "appSrc/ParaFactManager.h"
 #include "appSrc/Application.h"
 
-class TunnelGasDev : public QObject
+//数据召测
+class TunnelGasData : public QObject
 {
     Q_OBJECT
 public:
@@ -16,9 +17,13 @@ public:
                                     "Cl2","H2S","CO2",
                                     "CH4","温度","湿度"};
 
-    explicit TunnelGasDev(QObject *parent = nullptr);
-
+    explicit TunnelGasData(QObject *parent = nullptr);
+    //Function//
     Q_INVOKABLE void queryData();
+
+    QByteArray getTunnelGasData() {
+        return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
+    }
 
 signals:
     void TunnelGasQueryData(QByteArray data);
@@ -29,4 +34,4 @@ private:
 //    QMap<QString ,QString>modelMap_;
 };
 
-#endif // TUNNELGASDEV_H
+#endif // TUNNELGASDATA_H

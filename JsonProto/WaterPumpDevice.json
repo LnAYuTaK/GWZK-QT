@@ -1,0 +1,91 @@
+{
+    "version":      1.0,
+    "componentid":  9,
+    "WaterPumpDevice":
+    [
+        {
+            "address":     "0x0446",
+            "operate":     "R/W",
+            "content":     "水泵ID地址1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0447",
+            "operate":     "R/W",
+            "content":     "水泵ID地址2",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0448",
+            "operate":     "R/W",
+            "content":     "水泵ID地址3",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0449",
+            "operate":     "R/W",
+            "content":     "水泵ID地址4",
+            "format" :     ""
+        },
+        {
+            "address":     "0x044A",
+            "operate":     "R/W",
+            "content":     "水泵ID地址5",
+            "format" :     ""
+        },
+        {
+            "address":     "0x044B",
+            "operate":     "R/W",
+            "content":     "水泵ID地址6",
+            "format" :     ""
+        },
+        {
+            "address":     "0x044C",
+            "operate":     "R/W",
+            "content":     "水泵ID地址7",
+            "format" :     ""
+        },
+        {
+            "address":     "0x043D",
+            "operate":     "R/W",
+            "content":     "水泵ID地址8",
+            "format" :     ""
+        },
+        {
+            "address":     "0x043E",
+            "operate":     "R/W",
+            "content":     "水泵ID地址9",
+            "format" :     ""
+        },
+        {
+            "address":     "0x044F",
+            "operate":     "R/W",
+            "content":     "水泵ID地址格式",
+            "format" :     "0：递增；1：相同，默认为0"
+        },
+        {
+            "address":     "0x0450",
+            "operate":     "R/W",
+            "content":     "液位单元数量",
+            "format" :     "无量纲，默认为0"
+        },
+        {
+            "address":     "0x0451",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x0452",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x0453",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     "备用"
+        }
+    ]
+}

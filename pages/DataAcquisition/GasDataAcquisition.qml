@@ -1,4 +1,4 @@
-import QtQuick 2.14
+﻿import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
@@ -59,7 +59,7 @@ Item {
                         backRadius: 4
                         bckcolor: "#4785FF"
                         onClicked: {
-                               App.protoManager.TunnelGas.queryData()
+                               App.protoManager.tunnelGasData.queryData()
                         }
                     }
                     //填充最底部

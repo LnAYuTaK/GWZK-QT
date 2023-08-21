@@ -1,24 +1,24 @@
-
-#include "TunnelGasDev.h"
+﻿
+#include "TunnelGasData.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
 #include "appSrc/ProtocolManager.h"
 #include "appSrc/NetWorkManager.h"
-TunnelGasDev::TunnelGasDev(QObject *parent)
+TunnelGasData::TunnelGasData(QObject *parent)
      : QObject{parent}
-    ,regList_(nullptr)
+    ,regList_(regList_= app()->paraFactMgr()->TunnelGasData())
 {
-   regList_= app()->paraFactMgr()->TunnelGasData();
+
 }
 
-void TunnelGasDev::queryData()
+void TunnelGasData::queryData()
 {
    if(app()->netWorkMgr()->IsTcpConnected())
    {
        auto adressVector  = regList_->getAddress();
        QByteArray start =QByteArray::fromHex(adressVector.at(0).toLatin1());
-       auto sendMsg = ProtocolManager::makeReadRegProto(start,adressVector.count());
+       auto sendMsg = ProtocolManager::makeReadRegProto(ProtocolManager::TunnelGasData_t,start,adressVector.count());
        app()->netWorkMgr()->_tcpWriteBytes(sendMsg);
    }
 }

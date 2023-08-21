@@ -1,0 +1,103 @@
+{
+    "version":      1.0,
+    "componentid":  8,
+    "WaterLevelDevice":
+    [
+        {
+            "address":     "0x0436",
+            "operate":     "R/W",
+            "content":     "液位ID地址1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0437",
+            "operate":     "R/W",
+            "content":     "液位ID地址2",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0438",
+            "operate":     "R/W",
+            "content":     "液位ID地址3",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0439",
+            "operate":     "R/W",
+            "content":     "液位ID地址4",
+            "format" :     ""
+        },
+        {
+            "address":     "0x043A",
+            "operate":     "R/W",
+            "content":     "液位ID地址5",
+            "format" :     ""
+        },
+        {
+            "address":     "0x043B",
+            "operate":     "R/W",
+            "content":     "液位ID地址6",
+            "format" :     ""
+        },
+        {
+            "address":     "0x043C",
+            "operate":     "R/W",
+            "content":     "液位ID地址7",
+            "format" :     ""
+        },
+        {
+            "address":     "0x043D",
+            "operate":     "R/W",
+            "content":     "液位ID地址8",
+            "format" :     ""
+        },
+        {
+            "address":     "0x043E",
+            "operate":     "R/W",
+            "content":     "液位ID地址9",
+            "format" :     ""
+        },
+        {
+            "address":     "0x043F",
+            "operate":     "R/W",
+            "content":     "液位ID地址格式",
+            "format" :     "0：递增；1：相同，默认为0"
+        },
+        {
+            "address":     "0x0440",
+            "operate":     "R/W",
+            "content":     "液位单元数量",
+            "format" :     "无量纲，默认为0"
+        },
+        {
+            "address":     "0x0441",
+            "operate":     "R/W",
+            "content":     "液位单元周期",
+            "format" :     "单位min，默认为0"
+        },
+        {
+            "address":     "0x0442",
+            "operate":     "R/W",
+            "content":     "液位单元通道",
+            "format" :     "无量纲，默认为0，备用"
+        },
+        {
+            "address":     "0x0443",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x0444",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     "备用"
+        },
+        {
+            "address":     "0x0445",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     "备用"
+        }
+    ]
+}

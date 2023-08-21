@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
 import "qrc:/common"
@@ -40,6 +40,16 @@ StackLayout {
          width: stack.width
          height: stack.height
     }
+    DeviceList_WaterLevel{
+        property string name: "液位装置"
+        width: stack.width
+        height: stack.height
+    }
+    DeviceList_WaterPump{
+        property string name: "水泵装置"
+        width: stack.width
+        height: stack.height
+    }
    /***********************************************************************
                     参数设置查询   /pages/ParaSettingQuery/
    ***********************************************************************/
@@ -63,6 +73,12 @@ StackLayout {
        width: stack.width
        height: stack.height
    }
+   MqttPara {
+       property string name: "mqtt参数"
+       width: stack.width
+       height: stack.height
+   }
+
    /**********************************************************************
                 设置操作   /pages/OperationSet/
    /**********************************************************************/

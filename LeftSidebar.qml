@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Layouts 1.14
 import QtQuick.Controls.Material 2.12
 import QtQuick.Controls 2.14
@@ -14,6 +14,5 @@ Sidebar {
         id: _stretchEntry
         anchors.fill: contentObj
         clip: true
-
     }
 }

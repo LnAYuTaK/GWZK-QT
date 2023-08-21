@@ -1,0 +1,404 @@
+﻿{
+    "version":      1.0,
+    "componentid":  5,
+    "GasParaO2":
+    [
+        {
+            "address":     "0x0300",
+            "operate":     "R/W",
+            "content":     "O2报警阈值上限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0301",
+            "operate":     "R/W",
+            "content":     "O2报警阈值下限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0302",
+            "operate":     "R/W",
+            "content":     "O2报警阈值上限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0303",
+            "operate":     "R/W",
+            "content":     "O2报警阈值下限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0304",
+            "operate":     "R/W",
+            "content":     "O2报警阈值上限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0305",
+            "operate":     "R/W",
+            "content":     "O2报警阈值下限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0306",
+            "operate":     "R/W",
+            "content":     "O2防抖阈值",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x307",
+            "operate":     "R/W",
+            "content":     "备用1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0308",
+            "operate":     "R/W",
+            "content":     "备用2",
+            "format" :     ""
+        }
+    ],
+    "GasParaH2":
+    [
+        {
+            "address":     "0x0309",
+            "operate":     "R/W",
+            "content":     "H2报警阈值上限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x030A",
+            "operate":     "R/W",
+            "content":     "H2报警阈值下限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x030B",
+            "operate":     "R/W",
+            "content":     "H2报警阈值上限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x030C",
+            "operate":     "R/W",
+            "content":     "H2报警阈值下限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x030D",
+            "operate":     "R/W",
+            "content":     "H2报警阈值上限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x030E",
+            "operate":     "R/W",
+            "content":     "H2报警阈值下限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x030F",
+            "operate":     "R/W",
+            "content":     "H2防抖阈值",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0310",
+            "operate":     "R/W",
+            "content":     "备用1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0311",
+            "operate":     "R/W",
+            "content":     "备用2",
+            "format" :     ""
+        }
+    ],
+    "GasParaCl2":
+    [
+        {
+            "address":     "0x0312",
+            "operate":     "R/W",
+            "content":     "Cl2报警阈值上限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0313",
+            "operate":     "R/W",
+            "content":     "Cl2报警阈值下限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0314",
+            "operate":     "R/W",
+            "content":     "Cl2报警阈值上限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0315",
+            "operate":     "R/W",
+            "content":     "Cl2报警阈值下限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0316",
+            "operate":     "R/W",
+            "content":     "Cl2报警阈值上限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0317",
+            "operate":     "R/W",
+            "content":     "Cl2报警阈值下限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0318",
+            "operate":     "R/W",
+            "content":     "Cl2防抖阈值",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0319",
+            "operate":     "R/W",
+            "content":     "备用1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x031A",
+            "operate":     "R/W",
+            "content":     "备用2",
+            "format" :     ""
+        }
+    ],
+    "GasParaH2S":
+    [
+        {
+            "address":     "0x031B",
+            "operate":     "R/W",
+            "content":     "H2S报警阈值上限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x031C",
+            "operate":     "R/W",
+            "content":     "H2S报警阈值下限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x031D",
+            "operate":     "R/W",
+            "content":     "H2S报警阈值上限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x031E",
+            "operate":     "R/W",
+            "content":     "H2S报警阈值下限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x031F",
+            "operate":     "R/W",
+            "content":     "H2S报警阈值上限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0320",
+            "operate":     "R/W",
+            "content":     "H2S报警阈值下限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0321",
+            "operate":     "R/W",
+            "content":     "H2S防抖阈值",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0322",
+            "operate":     "R/W",
+            "content":     "备用1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0323",
+            "operate":     "R/W",
+            "content":     "备用2",
+            "format" :     ""
+        }
+    ],
+    "GasParaCH4":
+    [
+        {
+            "address":     "0x0324",
+            "operate":     "R/W",
+            "content":     "CH4报警阈值上限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0325",
+            "operate":     "R/W",
+            "content":     "CH4报警阈值下限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0326",
+            "operate":     "R/W",
+            "content":     "CH4报警阈值上限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0327",
+            "operate":     "R/W",
+            "content":     "CH4报警阈值下限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0328",
+            "operate":     "R/W",
+            "content":     "CH4报警阈值上限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0329",
+            "operate":     "R/W",
+            "content":     "CH4报警阈值下限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x032A",
+            "operate":     "R/W",
+            "content":     "CH4防抖阈值",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x032B",
+            "operate":     "R/W",
+            "content":     "备用1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x032C",
+            "operate":     "R/W",
+            "content":     "备用2",
+            "format" :     ""
+        }
+
+    ],
+    "GasParaCO":
+    [
+        {
+            "address":     "0x032D",
+            "operate":     "R/W",
+            "content":     "CO报警阈值上限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x032E",
+            "operate":     "R/W",
+            "content":     "CO报警阈值下限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x032F",
+            "operate":     "R/W",
+            "content":     "CO报警阈值上限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0330",
+            "operate":     "R/W",
+            "content":     "CO报警阈值下限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0331",
+            "operate":     "R/W",
+            "content":     "CO报警阈值上限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0332",
+            "operate":     "R/W",
+            "content":     "CO报警阈值下限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0333",
+            "operate":     "R/W",
+            "content":     "CO防抖阈值",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0334",
+            "operate":     "R/W",
+            "content":     "备用1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0335",
+            "operate":     "R/W",
+            "content":     "备用2",
+            "format" :     ""
+        }
+    ],
+    "GasParaCO2":
+    [
+        {
+            "address":     "0x0336",
+            "operate":     "R/W",
+            "content":     "CO2报警阈值上限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0337",
+            "operate":     "R/W",
+            "content":     "CO2报警阈值下限等级1",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0338",
+            "operate":     "R/W",
+            "content":     "CO2报警阈值上限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x0339",
+            "operate":     "R/W",
+            "content":     "CO2报警阈值下限等级2",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x033A",
+            "operate":     "R/W",
+            "content":     "CO2报警阈值上限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x033B",
+            "operate":     "R/W",
+            "content":     "CO报警阈值下限等级3",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x033C",
+            "operate":     "R/W",
+            "content":     "CO2防抖阈值",
+            "format" :     "扩大100倍"
+        },
+        {
+            "address":     "0x033D",
+            "operate":     "R/W",
+            "content":     "备用1",
+            "format" :     ""
+        },
+        {
+            "address":     "0x033E",
+            "operate":     "R/W",
+            "content":     "备用2",
+            "format" :     ""
+        }
+    ]
+}

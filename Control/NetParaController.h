@@ -1,4 +1,4 @@
-
+﻿
 #ifndef NETPARACONTROLLER_H
 #define NETPARACONTROLLER_H
 
@@ -8,6 +8,7 @@
 #include <QDebug>
 #include "appSrc/Application.h"
 #include "appSrc/ParaFactManager.h"
+#include "appSrc/ProtocolManager.h"
 
 class NetParaController : public QObject
 {
@@ -33,9 +34,6 @@ public:
     //备用连接
     Q_PROPERTY(int AlternateLinktype READ AlternateLinktype WRITE setAlternateLinktype)
 
-    Q_INVOKABLE void setData();
-    Q_INVOKABLE void queryData();
-
     //read
     QString MasterIp(){return this->masterIp_;}
     int     MasterPort(){return this->masterPort_;}
@@ -56,6 +54,18 @@ public:
     void setAlternateIp(QString alternateIp){this->alternateIp_ = alternateIp;}
     void setAlternatePort(int alternatePort){this->alternatePort_ = alternatePort;}
     void setAlternateLinktype(int alternateLinktype){this->alternateLinktype_ = alternateLinktype;}
+
+    //FUNCTION
+    Q_INVOKABLE void setData();
+    Q_INVOKABLE void queryData();
+
+    QByteArray getNetParaReg(){
+        return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
+    }
+
+private slots:
+    void handleRecv(ProtocolManager::ReccType type,QByteArray data);
+
 private:
     JsonFactGroup *regList_;
     QString masterIp_;
@@ -67,7 +77,6 @@ private:
     QString alternateIp_;
     int     alternatePort_;
     int     alternateLinktype_;
-
 
 };
 

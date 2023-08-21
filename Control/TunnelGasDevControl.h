@@ -1,6 +1,6 @@
-
-#ifndef TUNNELGASMONITOR_H
-#define TUNNELGASMONITOR_H
+﻿
+#ifndef TUNNELGASDEVCONTROLH_H
+#define TUNNELGASDEVCONTROLH_H
 
 
 #include <QObject>
@@ -10,11 +10,11 @@
 #include  "appSrc/ParaFactManager.h"
 #include "appSrc/Application.h"
 
-class TunnelGasMonitor : public QObject
+class TunnelGasDevControl : public QObject
 {
     Q_OBJECT
 public:
-    explicit TunnelGasMonitor(QObject *parent = nullptr);
+    explicit TunnelGasDevControl(QObject *parent = nullptr);
     //数量
     Q_PROPERTY(int count       READ count    WRITE setCount)
     //周期
@@ -39,6 +39,11 @@ public:
     //Function
     Q_INVOKABLE void setData();
     Q_INVOKABLE void queryData();
+
+    QByteArray getTunnelGasDev()
+    {
+        return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
+    }
 private:
     JsonFactGroup *regList_;
     int            count_;
@@ -48,4 +53,4 @@ private:
     QString        address_;
 };
 
-#endif // TUNNELGASMONITOR_H
+#endif // TUNNELGASDEVCONTROLH_H

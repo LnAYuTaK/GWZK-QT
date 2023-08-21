@@ -1,4 +1,4 @@
-
+﻿
 #include "MainParaController.h"
 
 #include <QGuiApplication>
@@ -25,7 +25,7 @@ void MainParaController::queryData()
     {
         auto adressVector  = regList_->getAddress();
         QByteArray start =QByteArray::fromHex(adressVector.at(0).toLatin1());
-        auto sendMsg = ProtocolManager::makeReadRegProto(start,adressVector.count());
+        auto sendMsg = ProtocolManager::makeReadRegProto(ProtocolManager::MainParaController_t,start,adressVector.count());
         qDebug() << sendMsg.size();
         app()->netWorkMgr()->_tcpWriteBytes(sendMsg);
     }

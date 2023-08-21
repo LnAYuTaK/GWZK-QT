@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.14
 import QtQml.Models 2.12
@@ -29,7 +29,14 @@ Item {
                 },
                 {
                     name:"隧道风机"
+                },
+                {
+                    name:"液位装置"
+                },
+                {
+                    name:"水泵装置"
                 }
+
            ]
         },
         {
@@ -47,7 +54,11 @@ Item {
                 },
                 {
                     name:"气体参数",
+                },
+                {
+                    name:"mqtt参数"
                 }
+
            ]
         },
         {

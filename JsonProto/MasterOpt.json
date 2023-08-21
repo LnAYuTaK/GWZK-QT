@@ -1,7 +1,7 @@
-{
+﻿{
     "version":      1.0,
     "componentid":  4,
-    "MainControl":
+    "MasterOpt":
     [
         {
             "address":     "0x0400",

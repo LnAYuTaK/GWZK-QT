@@ -1,5 +1,5 @@
-
-#include "TunnelFanControl.h"
+﻿
+#include "TunnelFanDevControl.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
@@ -7,28 +7,28 @@
 #include "appSrc/ProtocolManager.h"
 #include "appSrc/NetWorkManager.h"
 
-TunnelFanControl::TunnelFanControl(QObject *parent)
+TunnelFanDevControl::TunnelFanDevControl(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->TunnelFan())
     ,count_(0)
     ,format_(0)
     ,address_("0000000000000000")
 {
-
+  qmlRegisterUncreatableType<TunnelFanDevControl>("Control", 1, 0, "TunnelFanDevControl",   "Reference only");
 }
 
-void TunnelFanControl::queryData()
+void TunnelFanDevControl::queryData()
 {
     if(app()->netWorkMgr()->IsTcpConnected())
     {
         auto adressVector  = regList_->getAddress();
         QByteArray start =QByteArray::fromHex(adressVector.at(0).toLatin1());
-        auto sendMsg = ProtocolManager::makeReadRegProto(start,adressVector.count());
+        auto sendMsg = ProtocolManager::makeReadRegProto(ProtocolManager::TunnelFanDevControl_t,start,adressVector.count());
         app()->netWorkMgr()->_tcpWriteBytes(sendMsg);
     }
 }
 
-void TunnelFanControl::setData()
+void TunnelFanDevControl::setData()
 {
     if(app()->netWorkMgr()->IsTcpConnected())
     {

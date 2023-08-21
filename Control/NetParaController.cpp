@@ -1,10 +1,9 @@
-
+﻿
 #include "NetParaController.h"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
-#include "appSrc/ProtocolManager.h"
 #include "appSrc/NetWorkManager.h"
 
 NetParaController::NetParaController(QObject *parent)
@@ -20,7 +19,10 @@ NetParaController::NetParaController(QObject *parent)
     ,alternatePort_(0)
     ,alternateLinktype_(0)
 {
-
+    if(app()->protocolMgr()== nullptr)
+    {
+        qDebug() << "ERERERERE";
+    }
 }
 
 void NetParaController::queryData()
@@ -29,11 +31,17 @@ void NetParaController::queryData()
     {
         auto adressVector  = regList_->getAddress();
         QByteArray start =QByteArray::fromHex(adressVector.at(0).toLatin1());
-        auto sendMsg = ProtocolManager::makeReadRegProto(start,adressVector.count());
+        auto sendMsg = ProtocolManager::makeReadRegProto(ProtocolManager::NetParaController_t,start,adressVector.count());
         qDebug() << sendMsg.size();
         app()->netWorkMgr()->_tcpWriteBytes(sendMsg);
     }
 }
+
+void NetParaController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
+{
+    qDebug()<<"SUCCCCCC";
+}
+
 
 void NetParaController::setData()
 {

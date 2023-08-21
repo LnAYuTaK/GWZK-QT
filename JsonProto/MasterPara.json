@@ -1,7 +1,7 @@
-{
+﻿{
     "version":      1.0,
     "componentid":  4,
-    "MainControlParaSetting":
+    "MasterPara":
     [
         {
             "address":     "0x0200",

@@ -17,7 +17,7 @@ Frameless {
     ]
     property int skintype :0
     height:    Screen.height/1.5
-     width:    Screen.width/1.5
+    width:    Screen.width/1.5
     x: (Screen.width - width) / 2
     y: (Screen.height - height) / 2
     property color accentColor: SkinSingleton.skins[skintype].accentColor              // 皮肤深色

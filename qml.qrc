@@ -64,14 +64,20 @@
         <file>pages/ParaSettingQuery/GasParaSetting.qml</file>
         <file>pages/MasterOperation/MainConOperation.qml</file>
         <file>pages/DataAcquisition/GasDataAcquisition.qml</file>
-        <file>JsonProto/GasParaSettingRegList.json</file>
-        <file>JsonProto/LocalNetParaSettingRegList.json</file>
-        <file>JsonProto/MainControlParaSettingRegList.json</file>
-        <file>JsonProto/MainControlRegList.json</file>
-        <file>JsonProto/NetParaSettingRegList.json</file>
-        <file>JsonProto/TunnelFanDeviceRegList.json</file>
+        <file>JsonProto/GasPara.json</file>
+        <file>JsonProto/LocalNetPara.json</file>
+        <file>JsonProto/MasterPara.json</file>
+        <file>JsonProto/MasterOpt.json</file>
+        <file>JsonProto/NetPara.json</file>
+        <file>JsonProto/TunnelFanDevice.json</file>
         <file>JsonProto/TunnelGasData.json</file>
         <file>JsonProto/TunnelGasDevice.json</file>
-        <file>JsonProto/MqttParaSetting.json</file>
+        <file>JsonProto/MqttPara.json</file>
+        <file>JsonProto/WaterLevelDevice.json</file>
+        <file>JsonProto/WaterPumpDevice.json</file>
+        <file>pages/DeviceList/DeviceList_WaterLevel.qml</file>
+        <file>pages/DeviceList/DeviceList_WaterPump.qml</file>
+        <file>pages/ParaSettingQuery/MqttPara.qml</file>
+        <file>JsonProto/EnvPara.json</file>
     </qresource>
 </RCC>

@@ -1,4 +1,4 @@
-import QtQuick 2.14
+﻿import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
@@ -24,13 +24,12 @@ Item {
                     anchors.margins: 30
                     anchors.fill: parent
                     spacing: 20
-                    //数量--周期--通道
+                    //数量
                     RowLayout {
                         Layout.fillWidth: true  // 外部 Row，子项填充水平空间
                         Row{
                             spacing:10
                             YaheiText {
-
                                 anchors.centerIn: parent.Center
                                 text: qsTr("数量")
                                 font.pixelSize: fontsize
@@ -38,13 +37,19 @@ Item {
                                 Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                             }
                             BaseTextField{
+                                id:count
                                 width :90
+                                color: acceptableInput  ? "black" : "#ff0000"
                                 validator: IntValidator {
                                       bottom: 0
                                       top: 65535
                                 }
-                                onTextChanged: {
-                                    App.protoManager.tunnelFanControl.count = text
+                                onEditingFinished: {
+                                    //验证通过写入
+                                    if(acceptableInput)
+                                    {
+                                       App.protoManager.tunnelFanDevControl.count = text
+                                    }
                                 }
                             }
                         }
@@ -69,11 +74,12 @@ Item {
                           Layout.preferredHeight: 40
                           model: ["递增", "相同"]
                           onCurrentIndexChanged: {
-                             App.protoManager.tunnelFanControl.format = currentIndex
+                             App.protoManager.tunnelFanDevControl.format = currentIndex
 
                           }
                         }
                         BaseTextField{
+                            id:format
                             readOnly: true
                             Layout.preferredWidth:140
                         }
@@ -83,19 +89,24 @@ Item {
                         spacing:10
                         YaheiText {
                             anchors.centerIn: parent.Center
-                            text: qsTr("隧道风机监测编码")
+                            text: qsTr("风机装置监测编码")
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
+                            id:address
                             Layout.preferredWidth:280
                             maximumLength: 16
+                            color: acceptableInput  ? "black" : "#ff0000"
                             validator: RegExpValidator {
                                 regExp: /^[a-zA-Z0-9]*$/ // 只允许输入字母和数字
                             }
-                            onTextChanged: {
-                                App.protoManager.tunnelFanControl.address = text
+                            onEditingFinished: {
+                                if(acceptableInput)
+                                {
+                                    App.protoManager.tunnelFanDevControl.address = text
+                                }
                             }
                         }
                     }
@@ -107,7 +118,8 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked:{
-                                 App.protoManager.tunnelFanControl.queryData()
+
+                                 App.protoManager.tunnelFanDevControl.queryData()
                             }
                         }
                         Rectangle {
@@ -119,7 +131,15 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked: {
-                                App.protoManager.tunnelFanControl.setData()
+                                if(!(count.acceptableInput&&address.acceptableInput&&format.acceptableInput))
+                                {
+                                    message("error","格式设置错误")
+                                    return
+                                }
+                                else
+                                {
+                                    App.protoManager.tunnelFanDevControl.setData()
+                                }
                             }
                         }
                     }
@@ -131,9 +151,29 @@ Item {
                 }
         //}
     }
-        Item {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
+    Message{
+        id:messageTip
+        z: 1
+        parent: Overlay.overlay
+    }
+    function message(type, message) {
+        if(type!=='success'&&type!=='error'&&type!=='info'){
+            return false
         }
+        messageTip.open(type, message)
+    }
+
+    SkinQianDialog {
+        id: skinQianDialog
+        backParent: windowEntry
+        parent: Overlay.overlay
+        onAccept: {
+           skinQianDialog.close();
+        }
+    }
+    Item {
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+    }
 
 }

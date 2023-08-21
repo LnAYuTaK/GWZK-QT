@@ -1,4 +1,4 @@
-
+﻿
 #include "MainOptController.h"
 
 #include <QGuiApplication>
@@ -23,7 +23,7 @@ void MainOptController::queryData()
     {
         auto adressVector  = regList_->getAddress();
         QByteArray start =QByteArray::fromHex(adressVector.at(0).toLatin1());
-        auto sendMsg = ProtocolManager::makeReadRegProto(start,adressVector.count());
+        auto sendMsg = ProtocolManager::makeReadRegProto(ProtocolManager::MainOptController_t,start,adressVector.count());
         qDebug() << sendMsg.size();
         app()->netWorkMgr()->_tcpWriteBytes(sendMsg);
     }
@@ -33,7 +33,6 @@ void MainOptController::setData()
 {
     if(app()->netWorkMgr()->IsTcpConnected())
     {
-
         auto adressVector = regList_->getAddress();
         auto start =  QByteArray::fromHex(adressVector.at(0).toLatin1());
         //系统时间地址1 4字节

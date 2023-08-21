@@ -1,4 +1,4 @@
-
+﻿
 #ifndef MIANPARACONTROL_H
 #define MIANPARACONTROL_H
 
@@ -38,6 +38,10 @@ public:
 
     Q_INVOKABLE void setData();
     Q_INVOKABLE void queryData();
+
+    QByteArray  getMainParaReg() {
+        return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
+    }
 
 private:
     JsonFactGroup *regList_;

@@ -1,6 +1,6 @@
 
-#ifndef TUNNELFANCONTROL_H
-#define TUNNELFANCONTROL_H
+#ifndef TUNNELFANDEVCONTROL_H
+#define TUNNELFANDEVCONTROL_H
 
 
 #include <QObject>
@@ -10,11 +10,11 @@
 #include "appSrc/Application.h"
 #include "appSrc/ParaFactManager.h"
 
-class TunnelFanControl : public QObject
+class TunnelFanDevControl : public QObject
 {
     Q_OBJECT
 public:
-    explicit TunnelFanControl(QObject *parent = nullptr);
+    explicit TunnelFanDevControl(QObject *parent = nullptr);
     //数量
     Q_PROPERTY(int count       READ count    WRITE setCount)
     //地址格式
@@ -31,6 +31,11 @@ public:
     //Function
     Q_INVOKABLE void setData();
     Q_INVOKABLE void queryData();
+
+    QByteArray getTunnelFanReg() {
+        return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
+    }
+
 private:
     JsonFactGroup *regList_;
     int count_;
@@ -38,4 +43,4 @@ private:
     QString address_;
 };
 
-#endif // TUNNELFANCONTROL_H
+#endif // TUNNELFANDEVCONTROL_H

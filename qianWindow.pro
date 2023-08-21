@@ -15,20 +15,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Control/EnvParaController.cpp \
+    Control/GasParaController.cpp \
     Control/LocalNetParaController.cpp \
     Control/MainOptController.cpp \
     Control/MainParaController.cpp \
     Control/MqttParaController.cpp \
     Control/NetParaController.cpp \
-    Control/TunnelFanControl.cpp \
+    Control/TunnelFanDevControl.cpp \
+    Control/TunnelGasData.cpp \
+    Control/WaterLevelController.cpp \
+    Control/WaterPumpController.cpp \
     appSrc/Application.cpp \
     appSrc/NetWorkManager.cpp \
     appSrc/ParaFactManager.cpp \
     appSrc/ProtocolEvent.cpp \
     appSrc/ProtocolManager.cpp \
     appSrc/QmlGlobal.cpp \
-    Control/TunnelGasDev.cpp \
     Control/TunnelGasMonitor.cpp \
+    appSrc/Utils.cpp \
     fact/JsonFactGroup.cpp \
         main.cpp \
 
@@ -55,18 +60,23 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 HEADERS += \
+    Control/EnvParaController.h \
+    Control/GasParaController.h \
     Control/LocalNetParaController.h \
     Control/MainOptController.h \
     Control/MainParaController.h \
     Control/MqttParaController.h \
     Control/NetParaController.h \
-    Control/TunnelFanControl.h \
+    Control/TunnelFanDevControl.h \
+    Control/TunnelGasData.h \
+    Control/TunnelGasDevControl.h \
+    Control/WaterLevelController.h \
+    Control/WaterPumpController.h \
     appSrc/Application.h \
     appSrc/NetWorkManager.h \
     appSrc/ParaFactManager.h \
     appSrc/ProtocolEvent.h \
     appSrc/ProtocolManager.h \
     appSrc/QmlGlobal.h \
-    Control/TunnelGasDev.h \
-    Control/TunnelGasMonitor.h \
+    appSrc/Utils.h \
     fact/JsonFactGroup.h

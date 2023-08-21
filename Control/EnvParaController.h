@@ -1,0 +1,100 @@
+﻿
+#ifndef ENVPARACONTROLLER_H
+#define ENVPARACONTROLLER_H
+
+
+#include <QObject>
+#include <QString>
+#include <QDebug>
+#include "appSrc/Application.h"
+#include "appSrc/ParaFactManager.h"
+
+//环境参数----温度湿度液位
+class EnvParaController : public QObject
+{
+    Q_OBJECT
+    Q_ENUMS(EnvType)
+public:
+    enum EnvType {
+       Temp,
+       Humidity,
+       WaterLevel
+    };
+    explicit EnvParaController(QObject *parent = nullptr);
+    //报警阈值上限等级1
+    Q_PROPERTY(int  UpThresholdLimitLevel1   READ UpThresholdLimitLevel1   WRITE setUpThresholdLimitLevel1)
+    //报警阈值下限等级1
+    Q_PROPERTY(int  LowThresholdLimitLevel1  READ LowThresholdLimitLevel1  WRITE setLowThresholdLimitLevel1)
+    //报警阈值上限等级2
+    Q_PROPERTY(int  UpThresholdLimitLevel2   READ UpThresholdLimitLevel2   WRITE setUpThresholdLimitLevel2)
+    //报警阈值下限等级2
+    Q_PROPERTY(int  LowThresholdLimitLevel2  READ LowThresholdLimitLevel2  WRITE setLowThresholdLimitLevel2)
+    //报警阈值上限等级3
+    Q_PROPERTY(int  UpThresholdLimitLevel3   READ UpThresholdLimitLevel3   WRITE setUpThresholdLimitLevel3)
+    //报警阈值下限等级3
+    Q_PROPERTY(int  LowThresholdLimitLevel3  READ LowThresholdLimitLevel3  WRITE setLowThresholdLimitLevel3)
+    //防抖阈值
+    Q_PROPERTY(int  KeepThresholdLimit READ KeepThresholdLimit WRITE setKeepThresholdLimit)
+    //read
+    int UpThresholdLimitLevel1(){return this->upThresholdLimitLevel1_;}
+    int LowThresholdLimitLevel1(){return this->lowThresholdLimitLevel1_;}
+    int UpThresholdLimitLevel2(){return this->upThresholdLimitLevel2_;}
+    int LowThresholdLimitLevel2(){return this->lowThresholdLimitLevel2_;}
+    int UpThresholdLimitLevel3(){return this->upThresholdLimitLevel3_;}
+    int LowThresholdLimitLevel3(){return this->lowThresholdLimitLevel3_;}
+    int KeepThresholdLimit() {return keepThresholdLimit_;}
+    //set
+    void setUpThresholdLimitLevel1(int upThresholdLimit){
+        this->upThresholdLimitLevel1_ = upThresholdLimit;
+    }
+    void setLowThresholdLimitLevel1(int lowThresholdLimit){
+        this->lowThresholdLimitLevel1_ = lowThresholdLimit;
+    }
+    void setUpThresholdLimitLevel2(int upThresholdLimit){
+        this->upThresholdLimitLevel2_ = upThresholdLimit;
+    }
+    void setLowThresholdLimitLevel2(int lowThresholdLimit){
+        this->lowThresholdLimitLevel2_ = lowThresholdLimit;
+    }
+    void setUpThresholdLimitLevel3(int upThresholdLimit){
+        this->upThresholdLimitLevel3_ = upThresholdLimit;
+    }
+    void setLowThresholdLimitLevel3(int lowThresholdLimit){
+        this->lowThresholdLimitLevel3_ = lowThresholdLimit;
+    }
+    void setKeepThresholdLimit(int keepThresholdLimit){
+        this->keepThresholdLimit_ = keepThresholdLimit;
+    }
+
+    QByteArray getEnvTempReg() {
+        return QByteArray::fromHex(TempRegList_->getAddress().at(0).toLatin1());
+    }
+
+    QByteArray getEnvWaterLevelReg() {
+        return QByteArray::fromHex(WaterLevelRegList_->getAddress().at(0).toLatin1());
+    }
+
+    QByteArray getEnvHumidityReg() {
+        return QByteArray::fromHex(HumidityRegList_->getAddress().at(0).toLatin1());
+    }
+
+    //FUNCTION
+    Q_INVOKABLE void queryData(EnvType type);
+    Q_INVOKABLE void setData(EnvType type);
+
+private:
+    JsonFactGroup * TempRegList_;
+    JsonFactGroup * HumidityRegList_;
+    JsonFactGroup * WaterLevelRegList_;
+    EnvType type;
+
+    int upThresholdLimitLevel1_;
+    int lowThresholdLimitLevel1_;
+    int upThresholdLimitLevel2_;
+    int lowThresholdLimitLevel2_;
+    int upThresholdLimitLevel3_;
+    int lowThresholdLimitLevel3_;
+    int keepThresholdLimit_;
+};
+
+#endif // ENVPARACONTROLLER_H
