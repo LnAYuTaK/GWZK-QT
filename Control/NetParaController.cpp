@@ -5,7 +5,7 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 #include "appSrc/NetWorkManager.h"
-
+#include "appSrc/Utils.h"
 NetParaController::NetParaController(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->NetParaSet())
@@ -19,10 +19,7 @@ NetParaController::NetParaController(QObject *parent)
     ,alternatePort_(0)
     ,alternateLinktype_(0)
 {
-    if(app()->protocolMgr()== nullptr)
-    {
-        qDebug() << "ERERERERE";
-    }
+
 }
 
 void NetParaController::queryData()
@@ -36,12 +33,6 @@ void NetParaController::queryData()
         app()->netWorkMgr()->_tcpWriteBytes(sendMsg);
     }
 }
-
-void NetParaController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
-{
-    qDebug()<<"SUCCCCCC";
-}
-
 
 void NetParaController::setData()
 {
@@ -90,4 +81,14 @@ void NetParaController::setData()
     }
 }
 
-
+void NetParaController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
+{
+    if(type == ProtocolManager::HandleRead) {
+        qDebug() << data.size();
+        qDebug() << data;
+    }
+    else if(type == ProtocolManager::HandleWrite) {
+        //
+        qDebug() << "Handle Write: "<< data;
+    }
+}

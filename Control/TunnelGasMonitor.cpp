@@ -62,6 +62,17 @@ void TunnelGasDevControl::setData()
     }
 }
 
+void TunnelGasDevControl::handleRecv(ProtocolManager::ReccType type,QByteArray data)
+{
+    if(type == ProtocolManager::HandleRead) {
+        qDebug() << data.size();
+        qDebug() << data;
+    }
+    else if(type == ProtocolManager::HandleWrite) {
+        //
+        qDebug() << "Handle Write: "<< data;
+    }
+}
 
 
 

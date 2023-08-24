@@ -72,6 +72,11 @@ public:
       HandleWrite
     };
 
+    enum Endian {
+      LittileEndian,
+      BigEndian
+    };
+
     Q_PROPERTY(TunnelGasDevControl*     tunnelGasDevControl     READ  tunnelGasDevControl    CONSTANT)
     Q_PROPERTY(TunnelFanDevControl*     tunnelFanDevControl     READ  tunnelFanDevControl    CONSTANT)
     Q_PROPERTY(MainParaController*      mainParaController      READ  mainParaController     CONSTANT)
@@ -106,20 +111,30 @@ public:
 
     static QByteArray intToHexByteArray(int data);
 
-    void initConnect();
+    //将协议内所有数据拼接成quint16返回
+    static QVector<quint16> getProtocolData(QByteArray data);
 
     //处理 网络参数字符串
     static QByteArray ParseNetLocalString(ParaType type,QString paraStr);
-   //接收超速定时器
-    QTimer *recvTimer() {return this->recvReadTimer;}
     //设置当前查询状态
     void setNowType(ControllerType type){ nowType_= type;}
+    //拼接QByteAray
+    static QVector<qint16>ByteArrayToIntVec(QByteArray byteArray);
+    static QVector<QByteArray> SpiltData(QByteArray byteArray);
+    //
+    static short bytesToshort(QByteArray bytes)
+    {
+        int addr = bytes[0] & 0x000000FF;
+        addr |= ((bytes[1] << 8) & 0x0000FF00);
+        return addr;
+    }
 public slots:
-
+    //接收超速定时器
+    QTimer *recvTimer() {return this->recvReadTimer;}
 signals:
     //接收到信号数据发送//
     //隧道气体装置信号
-    void TunnelGasDevieSig(ReccType type,QByteArray data);
+    void TunnelGasDataSig(ReccType type,QByteArray data);
     //隧道气体召测
     void TunnelGasDevSig(ReccType type,QByteArray data);
     //隧道风机装置信号
@@ -159,14 +174,11 @@ signals:
     //环境液位参数设置
     void  EnvParaWaterLevelSig(ReccType type,QByteArray data);
 private:
-
     static quint16 modbusCrc16(quint8 *data, qint16 length);
-
     //根据寄存器值返回相应的类型
     ControllerType getProtoTypeByReg(QByteArray data);
     //根据类型发送相应的信号
     void sendSignal(ReccType recvType,ControllerType type,QByteArray data);
-
     TunnelGasData     *     tunnelGasData_;
     TunnelGasDevControl *   tunnelGasDevControl_;
     TunnelFanDevControl *   tunnelFanDevControl_;

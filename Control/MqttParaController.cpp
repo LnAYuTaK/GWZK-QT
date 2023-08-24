@@ -4,9 +4,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
-#include "appSrc/ProtocolManager.h"
 #include "appSrc/NetWorkManager.h"
-
+#include "appSrc/Utils.h"
 MqttParaController::MqttParaController(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->MqttParaSet())
@@ -65,3 +64,24 @@ void MqttParaController::setData()
     }
 }
 
+void MqttParaController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
+{
+    if(type == ProtocolManager::HandleRead) {
+         QDataStream dataStream(&data, QIODevice::ReadOnly);
+         QVector<quint16> quint16Array;
+         while (!dataStream.atEnd()) {
+             quint16 value;
+             dataStream >> value;
+             quint16Array.append(value);
+         }
+         for(auto i :quint16Array)
+         {
+             qDebug() << i;
+         }
+    }
+    else if(type == ProtocolManager::HandleWrite) {
+         //
+         qDebug() << "Handle Write: "<< data;
+    }
+
+}

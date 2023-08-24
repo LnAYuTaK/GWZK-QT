@@ -4,9 +4,8 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 
-#include "appSrc/ProtocolManager.h"
 #include "appSrc/NetWorkManager.h"
-
+#include "appSrc/Utils.h"
 TunnelFanDevControl::TunnelFanDevControl(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->TunnelFan())
@@ -14,7 +13,7 @@ TunnelFanDevControl::TunnelFanDevControl(QObject *parent)
     ,format_(0)
     ,address_("0000000000000000")
 {
-  qmlRegisterUncreatableType<TunnelFanDevControl>("Control", 1, 0, "TunnelFanDevControl",   "Reference only");
+
 }
 
 void TunnelFanDevControl::queryData()
@@ -51,5 +50,17 @@ void TunnelFanDevControl::setData()
         auto sendMsg = ProtocolManager::makeWriteRegProto(start,adressVector.count(), packData);
         qDebug() << "TunnelFanControl SendMsg Size: " <<sendMsg.size();
         app()->netWorkMgr()->_tcpWriteBytes(sendMsg);
+    }
+}
+
+void TunnelFanDevControl::handleRecv(ProtocolManager::ReccType type,QByteArray data)
+{
+    if(type == ProtocolManager::HandleRead) {
+        qDebug() << data.size();
+        qDebug() << data;
+    }
+    else if(type == ProtocolManager::HandleWrite) {
+        //
+        qDebug() << "Handle Write: "<< data;
     }
 }

@@ -8,7 +8,7 @@
 #include <QMap>
 #include "appSrc/Application.h"
 #include "appSrc/ParaFactManager.h"
-
+#include "appSrc/ProtocolManager.h"
 class MainParaController : public QObject
 {
     Q_OBJECT
@@ -42,6 +42,9 @@ public:
     QByteArray  getMainParaReg() {
         return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
     }
+public slots:
+    void handleRecv(ProtocolManager::ReccType type,QByteArray data);
+
 
 private:
     JsonFactGroup *regList_;

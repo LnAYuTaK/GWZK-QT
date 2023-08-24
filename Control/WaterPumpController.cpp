@@ -4,10 +4,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
-
-#include "appSrc/ProtocolManager.h"
 #include "appSrc/NetWorkManager.h"
-
+#include "appSrc/Utils.h"
 WaterPumpController::WaterPumpController(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->WaterPump())
@@ -56,6 +54,16 @@ void WaterPumpController::setData()
     }
 }
 
+void WaterPumpController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
+{
+    if(type == ProtocolManager::HandleRead) {
+        qDebug() << data.size();
+        qDebug() << data;
+    }
+    else if(type == ProtocolManager::HandleWrite) {
+        qDebug() << "Handle Write: "<< data;
+    }
+}
 
 
 

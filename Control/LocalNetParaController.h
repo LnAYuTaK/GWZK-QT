@@ -9,6 +9,7 @@
 #include "appSrc/Application.h"
 #include "appSrc/ParaFactManager.h"
 
+#include "appSrc/ProtocolManager.h"
 //本地网络设置
 class LocalNetParaController : public QObject
 {
@@ -57,11 +58,13 @@ public:
     //FCUNTION
     Q_INVOKABLE void setData();
     Q_INVOKABLE void queryData();
-
     //获取寄存器首地址
     QByteArray getLocalNetParaReg(){
         return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
     }
+
+public slots:
+//    void handleRecv(ProtocolManager::ReccType type,QByteArray data);
 
 private:
     JsonFactGroup *regList_;

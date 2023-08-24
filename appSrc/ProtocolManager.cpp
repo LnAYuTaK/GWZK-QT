@@ -50,10 +50,12 @@ ProtocolManager::ProtocolManager(QObject *parent)
     ,envParaController_(new EnvParaController(this))
     ,recvReadTimer(new QTimer(this))
 {
+    //recv timer
     recvReadTimer->setInterval(1000); // 设置1秒的时间间隔
     connect(this->recvReadTimer, &QTimer::timeout, [=]() {
         recvReadTimer->stop();
     });
+    //reg qml
     qmlRegisterUncreatableType<TunnelGasDevControl>   ("App.ProtocolManager", 1, 0, "TunnelGasDevControl",   "Reference only");
     qmlRegisterUncreatableType<TunnelFanDevControl>   ("App.ProtocolManager", 1, 0, "TunnelFanDevControl",   "Reference only");
     qmlRegisterUncreatableType<MainParaController>    ("App.ProtocolManager", 1, 0, "MainParaController",    "Reference only");
@@ -66,6 +68,26 @@ ProtocolManager::ProtocolManager(QObject *parent)
     qmlRegisterUncreatableType<GasParaController>     ("App.ProtocolManager", 1, 0, "GasParaController",     "Reference only");
     qmlRegisterUncreatableType<EnvParaController>     ("App.ProtocolManager", 1, 0, "EnvParaController",     "Reference only");
     qmlRegisterUncreatableType<TunnelGasData>         ("App.ProtocolManager", 1, 0, "TunnelGasData",         "Reference only");
+    //Connect//
+    connect(this,&ProtocolManager::TunnelGasDataSig,tunnelGasData_,&TunnelGasData::handleRecv);
+    connect(this,&ProtocolManager::TunnelGasDevSig, tunnelGasDevControl_,&TunnelGasDevControl::handleRecv);
+    connect(this,&ProtocolManager::TunnelFunDevSig,tunnelFanDevControl_,&TunnelFanDevControl::handleRecv);
+    connect(this,&ProtocolManager::WaterLevelDeviceSig,waterLevelController_,&WaterLevelController::handleRecv);
+    connect(this,&ProtocolManager::WaterPumpDeviceSig,waterPumpConrtroller_,&WaterPumpController::handleRecv);
+    connect(this,&ProtocolManager::MainControlParaSig,mainOptController_,&MainOptController::handleRecv);
+    //connect(this,&ProtocolManager::LoaclNetParaSig,localNetParaController_,&LocalNetParaController::handleRecv);
+    connect(this,&ProtocolManager::MqttParaSig,mqttParaController_,&MqttParaController::handleRecv);
+    connect(this,&ProtocolManager::NetparaSig,netParaController_,&NetParaController::handleRecv);
+    connect(this,&ProtocolManager::GasParaO2Sig,gasParaController_,&GasParaController::handleRecvO2);
+    connect(this,&ProtocolManager::GasParaH2Sig,gasParaController_,&GasParaController::handleRecvH2);
+    connect(this,&ProtocolManager::GasParaCl2Sig,gasParaController_,&GasParaController::handleRecvCl2);
+    connect(this,&ProtocolManager::GasParaH2SSig,gasParaController_,&GasParaController::handleRecvH2S);
+    connect(this,&ProtocolManager::GasParaCH4Sig,gasParaController_,&GasParaController::handleRecvCH4);
+    connect(this,&ProtocolManager::GasParaCOSig,gasParaController_,&GasParaController::handleRecvCO);
+    connect(this,&ProtocolManager::GasParaCO2Sig,gasParaController_,&GasParaController::handleRecvCO2);
+    connect(this,&ProtocolManager::EnvParaTempSig,envParaController_,&EnvParaController::handleRecvTemp);
+    connect(this,&ProtocolManager::EnvParaHumiditySig,envParaController_,&EnvParaController::handleRecvHumidity);
+    connect(this,&ProtocolManager::EnvParaWaterLevelSig,envParaController_,&EnvParaController::handleRecvWaterLevel);
 }
 //-----------------------------------------------------------------------------
 /**
@@ -78,6 +100,26 @@ ProtocolManager::ProtocolManager(QObject *parent)
 void splitQuint16(quint16 value, char& highByte, char& lowByte) {
     highByte = static_cast<char>((value >> 8) & 0xFF);
     lowByte = static_cast<char>(value & 0xFF);
+}
+//2字节一组数据
+QVector<qint16> ProtocolManager::ByteArrayToIntVec(QByteArray byteArray){
+    QVector<qint16> intArray{};
+    for (int i = 0; i < byteArray.size(); i += 2) {
+        //高位                  //低位
+        qint16 value = (byteArray[i + 1] << 8) | byteArray[i];
+        intArray.append(value);
+    }
+    return intArray;
+}
+
+QVector<QByteArray> ProtocolManager::SpiltData(QByteArray byteArray)
+{
+    QVector<QByteArray>byteArrayGroups;
+    for (int i = 0; i < byteArray.size(); i += 2) {
+        QByteArray group = byteArray.mid(i, 2);
+        byteArrayGroups.append(group);
+    }
+    return byteArrayGroups;
 }
 
 ProtocolManager::ControllerType ProtocolManager::getProtoTypeByReg(QByteArray data)
@@ -169,7 +211,7 @@ void ProtocolManager::sendSignal(ReccType recvType,ControllerType type,QByteArra
 {
     switch (type) {
     case TunnelGasData_t:
-        emit TunnelGasDevieSig(recvType,data);
+        emit TunnelGasDataSig(recvType,data);
         break;
     case TunnelGasDevControl_t:
         emit TunnelGasDevSig(recvType,data);
@@ -231,6 +273,7 @@ void ProtocolManager::sendSignal(ReccType recvType,ControllerType type,QByteArra
 
 void ProtocolManager::ProtocolHandle(QObject *sender,QByteArray data)
 {
+    Q_UNUSED(sender)
     //先拆头字节//
     if(data.size()>0)
     {
@@ -244,18 +287,20 @@ void ProtocolManager::ProtocolHandle(QObject *sender,QByteArray data)
             splitQuint16(crc,CRC16TempHi,CRC16TempLo);
             //CRC 两个字节
             char CRC16Hi = pData[data.size()-1];
-            char CRC16Lo= pData[data.size()-2];
+            char CRC16Lo = pData[data.size()-2];
             if((CRC16Hi == CRC16TempHi)&&(CRC16Lo==CRC16TempLo))
             {
-                //
                 //读寄存器返回类型//
                 if(pData[1]=='\x03')
                 {
-                    //去掉头尾2字节
-                    QByteArray master_read = data.mid(2,(data.size() - 4));
+                    //去掉从站地址 报文类型 数据长度 校验码
+                    data.remove(0, 3);
+                    data.chop(2);
+                    QByteArray master_read  = data;
                     //根据上次操作判断是什么类型的返回
 //                    if(this->recvReadTimer->isActive())
 //                    {
+                        qDebug() << "Recv 0x03";
                         //根据上次操作判断是
                         sendSignal(HandleRead,nowType_ ,master_read);
 //                    }
@@ -272,8 +317,7 @@ void ProtocolManager::ProtocolHandle(QObject *sender,QByteArray data)
                     QByteArray byteArray;
                     byteArray.append(regStartHi);
                     byteArray.append(regStartLo);
-                    qDebug() << "Recv X10" ;
-                    getProtoTypeByReg(byteArray);
+                    qDebug() << "Recv 0x10" ;
                     sendSignal(HandleWrite,getProtoTypeByReg(byteArray),master_write);
                 }
                 else
@@ -301,7 +345,7 @@ QByteArray ProtocolManager::makeWriteRegProto(QByteArray start,int count,QByteAr
   crc[1] = (uchar)((0xff00&checkData)>>8);  //转换-存入QByteArray
   return res+crc;
 }
-
+//-----------------------------------------------------------------------------
 QByteArray ProtocolManager::makeReadRegProto(ProtocolManager::ControllerType type,QByteArray start,int count)
 {
   QByteArray res {};
@@ -323,11 +367,12 @@ QByteArray ProtocolManager::makeReadRegProto(ProtocolManager::ControllerType typ
 //-----------------------------------------------------------------------------
 QByteArray ProtocolManager::intToHexByteArray(int data)
 {
-  QByteArray resByte{};
+   QByteArray resByte{};
    resByte.append(static_cast<char>((data >> 8) & 0xFF)); // 高字节
    resByte.append(static_cast<char>(data & 0xFF)); // 低字节
    return resByte;
 }
+
 //-----------------------------------------------------------------------------
 quint16 ProtocolManager::modbusCrc16(quint8 *data, qint16 length)
 {
@@ -344,7 +389,7 @@ quint16 ProtocolManager::modbusCrc16(quint8 *data, qint16 length)
           }
       }
   }
-  crc = ((crc >> 8) & 0xFF) | ((crc & 0xFF) << 8);
+  //crc = ((crc >> 8) & 0xFF) | ((crc & 0xFF) << 8);
   return crc;
 }
 //-----------------------------------------------------------------------------

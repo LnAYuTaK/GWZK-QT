@@ -7,7 +7,7 @@
 #include <QMap>
 #include  "appSrc/ParaFactManager.h"
 #include "appSrc/Application.h"
-
+#include "appSrc/ProtocolManager.h"
 //数据召测
 class TunnelGasData : public QObject
 {
@@ -27,6 +27,9 @@ public:
 
 signals:
     void TunnelGasQueryData(QByteArray data);
+
+public slots:
+    void handleRecv(ProtocolManager::ReccType type,QByteArray data);
 
 private:
     JsonFactGroup * regList_;

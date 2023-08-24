@@ -4,9 +4,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
-#include "appSrc/ProtocolManager.h"
 #include "appSrc/NetWorkManager.h"
-
+#include "appSrc/Utils.h"
 MainParaController::MainParaController(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->MainConParaSet())
@@ -63,6 +62,17 @@ void MainParaController::setData()
     }
 }
 
+void MainParaController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
+{
+    if(type == ProtocolManager::HandleRead) {
+        qDebug() << data.size();
+        qDebug() << data;
+    }
+    else if(type == ProtocolManager::HandleWrite) {
+        //
+        qDebug() << "Handle Write: "<< data;
+    }
+}
 
 
 

@@ -4,7 +4,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
-#include "appSrc/ProtocolManager.h"
+#include "appSrc/Utils.h"
 #include "appSrc/NetWorkManager.h"
 
 WaterLevelController::WaterLevelController(QObject *parent)
@@ -62,3 +62,14 @@ void WaterLevelController::setData()
     }
 }
 
+void WaterLevelController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
+{
+    if(type == ProtocolManager::HandleRead) {
+        qDebug() << data.size();
+        qDebug() << data;
+    }
+    else if(type == ProtocolManager::HandleWrite) {
+        //
+        qDebug() << "Handle Write: "<< data;
+    }
+}

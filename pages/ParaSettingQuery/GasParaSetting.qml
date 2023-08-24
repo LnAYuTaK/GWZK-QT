@@ -60,7 +60,6 @@ Item {
             return GasParaController.CO2
         }
     }
-
     StackLayout {
         anchors.top:bar.bottom
         anchors.bottom: parent.bottom
@@ -89,7 +88,50 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                    App.protoManager.GasParaCtrl.UpThresholdLimitLevel1 = text
+                                    if(modelData === "O2"){
+                                       App.protoManager.GasParaCtrl.GasParaO2.UpThresholdLimitLevel1 = text
+                                    }
+                                    else if(modelData  === "H2"){
+                                       App.protoManager.GasParaCtrl.GasParaH2.UpThresholdLimitLevel1 = text
+                                    }
+                                    else if(modelData  === "Cl2"){
+                                       App.protoManager.GasParaCtrl.GasParaCl2.UpThresholdLimitLevel1 = text
+                                    }
+                                    else if(modelData  === "H2S"){
+                                        App.protoManager.GasParaCtrl.GasParaH2S.UpThresholdLimitLevel1 = text
+                                    }
+                                    else if(modelData  === "CH4") {
+                                        App.protoManager.GasParaCtrl.GasParaCH4.UpThresholdLimitLevel1 = text
+                                    }
+                                    else if(modelData  === "CO"){
+                                        App.protoManager.GasParaCtrl.GasParaCO.UpThresholdLimitLevel1 = text
+                                    }
+                                    else if(modelData  === "CO2"){
+                                        App.protoManager.GasParaCtrl.GasParaCO2.UpThresholdLimitLevel1 = text
+                                    }
+                                }
+                            }
+                            text:{
+                                if(modelData === "O2"){
+                                   return App.protoManager.GasParaCtrl.GasParaO2.UpThresholdLimitLevel1
+                                }
+                                else if(modelData  === "H2"){
+                                  return App.protoManager.GasParaCtrl.GasParaH2.UpThresholdLimitLevel1
+                                }
+                                else if(modelData  === "Cl2"){
+                                  return App.protoManager.GasParaCtrl.GasParaCl2.UpThresholdLimitLevel1
+                                }
+                                else if(modelData  === "H2S"){
+                                   return App.protoManager.GasParaCtrl.GasParaH2S.UpThresholdLimitLevel1
+                                }
+                                else if(modelData  === "CH4"){
+                                   return App.protoManager.GasParaCtrl.GasParaCH4.UpThresholdLimitLevel1
+                                }
+                                else if(modelData  === "CO"){
+                                   return App.protoManager.GasParaCtrl.GasParaCO.UpThresholdLimitLevel1
+                                }
+                                else if(modelData  === "CO2"){
+                                   return App.protoManager.GasParaCtrl.GasParaCO2.UpThresholdLimitLevel1
                                 }
                             }
                         }
@@ -111,7 +153,50 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                    App.protoManager.GasParaCtrl.LowThresholdLimitLevel1 = text
+                                    if(modelData === "O2"){
+                                       App.protoManager.GasParaCtrl.GasParaO2.LowThresholdLimitLevel1 = text
+                                    }
+                                    else if(modelData  === "H2"){
+                                       App.protoManager.GasParaCtrl.GasParaH2.LowThresholdLimitLevel1 = text
+                                    }
+                                    else if(modelData  === "Cl2"){
+                                       App.protoManager.GasParaCtrl.GasParaCl2.LowThresholdLimitLevel1 = text
+                                    }
+                                    else if(modelData  === "H2S"){
+                                        App.protoManager.GasParaCtrl.GasParaH2S.LowThresholdLimitLevel1 = text
+                                    }
+                                    else if(modelData  === "CH4"){
+                                        App.protoManager.GasParaCtrl.GasParaCH4.LowThresholdLimitLevel1 = text
+                                    }
+                                    else if(modelData === "CO"){
+                                        App.protoManager.GasParaCtrl.GasParaO2.LowThresholdLimitLevel1 = text
+                                    }
+                                    else if(modelData  === "CO2"){
+                                        App.protoManager.GasParaCtrl.GasParaCO2.LowThresholdLimitLevel1 = text
+                                    }
+                                }
+                            }
+                            text:{
+                                if(modelData === "O2"){
+                                  return App.protoManager.GasParaCtrl.GasParaO2.LowThresholdLimitLevel1
+                                }
+                                else if(modelData  === "H2"){
+                                  return App.protoManager.GasParaCtrl.GasParaH2.LowThresholdLimitLevel1
+                                }
+                                else if(modelData  === "Cl2"){
+                                  return App.protoManager.GasParaCtrl.GasParaCl2.LowThresholdLimitLevel1
+                                }
+                                else if(modelData  === "H2S") {
+                                  return  App.protoManager.GasParaCtrl.GasParaH2S.LowThresholdLimitLevel1
+                                }
+                                else if(modelData  === "CH4"){
+                                  return  App.protoManager.GasParaCtrl.GasParaCH4.LowThresholdLimitLevel1
+                                }
+                                else if(modelData  === "CO"){
+                                  return  App.protoManager.GasParaCtrl.GasParaCO.LowThresholdLimitLevel1
+                                }
+                                else if(modelData  === "CO2"){
+                                  return  App.protoManager.GasParaCtrl.GasParaCO2.LowThresholdLimitLevel1
                                 }
                             }
                         }
@@ -132,7 +217,50 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                    App.protoManager.GasParaCtrl.UpThresholdLimitLevel2 = text
+                                    if(modelData === "O2"){
+                                       App.protoManager.GasParaCtrl.GasParaO2.LowThresholdLimitLevel2 = text
+                                    }
+                                    else if(modelData  === "H2"){
+                                       App.protoManager.GasParaCtrl.GasParaH2.LowThresholdLimitLevel2 = text
+                                    }
+                                    else if(modelData  === "Cl2"){
+                                       App.protoManager.GasParaCtrl.GasParaCl2.LowThresholdLimitLevel2 = text
+                                    }
+                                    else if(modelData  === "H2S"){
+                                        App.protoManager.GasParaCtrl.GasParaH2S.LowThresholdLimitLevel2 = text
+                                    }
+                                    else if(modelData  === "CH4"){
+                                        App.protoManager.GasParaCtrl.GasParaCH4.LowThresholdLimitLevel2 = text
+                                    }
+                                    else if(modelData  === "CO"){
+                                        App.protoManager.GasParaCtrl.GasParaCO.LowThresholdLimitLevel2 = text
+                                    }
+                                    else if(modelData  === "CO2"){
+                                        App.protoManager.GasParaCtrl.GasParaCO2.LowThresholdLimitLevel2 = text
+                                    }
+                                }
+                            }
+                            text:{
+                                if(modelData === "O2"){
+                                   return App.protoManager.GasParaCtrl.GasParaO2.LowThresholdLimitLevel2
+                                }
+                                else if(modelData  === "H2"){
+                                  return App.protoManager.GasParaCtrl.GasParaH2.LowThresholdLimitLevel2
+                                }
+                                else if(modelData  === "Cl2"){
+                                  return App.protoManager.GasParaCtrl.GasParaCl2.LowThresholdLimitLevel2
+                                }
+                                else if(modelData === "H2S"){
+                                  return  App.protoManager.GasParaCtrl.GasParaH2S.LowThresholdLimitLevel2
+                                }
+                                else if(modelData  === "CH4"){
+                                  return  App.protoManager.GasParaCtrl.GasParaCH4.LowThresholdLimitLevel2
+                                }
+                                else if(modelData  === "CO"){
+                                  return  App.protoManager.GasParaCtrl.GasParaCO.LowThresholdLimitLevel2
+                                }
+                                else if(modelData === "CO2"){
+                                  return App.protoManager.GasParaCtrl.GasParaCO2.LowThresholdLimitLevel2
                                 }
                             }
                         }
@@ -154,7 +282,50 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                    App.protoManager.GasParaCtrl.LowThresholdLimitLevel2 = text
+                                    if(modelData === "O2"){
+                                       App.protoManager.GasParaCtrl.GasParaO2.UpThresholdLimitLevel2 = text
+                                    }
+                                    else if(modelData  === "H2"){
+                                       App.protoManager.GasParaCtrl.GasParaH2.UpThresholdLimitLevel2 = text
+                                    }
+                                    else if(modelData  === "Cl2"){
+                                       App.protoManager.GasParaCtrl.GasParaCl2.UpThresholdLimitLevel2 = text
+                                    }
+                                    else if(modelData  === "H2S"){
+                                        App.protoManager.GasParaCtrl.GasParaH2S.UpThresholdLimitLevel2 = text
+                                    }
+                                    else if(modelData  === "CH4"){
+                                        App.protoManager.GasParaCtrl.GasParaCH4.UpThresholdLimitLevel2 = text
+                                    }
+                                    else if(modelData  === "CO"){
+                                        App.protoManager.GasParaCtrl.GasParaCO.UpThresholdLimitLevel2 = text
+                                    }
+                                    else if(modelData  === "CO2"){
+                                        App.protoManager.GasParaCtrl.GasParaCO2.UpThresholdLimitLevel2 = text
+                                    }
+                                }
+                            }
+                            text:{
+                                if(modelData === "O2"){
+                                  return App.protoManager.GasParaCtrl.GasParaO2.UpThresholdLimitLevel2
+                                }
+                                else if(modelData  === "H2"){
+                                  return  App.protoManager.GasParaCtrl.GasParaH2.UpThresholdLimitLevel2
+                                }
+                                else if(modelData  === "Cl2"){
+                                  return  App.protoManager.GasParaCtrl.GasParaCl2.UpThresholdLimitLevel2
+                                }
+                                else if(modelData  === "H2S"){
+                                  return  App.protoManager.GasParaCtrl.GasParaH2S.UpThresholdLimitLevel2
+                                }
+                                else if(modelData  === "CH4") {
+                                   return  App.protoManager.GasParaCtrl.GasParaCH4.UpThresholdLimitLevel2
+                                }
+                                else if(modelData  === "CO") {
+                                   return  App.protoManager.GasParaCtrl.GasParaCO.UpThresholdLimitLevel2
+                                }
+                                else if(modelData  === "CO2"){
+                                   return App.protoManager.GasParaCtrl.GasParaCO2.UpThresholdLimitLevel2
                                 }
                             }
                         }
@@ -176,7 +347,51 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                    App.protoManager.GasParaCtrl.UpThresholdLimitLevel3 = text
+                                    if(modelData === "O2"){
+                                       App.protoManager.GasParaCtrl.GasParaO2.UpThresholdLimitLevel3 = text
+                                    }
+                                    else if(modelData  === "H2"){
+                                       App.protoManager.GasParaCtrl.GasParaH2.UpThresholdLimitLevel3 = text
+                                    }
+                                    else if(modelData  === "Cl2"){
+                                       App.protoManager.GasParaCtrl.GasParaCl2.UpThresholdLimitLevel3 = text
+                                    }
+                                    else if(modelData  === "H2S") {
+                                        App.protoManager.GasParaCtrl.GasParaH2S.UpThresholdLimitLevel3 = text
+                                    }
+                                    else if(modelData  === "CH4"){
+                                        App.protoManager.GasParaCtrl.GasParaCH4.UpThresholdLimitLevel3 = text
+                                    }
+                                    else if(modelData === "CO") {
+                                        App.protoManager.GasParaCtrl.GasParaCO.UpThresholdLimitLevel3 = text
+                                    }
+                                    else if(modelData  === "CO2"){
+                                        App.protoManager.GasParaCtrl.GasParaCO2.UpThresholdLimitLevel3 = text
+                                    }
+                                }
+                            }
+                            text:{
+
+                                if(modelData === "O2"){
+                                  return  App.protoManager.GasParaCtrl.GasParaO2.UpThresholdLimitLevel3
+                                }
+                                else if(modelData  === "H2"){
+                                  return  App.protoManager.GasParaCtrl.GasParaH2.UpThresholdLimitLevel3
+                                }
+                                else if(modelData === "Cl2"){
+                                  return App.protoManager.GasParaCtrl.GasParaCl2.UpThresholdLimitLevel3
+                                }
+                                else if(modelData  === "H2S"){
+                                   return App.protoManager.GasParaCtrl.GasParaH2S.UpThresholdLimitLevel3
+                                }
+                                else if(modelData  === "CH4"){
+                                   return App.protoManager.GasParaCtrl.GasParaCH4.UpThresholdLimitLevel3
+                                }
+                                else if(modelData  === "CO") {
+                                   return App.protoManager.GasParaCtrl.GasParaCO.UpThresholdLimitLevel3
+                                }
+                                else if(modelData  === "CO2"){
+                                   return App.protoManager.GasParaCtrl.GasParaCO2.UpThresholdLimitLevel3
                                 }
                             }
                         }
@@ -198,7 +413,50 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                    App.protoManager.GasParaCtrl.LowThresholdLimitLevel3 = text
+                                    if(modelData === "O2"){
+                                       App.protoManager.GasParaCtrl.GasParaO2.LowThresholdLimitLevel3 = text
+                                    }
+                                    else if(modelData  === "H2"){
+                                       App.protoManager.GasParaCtrl.GasParaH2.LowThresholdLimitLevel3 = text
+                                    }
+                                    else if(modelData  === "Cl2"){
+                                       App.protoManager.GasParaCtrl.GasParaCl2.LowThresholdLimitLevel3 = text
+                                    }
+                                    else if(modelData  === "H2S") {
+                                        App.protoManager.GasParaCtrl.GasParaH2S.LowThresholdLimitLevel3 = text
+                                    }
+                                    else if(modelData  === "CH4"){
+                                        App.protoManager.GasParaCtrl.GasParaCH4.LowThresholdLimitLevel3 = text
+                                    }
+                                    else if(modelData  === "CO") {
+                                        App.protoManager.GasParaCtrl.GasParaCO.LowThresholdLimitLevel3 = text
+                                    }
+                                    else if(modelData  === "CO2"){
+                                        App.protoManager.GasParaCtrl.GasParaCO2.LowThresholdLimitLevel3 = text
+                                    }
+                                }
+                            }
+                            text:{
+                                if(modelData === "O2"){
+                                  return  App.protoManager.GasParaCtrl.GasParaO2.LowThresholdLimitLevel3
+                                }
+                                else if(modelData  === "H2"){
+                                  return  App.protoManager.GasParaCtrl.GasParaH2.LowThresholdLimitLevel3
+                                }
+                                else if(modelData  === "Cl2"){
+                                   return App.protoManager.GasParaCtrl.GasParaCl2.LowThresholdLimitLevel3
+                                }
+                                else if(modelData  === "H2S"){
+                                  return   App.protoManager.GasParaCtrl.GasParaH2S.LowThresholdLimitLevel3
+                                }
+                                else if(modelData === "CH4"){
+                                   return  App.protoManager.GasParaCtrl.GasParaCH4.LowThresholdLimitLevel3
+                                }
+                                else if(modelData === "CO") {
+                                   return  App.protoManager.GasParaCtrl.GasParaCO.LowThresholdLimitLevel3
+                                }
+                                else if(modelData === "CO2"){
+                                   return  App.protoManager.GasParaCtrl.GasParaCO2.LowThresholdLimitLevel3
                                 }
                             }
                         }
@@ -220,7 +478,50 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                    App.protoManager.GasParaCtrl.KeepThresholdLimit = text
+                                    if(modelData === "O2"){
+                                       App.protoManager.GasParaCtrl.GasParaO2.KeepThresholdLimit = text
+                                    }
+                                    else if(modelData  === "H2"){
+                                       App.protoManager.GasParaCtrl.GasParaH2.KeepThresholdLimit = text
+                                    }
+                                    else if(modelData  === "Cl2"){
+                                       App.protoManager.GasParaCtrl.GasParaCl2.KeepThresholdLimit = text
+                                    }
+                                    else if(modelData  === "H2S") {
+                                        App.protoManager.GasParaCtrl.GasParaH2S.KeepThresholdLimit = text
+                                    }
+                                    else if(modelData  === "CH4"){
+                                        App.protoManager.GasParaCtrl.GasParaCH4.KeepThresholdLimit = text
+                                    }
+                                    else if(modelData  === "CO") {
+                                        App.protoManager.GasParaCtrl.GasParaCO.KeepThresholdLimit = text
+                                    }
+                                    else if(modelData === "CO2"){
+                                        App.protoManager.GasParaCtrl.GasParaCO2.KeepThresholdLimit = text
+                                    }
+                                }
+                            }
+                            text:{
+                                if(modelData === "O2"){
+                                   App.protoManager.GasParaCtrl.GasParaO2.KeepThresholdLimit
+                                }
+                                else if(modelData === "H2"){
+                                   App.protoManager.GasParaCtrl.GasParaH2.KeepThresholdLimit
+                                }
+                                else if(modelData === "Cl2"){
+                                   App.protoManager.GasParaCtrl.GasParaCl2.UpThresholdLimitLevel3
+                                }
+                                else if(modelData === "H2S"){
+                                    App.protoManager.GasParaCtrl.GasParaH2S.UpThresholdLimitLevel3
+                                }
+                                else if(modelData === "CH4"){
+                                    App.protoManager.GasParaCtrl.GasParaCH4.UpThresholdLimitLevel3
+                                }
+                                else if(modelData === "CO") {
+                                    return App.protoManager.GasParaCtrl.GasParaCO.UpThresholdLimitLevel3
+                                }
+                                else if(modelData === "CO2"){
+                                    return App.protoManager.GasParaCtrl.GasParaCO2.UpThresholdLimitLevel3
                                 }
                             }
                         }

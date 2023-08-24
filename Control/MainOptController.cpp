@@ -5,8 +5,8 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 
-#include "appSrc/ProtocolManager.h"
 #include "appSrc/NetWorkManager.h"
+#include "appSrc/Utils.h"
 
 MainOptController::MainOptController(QObject *parent)
     : QObject{parent}
@@ -52,3 +52,17 @@ void MainOptController::setData()
 
     }
 }
+
+void MainOptController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
+{
+    if(type == ProtocolManager::HandleRead) {
+        qDebug() << data.size();
+        qDebug() << data;
+    }
+    else if(type == ProtocolManager::HandleWrite) {
+        //
+        qDebug() << "Handle Write: "<< data;
+    }
+}
+
+

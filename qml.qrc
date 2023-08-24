@@ -79,5 +79,6 @@
         <file>pages/DeviceList/DeviceList_WaterPump.qml</file>
         <file>pages/ParaSettingQuery/MqttPara.qml</file>
         <file>JsonProto/EnvPara.json</file>
+        <file>pages/ParaSettingQuery/EnvPara.qml</file>
     </qresource>
 </RCC>

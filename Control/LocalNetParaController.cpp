@@ -5,8 +5,8 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 
-#include "appSrc/ProtocolManager.h"
 #include "appSrc/NetWorkManager.h"
+#include "appSrc/Utils.h"
 
 LocalNetParaController::LocalNetParaController(QObject *parent)
     : QObject{parent}
@@ -86,6 +86,12 @@ void LocalNetParaController::setData()
     }
 }
 
+//void LocalNetParaController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
+//{
+
+
+
+//}
 
 
 

@@ -9,7 +9,7 @@
 #include <QMap>
 #include "appSrc/Application.h"
 #include "appSrc/ParaFactManager.h"
-
+#include "appSrc/ProtocolManager.h"
 //主控参数设置
 class MainOptController : public QObject
 {
@@ -31,6 +31,9 @@ public:
     QByteArray getMainOptReg(){
         return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
     }
+
+public slots:
+    void handleRecv(ProtocolManager::ReccType type,QByteArray data);
 
 private:
     JsonFactGroup * regList_;

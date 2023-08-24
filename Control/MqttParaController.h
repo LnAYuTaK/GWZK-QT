@@ -8,7 +8,7 @@
 #include <QDebug>
 #include "appSrc/Application.h"
 #include "appSrc/ParaFactManager.h"
-
+#include "appSrc/ProtocolManager.h"
 class MqttParaController : public QObject
 {
     Q_OBJECT
@@ -44,6 +44,8 @@ public:
         return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
     }
 
+public slots:
+    void handleRecv(ProtocolManager::ReccType type,QByteArray data);
 private:
     JsonFactGroup *regList_;
     QString mqttIp_;

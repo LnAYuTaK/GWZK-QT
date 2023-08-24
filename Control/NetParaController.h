@@ -63,7 +63,8 @@ public:
         return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
     }
 
-private slots:
+
+public slots:
     void handleRecv(ProtocolManager::ReccType type,QByteArray data);
 
 private:

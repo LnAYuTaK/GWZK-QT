@@ -8,7 +8,7 @@
 #include <QDebug>
 #include "appSrc/ParaFactManager.h"
 #include "appSrc/Application.h"
-
+#include "appSrc/ProtocolManager.h"
 class WaterLevelController : public QObject
 {
     Q_OBJECT
@@ -43,6 +43,9 @@ public:
     QByteArray getWaterLevel(){
         return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
     }
+public slots:
+    void handleRecv(ProtocolManager::ReccType type,QByteArray data);
+
 private:
     JsonFactGroup *regList_;
     int            count_;
