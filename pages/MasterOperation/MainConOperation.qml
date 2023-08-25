@@ -1,4 +1,4 @@
-import QtQuick 2.14
+﻿import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
@@ -43,6 +43,40 @@ Item {
                                    App.protoManager.MainOptCtrl.SysTime = text
                                 }
                             }
+                            text:App.protoManager.MainOptCtrl.SysTime
+
+                        }
+                    }
+                    //时间查询
+                    RowLayout{
+                        Layout.fillWidth: true
+                        BaseButton {
+                            text:qsTr("查询")
+                            font.pixelSize:  20
+                            backRadius: 4
+                            bckcolor: "#4785FF"
+                            onClicked:{
+                              App.protoManager.MainOptCtrl.querySysTimeData()
+                            }
+                        }
+                        Rectangle {
+                             width: 200
+                        }
+                        BaseButton {
+                            text: qsTr("设置")
+                            font.pixelSize:  20
+                            backRadius: 4
+                            bckcolor: "#4785FF"
+                            onClicked:{
+                                if(!(systime.acceptableInput))
+                                {
+                                    message("error","格式设置错误")
+                                }
+                                else
+                                {
+                                    App.protoManager.MainOptCtrl.setSysTimeData()
+                                }
+                            }
                         }
                     }
                     RowLayout{
@@ -61,24 +95,9 @@ Item {
                               App.protoManager.MainOptCtrl.SysOpsAble = currentIndex
                           }
                         }
-                        BaseTextField{
-                            Layout.preferredWidth:140
-                        }
                     }
                     RowLayout{
                         Layout.fillWidth: true
-                        BaseButton {
-                            text:qsTr("查询")
-                            font.pixelSize:  20
-                            backRadius: 4
-                            bckcolor: "#4785FF"
-                            onClicked:{
-                               App.protoManager.MainOptCtrl.queryData()
-                            }
-                        }
-                        Rectangle {
-                             width: 200
-                        }
                         BaseButton {
                             text: qsTr("设置")
                             font.pixelSize:  20
@@ -91,7 +110,7 @@ Item {
                                 }
                                 else
                                 {
-                                    App.protoManager.MainOptCtrl.setData()
+                                    App.protoManager.MainOptCtrl.setSysStateData()
                                 }
                             }
                         }

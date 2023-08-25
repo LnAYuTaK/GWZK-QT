@@ -15,7 +15,7 @@
 #include <QVector>
 #include <QDebug>
 #include <QTimer>
-
+#include <QDataStream>
 #include "Application.h"
 class TunnelGasData;
 class TunnelGasDevControl;
@@ -109,7 +109,21 @@ public:
 
     static QByteArray makeReadRegProto(ProtocolManager::ControllerType type,QByteArray start,int count);
 
+    //int 转双字节QByteArray
     static QByteArray intToHexByteArray(int data);
+    //int 转四字节 QByteArray
+    static QByteArray intToByteArray(int number,Endian type) {
+        QByteArray bytes;
+        QDataStream stream(&bytes, QIODevice::WriteOnly);
+        if(type == LittileEndian){
+          stream.setByteOrder(QDataStream::LittleEndian); //设置字节序 - 大端
+        }
+        else {
+          stream.setByteOrder(QDataStream::BigEndian); //设置字节序 - 大端
+        }
+        stream << number;  // 数字流向stream流
+        return  bytes;
+    }
 
     //将协议内所有数据拼接成quint16返回
     static QVector<quint16> getProtocolData(QByteArray data);
@@ -121,13 +135,74 @@ public:
     //拼接QByteAray
     static QVector<qint16>ByteArrayToIntVec(QByteArray byteArray);
     static QVector<QByteArray> SpiltData(QByteArray byteArray);
-    //
+    //大端模式 TODO
     static short bytesToshort(QByteArray bytes)
     {
         int addr = bytes[0] & 0x000000FF;
         addr |= ((bytes[1] << 8) & 0x0000FF00);
         return addr;
     }
+    //双字节QByteArray转 short
+    static short bytesToshort(QByteArray bytes,Endian type)
+    {
+        if(type == Endian::LittileEndian)
+        {
+            int addr = bytes[1] & 0x000000FF;
+            addr |= ((bytes[0] << 8) & 0x0000FF00);
+            return addr;
+        }
+        else
+        {
+            int addr = bytes[0] & 0x000000FF;
+            addr |= ((bytes[1] << 8) & 0x0000FF00);
+            return addr;
+        }
+    }
+    //大端模式
+    static int byteAraryToInt(QByteArray arr, Endian endian)
+    {
+        if (arr.size() < 4) {
+            return 0;
+        }
+        int res = 0;
+        // 小端模式
+        if (endian == LittileEndian){
+            res = arr.at(0) & 0x000000FF;
+            res |= (arr.at(1) << 8) & 0x0000FF00;
+            res |= (arr.at(2) << 16) & 0x00FF0000;
+            res |= (arr.at(3) << 24) & 0xFF000000;
+        }
+        // 大端模式
+        else if (endian == BigEndian){
+            res = (arr.at(0) << 24) & 0xFF000000;
+            res |= (arr.at(1) << 16) & 0x00FF0000;
+            res |= arr.at(2) << 8 & 0x0000FF00;
+            res |= arr.at(3) & 0x000000FF;
+        }
+        return res;
+    }
+    //QbyteArray转QbyteArray Vector
+    static QVector<QByteArray> bytesToVector(QByteArray bytes){
+        QVector<QByteArray>  vectorByteArray;
+        for (int i = 0; i < bytes.size(); i++) {
+            QByteArray singleByte;
+            singleByte.append(bytes.mid(i, 1));
+            vectorByteArray.push_back(singleByte);
+        }
+        return vectorByteArray;
+    }
+    //设置QChar 置零置一
+    static QChar setBit(QChar ch, int bitIndex, bool value) {
+        ushort unicode = ch.unicode();
+        if (value) {
+            unicode |= (1 << bitIndex);
+        } else {
+            unicode &= ~(1 << bitIndex);
+        }
+        return QChar(unicode);
+    }
+
+
 public slots:
     //接收超速定时器
     QTimer *recvTimer() {return this->recvReadTimer;}

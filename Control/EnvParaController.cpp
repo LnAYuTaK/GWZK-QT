@@ -128,6 +128,7 @@ void EnvParaController::setData(EnvType type)
     }
 }
 
+//设备发送
 void EnvParaController::recvSeleteType(EnvType type,EnvPara *target,QByteArray data)
 {
     auto resdata = ProtocolManager::SpiltData(data);
@@ -136,6 +137,7 @@ void EnvParaController::recvSeleteType(EnvType type,EnvPara *target,QByteArray d
     {
         switch (type) {
         case Temp:
+            qDebug()<< data;
             envTemp_->setUpThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[0]));
             envTemp_->setLowThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[1]));
             envTemp_->setUpThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[2]));

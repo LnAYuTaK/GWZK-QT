@@ -64,7 +64,7 @@ public:
     }
 
 public slots:
-//    void handleRecv(ProtocolManager::ReccType type,QByteArray data);
+  void handleRecv(ProtocolManager::ReccType type,QByteArray data);
 
 private:
     JsonFactGroup *regList_;

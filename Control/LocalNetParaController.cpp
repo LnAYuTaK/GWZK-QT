@@ -11,14 +11,14 @@
 LocalNetParaController::LocalNetParaController(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->LocalNetParaSet())
-    ,localIp1_("0.0.0.0")
-    ,localGateway1_("0.0.0.0")
-    ,localMask1_("255.255.255.0")
-    ,localMACAddr1_("00-00-00-00-00-00")
-    ,localIp2_("0.0.0.0")
-    ,localGateway2_("0.0.0.0")
-    ,localMask2_("255.255.255.0")
-    ,localMACAddr2_("00-00-00-00-00-00")
+    ,localIp1_("")
+    ,localGateway1_("")
+    ,localMask1_("")
+    ,localMACAddr1_("")
+    ,localIp2_("")
+    ,localGateway2_("")
+    ,localMask2_("")
+    ,localMACAddr2_("")
     ,localWifiName_("")
 {
 
@@ -86,12 +86,106 @@ void LocalNetParaController::setData()
     }
 }
 
-//void LocalNetParaController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
-//{
+void LocalNetParaController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
+{
+    if(type == ProtocolManager::HandleRead) {
+        if(data.size()==48)
+        {
+            //本地IP地址1
+            localIp1_ = QString::number(QChar(data.at(0)).unicode())
+                        +"."
+                        + QString::number(QChar(data.at(1)).unicode())
+                        +"."
+                        + QString::number(QChar(data.at(2)).unicode())
+                        +"."
+                        + QString::number(QChar(data.at(3)).unicode());
+            qDebug() << localIp1_;
+            //本地IP网关地址1
+            localGateway1_ =   QString::number(QChar(data.at(4)).unicode())
+                             +"."
+                             + QString::number(QChar(data.at(5)).unicode())
+                             +"."
+                             + QString::number(QChar(data.at(6)).unicode())
+                             +"."
+                             + QString::number(QChar(data.at(7)).unicode());
+            qDebug() << localGateway1_;
+            //子网掩码1
+            localMask1_ =   QString::number(QChar(data.at(8)).unicode())
+                          +"."
+                          + QString::number(QChar(data.at(9)).unicode())
+                          +"."
+                          + QString::number(QChar(data.at(10)).unicode())
+                          +"."
+                          + QString::number(QChar(data.at(11)).unicode());
+            qDebug() << localMask1_;
+            //本地IPMAC地址1
+            localMACAddr1_ =   QString::number(QChar(data.at(12)).unicode())
+                             +":"
+                             + QString::number(QChar(data.at(13)).unicode())
+                             +":"
+                             + QString::number(QChar(data.at(14)).unicode())
+                             +":"
+                             + QString::number(QChar(data.at(15)).unicode())
+                             +":"
+                             + QString::number(QChar(data.at(16)).unicode())
+                             +":"
+                             + QString::number(QChar(data.at(17)).unicode());
+            qDebug() << localMACAddr1_;
 
-
-
-//}
+            QString localIp2_  = QString::number(QChar(data.at(18)).unicode())
+                                +"."
+                                + QString::number(QChar(data.at(19)).unicode())
+                                +"."
+                                + QString::number(QChar(data.at(20)).unicode())
+                                +"."
+                                + QString::number(QChar(data.at(21)).unicode());
+            qDebug() << localIp2_;
+            //本地IP网关地址1
+            localGateway2_=   QString::number(QChar(data.at(22)).unicode())
+                             +"."
+                             + QString::number(QChar(data.at(23)).unicode())
+                             +"."
+                             + QString::number(QChar(data.at(24)).unicode())
+                             +"."
+                             + QString::number(QChar(data.at(25)).unicode());
+            qDebug() << localGateway2_;
+            //子网掩码1
+            localMask2_ =   QString::number(QChar(data.at(26)).unicode())
+                          +"."
+                          + QString::number(QChar(data.at(27)).unicode())
+                          +"."
+                          + QString::number(QChar(data.at(28)).unicode())
+                          +"."
+                          + QString::number(QChar(data.at(29)).unicode());
+            qDebug() << localMask2_;
+            //本地IPMAC地址1
+            localMACAddr2_=   QString::number(QChar(data.at(30)).unicode())
+                             +":"
+                             + QString::number(QChar(data.at(31)).unicode())
+                             +":"
+                             + QString::number(QChar(data.at(32)).unicode())
+                             +":"
+                             + QString::number(QChar(data.at(33)).unicode())
+                             +":"
+                             + QString::number(QChar(data.at(34)).unicode())
+                             +":"
+                             + QString::number(QChar(data.at(35)).unicode());
+            qDebug() << localMACAddr2_;
+            //八个字符添加到
+            auto i = 8;
+            QByteArray wifiBytes{};
+            while(i--)
+            {
+                wifiBytes.prepend(data.at(36+i));
+            }
+            localWifiName_  = QString::fromUtf8(wifiBytes);
+        }
+    }
+    else if(type == ProtocolManager::HandleWrite) {
+        //
+        qDebug() << "Handle Write: "<< data;
+    }
+}
 
 
 

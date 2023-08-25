@@ -75,7 +75,7 @@ ProtocolManager::ProtocolManager(QObject *parent)
     connect(this,&ProtocolManager::WaterLevelDeviceSig,waterLevelController_,&WaterLevelController::handleRecv);
     connect(this,&ProtocolManager::WaterPumpDeviceSig,waterPumpConrtroller_,&WaterPumpController::handleRecv);
     connect(this,&ProtocolManager::MainControlParaSig,mainOptController_,&MainOptController::handleRecv);
-    //connect(this,&ProtocolManager::LoaclNetParaSig,localNetParaController_,&LocalNetParaController::handleRecv);
+    connect(this,&ProtocolManager::LoaclNetParaSig,localNetParaController_,&LocalNetParaController::handleRecv);
     connect(this,&ProtocolManager::MqttParaSig,mqttParaController_,&MqttParaController::handleRecv);
     connect(this,&ProtocolManager::NetparaSig,netParaController_,&NetParaController::handleRecv);
     connect(this,&ProtocolManager::GasParaO2Sig,gasParaController_,&GasParaController::handleRecvO2);
@@ -243,8 +243,14 @@ void ProtocolManager::sendSignal(ReccType recvType,ControllerType type,QByteArra
     case GasParaO2Controller_t:
         emit GasParaO2Sig(recvType,data);
         break;
-    case GasParaH2SController_t:
+    case GasParaH2Controller_t:
         emit GasParaH2Sig(recvType,data);
+        break;
+    case GasParaCl2Controller_t:
+        emit GasParaCl2Sig(recvType,data);
+        break;
+    case GasParaH2SController_t:
+        emit GasParaH2SSig(recvType,data);
         break;
     case GasParaCH4Controller_t:
         emit GasParaCH4Sig(recvType,data);

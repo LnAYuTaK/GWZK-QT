@@ -9,7 +9,7 @@
 MainParaController::MainParaController(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->MainConParaSet())
-    ,address_("0000000000000000")
+    ,address_("")
     ,commType_(2)
     ,isEncrypted_(0)
     ,encrypType_(0)

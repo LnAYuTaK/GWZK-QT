@@ -16,17 +16,26 @@ class MainOptController : public QObject
     Q_OBJECT
 public:
     explicit MainOptController(QObject *parent = nullptr);
-    Q_PROPERTY(int   SysTime      READ SysTime      WRITE setSysTime)
-    Q_PROPERTY(int   SysOpsAble   READ SysOpsAble   WRITE setSysOpsAble)
+    Q_PROPERTY(QString   SysTime      READ SysTime     WRITE setSysTime    NOTIFY sysTimeChanged)
+    Q_PROPERTY(int       SysOpsAble   READ SysOpsAble  WRITE setSysOpsAble NOTIFY sysOpsAbleChanged)
 
-    int  SysTime(){return this->sysTime_;}
-    void setSysTime(int sysTime){this->sysTime_ = sysTime;}
-
+    QString SysTime(){return this->sysTime_;}
     int  SysOpsAble(){return this->sysOpsAble_;}
-    void setSysOpsAble(int sysOpsAble){this->sysOpsAble_ = sysOpsAble;}
+    void setSysTime(QString sysTime){
+        this->sysTime_ = sysTime;
+        emit sysTimeChanged(sysTime_);
+    }
+    void setSysOpsAble(int sysOpsAble){
+        this->sysOpsAble_ = sysOpsAble;
+        emit sysOpsAbleChanged(sysOpsAble_);
+    }
+    //系统状态设置
+    Q_INVOKABLE void setSysStateData();
+    //系统时间参数设置查询
+    Q_INVOKABLE void setSysTimeData();
+    Q_INVOKABLE void querySysTimeData();
 
-    Q_INVOKABLE void queryData();
-    Q_INVOKABLE void setData();
+
     //获取寄存器首地址
     QByteArray getMainOptReg(){
         return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
@@ -35,9 +44,13 @@ public:
 public slots:
     void handleRecv(ProtocolManager::ReccType type,QByteArray data);
 
+signals:
+    void sysTimeChanged(QString sysTime);
+    void sysOpsAbleChanged(int sysOpsAble);
+
 private:
     JsonFactGroup * regList_;
-    int          sysTime_;
+    QString         sysTime_;
     int          sysOpsAble_;
 
 };

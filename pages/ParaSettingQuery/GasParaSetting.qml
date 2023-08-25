@@ -27,7 +27,6 @@ Item {
             }
         }
     }
-
     function selectGasType(typename)
     {
         var temp = typename

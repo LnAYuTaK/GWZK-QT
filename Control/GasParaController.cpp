@@ -98,7 +98,7 @@ void GasPara::setData()
 
 GasParaController::GasParaController(QObject *parent)
     : QObject{parent}
-    ,gasO2_(new GasPara(O2,app()->paraFactMgr()->GasParaCO2()))
+    ,gasO2_(new GasPara(O2,app()->paraFactMgr()->GasParaO2()))
     ,gasH2_(new GasPara(H2,app()->paraFactMgr()->GasParaH2()))
     ,gasCl2_(new GasPara(Cl2,app()->paraFactMgr()->GasParaCl2()))
     ,gasH2S_(new GasPara(H2S,app()->paraFactMgr()->GasParaH2S()))
@@ -203,6 +203,7 @@ void GasParaController::recvSeleteType(GasType type,GasPara *target,QByteArray d
             gasCl2_->setKeepThresholdLimit((int)ProtocolManager::bytesToshort(resdata[7]));
             break;
         case H2S:
+             qDebug() << "Handle H2S1111: "<< data;
             gasH2S_->setUpThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[0]));
             gasH2S_->setLowThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[1]));
             gasH2S_->setUpThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[2]));
@@ -288,6 +289,7 @@ void GasParaController::handleRecvCl2(ProtocolManager::ReccType type,QByteArray 
 void GasParaController::handleRecvH2S(ProtocolManager::ReccType type,QByteArray data)
 {
     //读返回
+    qDebug() << "Handle H2S: "<< data;
     if(type == ProtocolManager::HandleRead) {
         recvSeleteType(H2S,gasH2S_,data);
     }
@@ -301,7 +303,7 @@ void GasParaController::handleRecvCH4(ProtocolManager::ReccType type,QByteArray 
 {
     //读返回
     if(type == ProtocolManager::HandleRead) {
-        recvSeleteType(H2S,gasH2S_,data);
+        recvSeleteType(CH4,gasCH4_,data);
     }
     else if(type == ProtocolManager::HandleWrite) {
         //
