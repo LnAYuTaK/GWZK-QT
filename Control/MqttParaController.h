@@ -13,18 +13,19 @@ class MqttParaController : public QObject
 {
     Q_OBJECT
 public:
+
     explicit MqttParaController(QObject *parent = nullptr);
     //mqttip地址
-    Q_PROPERTY(QString MqttIp   READ MqttIp  WRITE setMqttIp)
+    Q_PROPERTY(QString MqttIp         READ MqttIp        WRITE setMqttIp        NOTIFY MqttIpChanged)
     //mqttIP端口号
-    Q_PROPERTY(int MqttPort   READ MqttPort  WRITE setMqttPort)
+    Q_PROPERTY(int MqttPort           READ MqttPort      WRITE setMqttPort      NOTIFY MqttPortChanged)
     //MqttclientIP
-    Q_PROPERTY(QString MqttClientId   READ MqttClientId  WRITE setMqttClientId)
+    Q_PROPERTY(QString MqttClientId   READ MqttClientId  WRITE setMqttClientId  NOTIFY MqttMqttClientIdChanged)
     //Mqtt用户名
-    Q_PROPERTY(QString MqttUserName   READ MqttUserName  WRITE setMqttUserName)
+    Q_PROPERTY(QString MqttUserName   READ MqttUserName  WRITE setMqttUserName  NOTIFY MqttUserNameChanged)
     //Mqtt密码
-    Q_PROPERTY(QString MqttPasswd   READ MqttPasswd  WRITE setMqttPasswd)
-
+    Q_PROPERTY(QString MqttPasswd     READ MqttPasswd    WRITE setMqttPasswd    NOTIFY MqttPasswdChanged)
+    //FUNCTION
     Q_INVOKABLE void setData();
     Q_INVOKABLE void queryData();
     //read
@@ -34,18 +35,39 @@ public:
     QString MqttUserName(){return mqttUserName_;}
     QString MqttPasswd(){return mqttPasswd_;}
     //set
-    void setMqttIp(QString mqtt_ip){mqttIp_ = mqtt_ip;}
-    void setMqttPort(int mqtt_port){mqttPort_ =  mqtt_port ;}
-    void setMqttClientId(QString mqtt_clientid){mqttClientId_ = mqtt_clientid;}
-    void setMqttUserName(QString mqtt_username){mqttUserName_ = mqtt_username;}
-    void setMqttPasswd(QString mqtt_passwd){this->mqttPasswd_ = mqtt_passwd;}
-
+    void setMqttIp(QString mqtt_ip){
+        mqttIp_ = mqtt_ip;
+        emit MqttIpChanged(mqttIp_);
+    }
+    void setMqttPort(int mqtt_port){
+        mqttPort_ =  mqtt_port ;
+        emit MqttPortChanged(mqttPort_);
+    }
+    void setMqttClientId(QString mqtt_clientid){
+        mqttClientId_ = mqtt_clientid;
+        emit MqttMqttClientIdChanged(mqttClientId_);
+    }
+    void setMqttUserName(QString mqtt_username){
+        mqttUserName_ = mqtt_username;
+        emit MqttUserNameChanged(mqttUserName_);
+    }
+    void setMqttPasswd(QString mqtt_passwd){
+        mqttPasswd_ = mqtt_passwd;
+        emit  MqttPasswdChanged(mqttPasswd_);
+    }
     QByteArray getMqttParaReg(){
         return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
     }
 
 public slots:
     void handleRecv(ProtocolManager::ReccType type,QByteArray data);
+
+signals:
+    void MqttIpChanged(QString mqttIp);
+    void MqttPortChanged(int mqttPort);
+    void MqttMqttClientIdChanged(QString mqttClientid);
+    void MqttUserNameChanged(QString mqttUsername);
+    void MqttPasswdChanged(QString mqttPasswd);
 private:
     JsonFactGroup *regList_;
     QString mqttIp_;

@@ -74,7 +74,8 @@ ProtocolManager::ProtocolManager(QObject *parent)
     connect(this,&ProtocolManager::TunnelFunDevSig,tunnelFanDevControl_,&TunnelFanDevControl::handleRecv);
     connect(this,&ProtocolManager::WaterLevelDeviceSig,waterLevelController_,&WaterLevelController::handleRecv);
     connect(this,&ProtocolManager::WaterPumpDeviceSig,waterPumpConrtroller_,&WaterPumpController::handleRecv);
-    connect(this,&ProtocolManager::MainControlParaSig,mainOptController_,&MainOptController::handleRecv);
+    connect(this,&ProtocolManager::MainControlOptsSig,mainOptController_,&MainOptController::handleRecv);
+    connect(this,&ProtocolManager::MainControlParaSig,mainParaController_,&MainParaController::handleRecv);
     connect(this,&ProtocolManager::LoaclNetParaSig,localNetParaController_,&LocalNetParaController::handleRecv);
     connect(this,&ProtocolManager::MqttParaSig,mqttParaController_,&MqttParaController::handleRecv);
     connect(this,&ProtocolManager::NetparaSig,netParaController_,&NetParaController::handleRecv);
@@ -238,7 +239,7 @@ void ProtocolManager::sendSignal(ReccType recvType,ControllerType type,QByteArra
         emit MqttParaSig(recvType,data);
         break;
     case MainOptController_t:
-        emit MainControlParaSig(recvType,data);
+        emit MainControlOptsSig(recvType,data);
         break;
     case GasParaO2Controller_t:
         emit GasParaO2Sig(recvType,data);

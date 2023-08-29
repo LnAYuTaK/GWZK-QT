@@ -9,15 +9,15 @@
 NetParaController::NetParaController(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->NetParaSet())
-    ,masterIp_("0.0.0.0")
-    ,masterPort_(0)
-    ,linkType_(0)
+    ,masterIp_("")
+    ,masterPort_()
+    ,linkType_("TCP")
     ,simApn_("")
     ,simUserName_("")
     ,simPasswd_("")
-    ,alternateIp_("0.0.0.0")
-    ,alternatePort_(0)
-    ,alternateLinktype_(0)
+    ,alternateIp_("")
+    ,alternatePort_()
+    ,alternateLinktype_("TCP")
 {
 
 }
@@ -45,7 +45,14 @@ void NetParaController::setData()
         //端口2字节
         QByteArray port       = ProtocolManager::intToHexByteArray(masterPort_);
         //链接方式2字节
-        QByteArray linktype   = ProtocolManager::intToHexByteArray(linkType_);
+        int linktypeInt  =0;
+        if(linkType_ == "TCP"){
+            linktypeInt = 0;
+        }
+        else if(linkType_ == "UDP"){
+            linktypeInt = 1;
+        }
+        QByteArray linktype   = ProtocolManager::intToHexByteArray(linktypeInt);
         //SIM卡APN32字节(不够自动补0)
         QByteArray simApSource = simApn_.toLatin1();
         QByteArray simApn(32, '\x00');
@@ -63,7 +70,14 @@ void NetParaController::setData()
         //备用端口地址 2字节
         QByteArray alternatePort =ProtocolManager::intToHexByteArray(alternatePort_);
         //备用连接方式 2字节
-        QByteArray alternateLinktype = ProtocolManager::intToHexByteArray(alternateLinktype_);
+        int altlinktypeInt  =0;
+        if(alternateLinktype_ == "TCP"){
+            altlinktypeInt = 0;
+        }
+        else if(alternateLinktype_ == "UDP"){
+            altlinktypeInt = 1;
+        }
+        QByteArray alternateLinktype = ProtocolManager::intToHexByteArray(altlinktypeInt);
         //数据包总共 112字节
         QByteArray packData = ipAdd1Data +
                         port +
@@ -84,8 +98,66 @@ void NetParaController::setData()
 void NetParaController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
 {
     if(type == ProtocolManager::HandleRead) {
-        qDebug() << data.size();
-        qDebug() << data;
+       //解析IP地址
+        QString masterIp = QString::number(QChar(data.at(0)).unicode())
+                    +"."
+                    + QString::number(QChar(data.at(1)).unicode())
+                    +"."
+                    + QString::number(QChar(data.at(2)).unicode())
+                    +"."
+                    + QString::number(QChar(data.at(3)).unicode());
+        //qDebug() << masterIp;
+        setMasterIp(masterIp);
+        QByteArray portdata{};
+        portdata.append(data.at(4)).append(data.at(5));
+        setMasterPort(portdata.toHex().toInt(nullptr,16));
+        QByteArray linktypedata{};
+        linktypedata.append(data.at(6)).append(data.at(7));
+        int linktypeInt = linktypedata.toHex().toInt(nullptr,16);
+        if(linktypeInt == 0){
+            setLinkType(QString("TCP"));
+        }
+        else if(linktypeInt == 1){
+            setLinkType(QString("UDP"));
+        }
+        //SIM卡APN 32字节
+        QByteArray APN = data.mid(8,32);
+        qDebug() << QString(APN);
+        setSIMAPN(APN);
+        //SIM卡用户名 32字节
+        QByteArray UserName = data.mid(8+32,32);
+        qDebug() << QString(UserName);
+        setSIMUserName(UserName);
+        //SIM卡密码 32字节
+        QByteArray Passwd= data.mid(8+32+32,32);
+        qDebug() << QString(Passwd);
+        setSIMPasswd(Passwd);
+        //备用地址
+        QString altIp= QString::number(QChar(data.at(8+32+32+32)).unicode())
+                           +"."
+                           + QString::number(QChar(data.at(8+32+32+32+1)).unicode())
+                           +"."
+                           + QString::number(QChar(data.at(8+32+32+32+2)).unicode())
+                           +"."
+                           + QString::number(QChar(data.at(8+32+32+32+3)).unicode());
+        qDebug() << altIp;
+        setAlternateIp(altIp);
+        //备用端口 2字节
+        QByteArray altportdata{};
+        altportdata.append(data.at(8+32+32+32+3+1)).append(data.at(8+32+32+32+3+2));
+        setAlternatePort(altportdata.toHex().toInt(nullptr,16));
+        qDebug() << altportdata.toHex().toInt(nullptr,16);
+        //备用链接方式 2字节
+        QByteArray altlinktype{};
+        altlinktype.append(data.at(8+32+32+32+3+3)).append(data.at(8+32+32+32+3+4));
+        qDebug() << altlinktype.toHex().toInt(nullptr,16);
+        int altlinktypeInt = altlinktype.toHex().toInt(nullptr,16);
+        if(altlinktypeInt  == 0){
+            setAlternateLinktype(QString("TCP"));
+        }
+        else if(altlinktypeInt  == 1){
+            setAlternateLinktype(QString("UDP"));
+        }
     }
     else if(type == ProtocolManager::HandleWrite) {
         //

@@ -44,7 +44,6 @@ Item {
                                 }
                             }
                             text:App.protoManager.MainOptCtrl.SysTime
-
                         }
                     }
                     //时间查询

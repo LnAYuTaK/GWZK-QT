@@ -127,13 +127,13 @@ public:
 
     //将协议内所有数据拼接成quint16返回
     static QVector<quint16> getProtocolData(QByteArray data);
-
     //处理 网络参数字符串
     static QByteArray ParseNetLocalString(ParaType type,QString paraStr);
     //设置当前查询状态
     void setNowType(ControllerType type){ nowType_= type;}
     //拼接QByteAray
     static QVector<qint16>ByteArrayToIntVec(QByteArray byteArray);
+
     static QVector<QByteArray> SpiltData(QByteArray byteArray);
     //大端模式 TODO
     static short bytesToshort(QByteArray bytes)

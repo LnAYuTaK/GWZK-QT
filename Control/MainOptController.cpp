@@ -16,7 +16,6 @@ MainOptController::MainOptController(QObject *parent)
 {
 
 }
-
 //设置系统状态
 void MainOptController::setSysStateData()
 {
@@ -82,6 +81,7 @@ void MainOptController::handleRecv(ProtocolManager::ReccType type,QByteArray dat
         if(data.size()==6) {
             QByteArray  time = data.left(4);
             sysTime_  = time.toHex().toInt(nullptr, 16);
+            setSysTime(QString(sysTime_));
         }
     }
     else if(type == ProtocolManager::HandleWrite) {

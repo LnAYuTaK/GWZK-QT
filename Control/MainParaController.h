@@ -17,27 +17,27 @@ public:
     //地址
     Q_PROPERTY(QString address     READ address     WRITE setAddress     NOTIFY addressChanged)
     //通讯方式
-    Q_PROPERTY(int  commType       READ commType    WRITE setCommType    NOTIFY commTypeChanged)
+    Q_PROPERTY(QString commType    READ commType    WRITE setCommType    NOTIFY commTypeChanged)
     //是否加密
     Q_PROPERTY(int encrypted       READ encrypted   WRITE setEncrypt     NOTIFY encryptedChanged)
     //加密类型
-    Q_PROPERTY(int encrypType      READ encrypType  WRITE setEncrypType  NOTIFY encrypTypeChanged)
+    Q_PROPERTY(QString encrypType  READ encrypType  WRITE setEncrypType  NOTIFY encrypTypeChanged)
     //软件版本地址
     Q_PROPERTY(QString softVersion READ softVersion WRITE setSoftVersion NOTIFY softVersionChanged)
     //read
     QString address ()const{return  address_;}
-    int     commType()const{return commType_;}
+    QString commType()const{return commType_;}
     int     encrypted(){return isEncrypted_;}
-    int     encrypType (){return encrypType_;}
+    QString encrypType (){return encrypType_;}
     QString softVersion(){return softVersion_;}
     //Set
     void    setAddress(QString address){
         this->address_ = address;
         emit addressChanged(address_);
     }
-    void    setCommType(int commType) {
+    void    setCommType(QString commType) {
         this->commType_ = commType;
-
+        emit commTypeChanged(commType_);
     }
     void    setSoftVersion(QString softVersion){
         this->softVersion_ = softVersion;
@@ -45,9 +45,11 @@ public:
     }
     void    setEncrypt(int isEncrypted) {
         this->isEncrypted_ = isEncrypted;
+        emit encryptedChanged(isEncrypted_);
     }
-    void    setEncrypType(int encrypType) {
+    void    setEncrypType(QString encrypType) {
         this->encrypType_ = encrypType;
+        emit  encrypTypeChanged(encrypType_);
     }
     //
     Q_INVOKABLE void setData();
@@ -60,16 +62,16 @@ public slots:
     void handleRecv(ProtocolManager::ReccType type,QByteArray data);
 signals:
     void  addressChanged(QString address);
-    void  commTypeChanged(int commType);
+    void  commTypeChanged(QString commType);
     void  encryptedChanged(int isEncrypted);
-    void  encrypTypeChanged(int encrypType);
+    void  encrypTypeChanged(QString encrypType);
     void  softVersionChanged(QString softVersion);
 private:
     JsonFactGroup *regList_;
     QString        address_;
-    int            commType_;
+    QString        commType_;
     int            isEncrypted_;
-    int            encrypType_;
+    QString        encrypType_;
     QString        softVersion_;
 
 };

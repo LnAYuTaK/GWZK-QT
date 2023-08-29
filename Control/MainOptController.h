@@ -34,16 +34,12 @@ public:
     //系统时间参数设置查询
     Q_INVOKABLE void setSysTimeData();
     Q_INVOKABLE void querySysTimeData();
-
-
     //获取寄存器首地址
     QByteArray getMainOptReg(){
         return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
     }
-
 public slots:
     void handleRecv(ProtocolManager::ReccType type,QByteArray data);
-
 signals:
     void sysTimeChanged(QString sysTime);
     void sysOpsAbleChanged(int sysOpsAble);

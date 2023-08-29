@@ -5,12 +5,11 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 #include "appSrc/NetWorkManager.h"
-#include "appSrc/Utils.h"
 MqttParaController::MqttParaController(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->MqttParaSet())
-    ,mqttIp_("0.0.0.0")
-    ,mqttPort_(0)
+    ,mqttIp_("")
+    ,mqttPort_()
     ,mqttClientId_("")
     ,mqttUserName_("")
     ,mqttPasswd_("")
@@ -67,17 +66,30 @@ void MqttParaController::setData()
 void MqttParaController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
 {
     if(type == ProtocolManager::HandleRead) {
-         QDataStream dataStream(&data, QIODevice::ReadOnly);
-         QVector<quint16> quint16Array;
-         while (!dataStream.atEnd()) {
-             quint16 value;
-             dataStream >> value;
-             quint16Array.append(value);
-         }
-         for(auto i :quint16Array)
-         {
-             qDebug() << i;
-         }
+
+        //MQTT IP地址
+        mqttIp_ =   QString::number(QChar(data.at(0)).unicode())
+                     +"."
+                     + QString::number(QChar(data.at(1)).unicode())
+                     +"."
+                     + QString::number(QChar(data.at(2)).unicode())
+                     +"."
+                     + QString::number(QChar(data.at(3)).unicode());
+        qDebug() << mqttIp_;
+        setMqttIp(mqttIp_);
+        QByteArray portdata{};
+        portdata.append(data.at(4)).append(data.at(5));
+        setMqttPort(portdata.toHex().toInt(nullptr,16));
+        //32字节 客户端ID
+        QByteArray ClientId = data.mid(6,32);
+        setMqttClientId(QString(ClientId));
+        //32字节 用户名
+        QByteArray UserName = data.mid(6+32,32);
+        setMqttUserName(QString(UserName));
+        //32字节 密码
+        QByteArray Passwd= data.mid(6+32+32,32);
+        setMqttPasswd(QString(Passwd));
+
     }
     else if(type == ProtocolManager::HandleWrite) {
          //

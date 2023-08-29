@@ -58,7 +58,6 @@ void LocalNetParaController::setData()
         auto mask2Data    =  ProtocolManager::ParseNetLocalString(ProtocolManager::Mask,localMask2_);
         //IPMAC地址 6字节(暂时不需要)
         QByteArray ip2Mac(6,'\x00');
-//        auto macAddr2Data  = ProtocolManager::ParseNetLocalString(ProtocolManager::MACAddr,localMACAddr2_);
         //wifi名 8字节(不够自动补0)
         QByteArray wifiNameSource = localWifiName_.toLatin1();
         QByteArray wifiName(8,'\x00');

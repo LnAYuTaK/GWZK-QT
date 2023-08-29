@@ -47,6 +47,7 @@ Item {
                                     App.protoManager.localNetParaController.LocalIp1 = text
                                 }
                             }
+                            text:App.protoManager.localNetParaController.LocalIp1
                         }
                     }
                     RowLayout{
@@ -71,6 +72,7 @@ Item {
                                     App.protoManager.localNetParaController.LocalGateway1 = text
                                 }
                             }
+                            text:App.protoManager.localNetParaController.LocalGateway1
                         }
                     }
                     RowLayout{
@@ -95,6 +97,7 @@ Item {
                                   App.protoManager.localNetParaController.LocalMask1 = text
                               }
                           }
+                          text:App.protoManager.localNetParaController.LocalMask1
                         }
                     }
                     RowLayout{
@@ -119,6 +122,7 @@ Item {
                                     App.protoManager.localNetParaController.LocalMACAddr1 = text
                                 }
                             }
+                            text:App.protoManager.localNetParaController.LocalMACAddr1
                         }
                     }
                     RowLayout{
@@ -141,6 +145,7 @@ Item {
                                    App.protoManager.localNetParaController.LocalWifiName = text
                                 }
                             }
+                            text:App.protoManager.localNetParaController.LocalWifiName
                         }
                     }
                     RowLayout{
@@ -165,6 +170,7 @@ Item {
                                     App.protoManager.localNetParaController.LocalIp2 = text
                                 }
                             }
+                            text:App.protoManager.localNetParaController.LocalIp2
                         }
                     }
                     RowLayout{
@@ -190,6 +196,7 @@ Item {
                                     App.protoManager.localNetParaController.LocalGateway2 = text
                                 }
                             }
+                            text:App.protoManager.localNetParaController.LocalGateway2
                         }
                     }
                     RowLayout{
@@ -214,6 +221,7 @@ Item {
                                     App.protoManager.localNetParaController.LocalMask2 = text
                                 }
                             }
+                            text:App.protoManager.localNetParaController.LocalMask2
                         }
                     }
                     RowLayout{
@@ -238,6 +246,7 @@ Item {
                                     App.protoManager.localNetParaController.LocalMACAddr2 = text
                                 }
                             }
+                            text:App.protoManager.localNetParaController.LocalMACAddr2
                         }
                     }
                     RowLayout{

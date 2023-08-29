@@ -1,4 +1,4 @@
-import QtQuick 2.14
+﻿import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
@@ -47,6 +47,8 @@ Item {
                                    App.protoManager.MqttParaCtrl.MqttIp = text
                                 }
                             }
+                            text : App.protoManager.MqttParaCtrl.MqttIp
+
                         }
                     }
                     RowLayout{
@@ -72,6 +74,7 @@ Item {
                                     App.protoManager.MqttParaCtrl.MqttPort = text
                                 }
                             }
+                            text : App.protoManager.MqttParaCtrl.MqttPort
                         }
                     }
                     RowLayout{
@@ -94,6 +97,7 @@ Item {
                                    App.protoManager.MqttParaCtrl.MqttClientId = text
                                 }
                             }
+                            text: App.protoManager.MqttParaCtrl.MqttClientId
                         }
                     }
                     RowLayout{
@@ -116,6 +120,7 @@ Item {
                                     App.protoManager.MqttParaCtrl.MqttUserName = text
                                 }
                             }
+                            text: App.protoManager.MqttParaCtrl.MqttUserName
                         }
                     }
                     RowLayout{
@@ -138,6 +143,7 @@ Item {
                                     App.protoManager.MqttParaCtrl.MqttPasswd = text
                                 }
                             }
+                            text:App.protoManager.MqttParaCtrl.MqttPasswd
                         }
                     }
                     RowLayout{
@@ -148,7 +154,8 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked: {
-
+                                App.protoManager.MqttParaCtrl.queryData()
+                            }
                         }
                         Rectangle {
                              width: 200
@@ -164,16 +171,16 @@ Item {
                                      &&clientId.acceptableInput
                                      &&username.acceptableInput
                                      &&passwd.acceptableInput))
-                                     {
+                                    {
                                           message("error","格式设置错误")
                                           return
-                                     }
-                                     else
-                                     {
+                                    }
+                                    else
+                                    {
                                        App.protoManager.netParaController.setData()
-                                     }
-                                }
+                                    }
                             }
+
                         }
                     }
                     //填充最底部

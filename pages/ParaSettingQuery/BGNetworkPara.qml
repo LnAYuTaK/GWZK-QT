@@ -1,4 +1,4 @@
-import QtQuick 2.14
+﻿import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
@@ -32,7 +32,6 @@ Item {
                             text:qsTr("主站IP地址")
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
-
                             Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
                         }
                         BaseTextField{
@@ -49,6 +48,7 @@ Item {
                                   App.protoManager.netParaController.MasterIp = text
                               }
                           }
+                          text:App.protoManager.netParaController.MasterIp
                         }
                     }
                     RowLayout{
@@ -74,13 +74,14 @@ Item {
                                     App.protoManager.netParaController.MasterPort = text
                                 }
                             }
+                            text:App.protoManager.netParaController.MasterPort
                         }
                     }
                     RowLayout{
                         spacing:20
                         Layout.fillWidth: true
                         YaheiText {
-                            text:qsTr("通信方式")
+                            text:qsTr("主站连接方式")
                             Layout.preferredWidth: leftWidth
                             font.pixelSize: fontsize
                             Layout.alignment: Qt.AlignTop |Qt.AlignLeft
@@ -88,13 +89,14 @@ Item {
                         BaseComboBox{
                           Layout.preferredWidth:120
                           Layout.preferredHeight: 45
-                          model: ["UDP", "TCP"]
-                          onCurrentIndexChanged: {
-                              App.protoManager.netParaController.LinkType = currentIndex
+                          model: ["TCP","UDP"]
+                          onCurrentTextChanged: {
+                              App.protoManager.netParaController.LinkType = currentText
                           }
                         }
                         BaseTextField{
                           Layout.preferredWidth:140
+                          text:App.protoManager.netParaController.LinkType
                         }
                     }
                     RowLayout{
@@ -115,11 +117,11 @@ Item {
                               regExp: /^[a-zA-Z0-9]*$/ // 只允许输入字母和数字
                           }
                           onEditingFinished: {
-                              if(acceptableInput)
-                              {
+                              if(acceptableInput){
                                  App.protoManager.netParaController.SIMAPN = text
                               }
                           }
+                          text:App.protoManager.netParaController.SIMAPN
                         }
                     }
                     RowLayout{
@@ -139,11 +141,11 @@ Item {
                                 regExp: /^[a-zA-Z0-9]*$/ // 只允许输入字母和数字
                             }
                             onEditingFinished: {
-                                if(acceptableInput)
-                                {
+                                if(acceptableInput){
                                    App.protoManager.netParaController.SIMUserName = text
                                 }
                             }
+                            text:App.protoManager.netParaController.SIMUserName
 
                         }
                     }
@@ -169,6 +171,7 @@ Item {
                                    App.protoManager.netParaController.SIMPasswd = text
                                 }
                             }
+                            text:App.protoManager.netParaController.SIMPasswd
                         }
                     }
                     RowLayout{
@@ -194,6 +197,7 @@ Item {
                                     App.protoManager.netParaController.AlternateIp = text
                                 }
                             }
+                            text:App.protoManager.netParaController.AlternateIp
                         }
                     }
                     RowLayout{
@@ -219,6 +223,7 @@ Item {
                                     App.protoManager.netParaController.AlternatePort = text
                                 }
                             }
+                            text:App.protoManager.netParaController.AlternatePort
                         }
                     }
                     RowLayout{
@@ -233,14 +238,15 @@ Item {
                         BaseComboBox{
                           Layout.preferredWidth:120
                           Layout.preferredHeight: 45
-                          model: ["UDP", "TCP"]
-                          onCurrentIndexChanged: {
-                              App.protoManager.netParaController.AlternateLinktype = currentIndex
+                          model: [ "TCP","UDP"]
+                          onCurrentTextChanged: {
+                              App.protoManager.netParaController.AlternateLinktype = currentText
                           }
                         }
                         BaseTextField{
                           readOnly: true
                           Layout.preferredWidth:140
+                          text:App.protoManager.netParaController.AlternateLinktype
                         }
                     }
                     RowLayout{

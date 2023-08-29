@@ -1,4 +1,4 @@
-import QtQuick 2.14
+﻿import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.14
@@ -14,6 +14,7 @@ Item {
     id:root
     property int leftWidth: 182
     property int fontsize: 19
+
     ScrollView {
         id:flickable
         anchors.fill: parent
@@ -35,7 +36,7 @@ Item {
                         BaseCheckBox{
                             id  :checkbox
                             onClicked: {
-                              App.protoManager.mainParaController.encrypType = checkState
+                                  App.protoManager.mainParaController.encrypted= checkState
                             }
                         }
                         YaheiText {
@@ -46,15 +47,16 @@ Item {
                         BaseComboBox{
                           Layout.preferredWidth:120
                           Layout.preferredHeight: 40
-                          model: ["南瑞", "中电普华","SD卡加密","其他"]
-                          onCurrentIndexChanged: {
-                            App.protoManager.mainParaController.encrypType = currentIndex
+                          model: ["南瑞", "中普","SD卡加密","其他"]
+                           onCurrentTextChanged: {
+                            App.protoManager.mainParaController.encrypType = currentText
                           }
                           enabled: checkbox.checkState
                         }
                         BaseTextField{
                             readOnly: true
                             Layout.preferredWidth:140
+                            text: App.protoManager.mainParaController.encrypType
                         }
                     }
                     RowLayout{
@@ -69,13 +71,14 @@ Item {
                           Layout.preferredWidth:120
                           Layout.preferredHeight: 40
                           model: ["GPRS", "本地串口","本地网络","其他"]
-                          onCurrentIndexChanged: {
-                              App.protoManager.mainParaController.encrypType= currentIndex
+                           onCurrentTextChanged: {
+                              App.protoManager.mainParaController.commType = currentText
                           }
                         }
                         BaseTextField{
                             readOnly:  true
                             Layout.preferredWidth:140
+                            text:App.protoManager.mainParaController.commType
                         }
                     }
                     RowLayout{
@@ -96,6 +99,7 @@ Item {
                             onTextChanged: {
                                 App.protoManager.mainParaController.address = text
                             }
+                            text : App.protoManager.mainParaController.address
                         }
                     }
                     RowLayout{
@@ -109,6 +113,7 @@ Item {
                         BaseTextField{
                             readOnly: true
                             Layout.preferredWidth:280
+                            text: App.protoManager.mainParaController.softVersion
                         }
                     }
                     RowLayout{
@@ -131,7 +136,7 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked:{
-                                if(mainControlField.text.length <16)
+                                if(!(mainControlField.acceptableInput))
                                 {
                                    message("error","主控地址设置错误")
                                    return

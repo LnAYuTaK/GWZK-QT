@@ -10,8 +10,8 @@ TunnelFanDevControl::TunnelFanDevControl(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->TunnelFan())
     ,count_(0)
-    ,format_(0)
-    ,address_("0000000000000000")
+    ,format_("递增")
+    ,address_("")
 {
 
 }
@@ -36,7 +36,14 @@ void TunnelFanDevControl::setData()
         //地址 17字节
         QByteArray addressData = QByteArray(address_.toUtf8())+QByteArray(1, '\x00');
         //格式 2字节
-        auto formatData = ProtocolManager::intToHexByteArray(format_);
+        int format = 0;
+        if(format_ == "递增"){
+            format=0;
+        }
+        else if(format_ == "相同"){
+            format=0;
+        }
+        auto formatData = ProtocolManager::intToHexByteArray(format);
         //数量 2字节
         auto countData = ProtocolManager::intToHexByteArray(count_);
         //备用字节 4字节
@@ -57,7 +64,30 @@ void TunnelFanDevControl::handleRecv(ProtocolManager::ReccType type,QByteArray d
 {
     if(type == ProtocolManager::HandleRead) {
         qDebug() << data.size();
-        qDebug() << data;
+       //风机ID 地址 18 字节
+        QByteArray address = data.left(18);
+        setAddress(QString::fromUtf8(address));
+        //ID地址格式 2字节
+        QByteArray formatdata{};
+        int format = 0;
+        formatdata.append(data.at(18)).append(data.at(19));
+        format = formatdata.toHex().toInt(nullptr,16);
+        qDebug() << format;
+        if(format  == 0){
+            setFormat(QString("递增").toLocal8Bit());
+        }
+        else if(format  == 1){
+            setFormat(QString("递减").toLocal8Bit());
+        }
+        //数量 2字节
+        QByteArray countdata{};
+        int count = 0;
+        countdata.append(data.at(20)).append(data.at(21));
+        count =  countdata.toHex().toInt(nullptr,16);
+        setCount(count);
+        qDebug() << count_;
+        qDebug() << format_;
+        qDebug() << address_;
     }
     else if(type == ProtocolManager::HandleWrite) {
         //
