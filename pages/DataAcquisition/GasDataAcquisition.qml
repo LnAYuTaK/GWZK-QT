@@ -17,26 +17,21 @@ Item {
         clip:         true
         ScrollBar.vertical.interactive: true
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-        property var strArray:[]
                 ColumnLayout {
                     id: contents
                     anchors.margins: 30
                     anchors.fill: parent
                     spacing: 20
-                    Repeater{
-                        id:repeater
-                        model: ["O2","CO","H2", "Cl2","H2S","CO2","CH4","温度","环境"]
-                        delegate:RowLayout{
+                    RowLayout{
                             spacing:10
                             Layout.fillWidth: true
                             YaheiText {
-                                text:qsTr(modelData)
+                                text:qsTr("O2")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
                             }
                             BaseTextField{
-                                id:dataField
                                 readOnly: true
                                 Layout.preferredWidth:100
                             }
@@ -47,27 +42,241 @@ Item {
                                 Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
                             }
                             BaseTextField{
-                                id:lecelField
                                 readOnly: true
                                 Layout.preferredWidth:100
                             }
                         }
-                    }
-                    BaseButton {
-                        text: qsTr("查询")
-                        font.pixelSize:  20
-                        backRadius: 4
-                        bckcolor: "#4785FF"
-                        onClicked: {
-                               App.protoManager.tunnelGasData.queryData()
+                    RowLayout{
+                            spacing:10
+                            Layout.fillWidth: true
+                            YaheiText {
+                                text:qsTr("CO")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                            YaheiText {
+                                text:qsTr("报警等级")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
                         }
+                    RowLayout{
+                            spacing:10
+                            Layout.fillWidth: true
+                            YaheiText {
+                                text:qsTr("Cl2")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                            YaheiText {
+                                text:qsTr("报警等级")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                        }
+                    RowLayout{
+                            spacing:10
+                            Layout.fillWidth: true
+                            YaheiText {
+                                text:qsTr("H2S")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                            YaheiText {
+                                text:qsTr("报警等级")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                        }
+                    RowLayout{
+                            spacing:10
+                            Layout.fillWidth: true
+                            YaheiText {
+                                text:qsTr("H2")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                            YaheiText {
+                                text:qsTr("报警等级")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                        }
+                    RowLayout{
+                            spacing:10
+                            Layout.fillWidth: true
+                            YaheiText {
+                                text:qsTr("CO2")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                            YaheiText {
+                                text:qsTr("报警等级")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                        }
+                    RowLayout{
+                            spacing:10
+                            Layout.fillWidth: true
+                            YaheiText {
+                                text:qsTr("CO2")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                            YaheiText {
+                                text:qsTr("报警等级")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                        }
+                    RowLayout{
+                            spacing:10
+                            Layout.fillWidth: true
+                            YaheiText {
+                                text:qsTr("CH4")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                            YaheiText {
+                                text:qsTr("报警等级")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                        }
+                    RowLayout{
+                            spacing:10
+                            Layout.fillWidth: true
+                            YaheiText {
+                                text:qsTr("环境温度")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                            YaheiText {
+                                text:qsTr("报警等级")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                        }
+                    RowLayout{
+                            spacing:10
+                            Layout.fillWidth: true
+                            YaheiText {
+                                text:qsTr("环境湿度")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                            YaheiText {
+                                text:qsTr("报警等级")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
+                            }
+                            BaseTextField{
+                                readOnly: true
+                                Layout.preferredWidth:100
+                            }
+                        }
+                        BaseButton {
+                            text: qsTr("查询")
+                            font.pixelSize:  20
+                            backRadius: 4
+                            bckcolor: "#4785FF"
+                            onClicked: {
+                                   App.protoManager.tunnelGasData.queryData()
+                            }
+                        }
+                        Rectangle {
+                             width: parent.width
+                             height: 10
+                         }
+
                     }
-                    //填充最底部
-                    Rectangle {
-                         width: parent.width
-                         height: 10
-                     }
-                }
     }
     Item {
         Layout.fillHeight: true

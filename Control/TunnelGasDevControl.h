@@ -10,32 +10,49 @@
 #include  "appSrc/ParaFactManager.h"
 #include "appSrc/Application.h"
 #include "appSrc/ProtocolManager.h"
+//装置列表 隧道气体
 class TunnelGasDevControl : public QObject
 {
     Q_OBJECT
 public:
     explicit TunnelGasDevControl(QObject *parent = nullptr);
     //数量
-    Q_PROPERTY(int count       READ count    WRITE setCount)
+    Q_PROPERTY(int count       READ count    WRITE setCount   NOTIFY countChanged)
     //周期
-    Q_PROPERTY(int cycle       READ cycle    WRITE setCycle)
+    Q_PROPERTY(int cycle       READ cycle    WRITE setCycle   NOTIFY cycleChanged)
     //通道
-    Q_PROPERTY(int channel     READ channel  WRITE setChannel)
+    Q_PROPERTY(int channel     READ channel  WRITE setChannel NOTIFY channelChanged)
     //地址格式
-    Q_PROPERTY(int format      READ format   WRITE setFormat)
+    Q_PROPERTY(QString format  READ format   WRITE setFormat  NOTIFY formatChanged)
     //隧道气体地址
-    Q_PROPERTY(QString address READ address  WRITE setAddress)
-    //FUNCTION
+    Q_PROPERTY(QString address READ address  WRITE setAddress NOTIFY addressChanged)
+    //Read
     int  count() const {return count_;}
-    void setCount(int count) {this->count_ = count;}
     int  cycle()const {return cycle_;}
-    void setCycle(int cycle) {this->cycle_ = cycle;}
     int  channel()const {return channel_;}
-    void setChannel(int channel) {this->channel_= channel;}
-    int  format()const {return format_;}
-    void setFormat(int format){this->format_ = format;}
+    QString format()const {return format_;}
     QString address()const {return  address_;}
-    void setAddress(QString address) {this->address_ = address;}
+    //Set
+    void setCount(int count) {
+        this->count_ = count;
+        emit countChanged(count_);
+    }
+    void setCycle(int cycle) {
+        this->cycle_ = cycle;
+        emit cycleChanged(cycle_);
+    }
+    void setChannel(int channel) {
+        this->channel_= channel;
+        emit channelChanged(channel_);
+    }
+    void setFormat(QString format){
+        this->format_ = format;
+        emit formatChanged(format_);
+    }
+    void setAddress(QString address) {
+        this->address_ = address;
+        emit addressChanged(address_);
+    }
     //Function
     Q_INVOKABLE void setData();
     Q_INVOKABLE void queryData();
@@ -48,12 +65,18 @@ public:
 public slots:
     void handleRecv(ProtocolManager::ReccType type,QByteArray data);
 
+signals:
+    void countChanged   (int count);
+    void cycleChanged   (int cycle);
+    void channelChanged (int channel);
+    void formatChanged  (QString format);
+    void addressChanged (QString address);
 private:
     JsonFactGroup *regList_;
     int            count_;
     int            cycle_;
     int            channel_;
-    int            format_;
+    QString        format_;
     QString        address_;
 };
 

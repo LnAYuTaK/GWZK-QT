@@ -47,11 +47,12 @@ Item {
                                 }
                                 onEditingFinished: {
                                     //验证通过写入
-                                    if(acceptableInput)
-                                    {
-                                        App.protoManager.tunnelFanDevControl.count = text
+                                    if(acceptableInput){
+                                       App.protoManager.tunnelGasDevControl.count = text
                                     }
                                 }
+                                text:App.protoManager.tunnelGasDevControl.count
+
                             }
                         }
                         Row {
@@ -76,9 +77,10 @@ Item {
                                      //验证通过写入
                                      if(acceptableInput)
                                      {
-                                           App.protoManager.tunnelFanDevControl.cycle = text
+                                         App.protoManager.tunnelGasDevControl.cycle = text
                                      }
                                  }
+                                 text :App.protoManager.tunnelGasDevControl.cycle
                             }
                         }
                         Row {
@@ -103,9 +105,10 @@ Item {
                                     //验证通过写入
                                     if(acceptableInput)
                                     {
-                                         App.protoManager.tunnelFanDevControl.channel = text
+                                         App.protoManager.tunnelGasDevControl.channel = text
                                     }
                                 }
+                                text:App.protoManager.tunnelGasDevControl.channel
                             }
                         }
                     }
@@ -128,14 +131,16 @@ Item {
                           Layout.preferredWidth:120
                           Layout.preferredHeight: 40
                           model: ["递增", "相同"]
-                          onCurrentIndexChanged: {
-                             App.protoManager.tunnelFanDevControl.format = currentIndex
+                          onCurrentTextChanged: {
+                             App.protoManager.tunnelGasDevControl.format = currentText
                           }
                         }
                         BaseTextField{
                             readOnly: true
                             Layout.preferredWidth:140
+                            text: App.protoManager.tunnelGasDevControl.format
                         }
+
                     }
                     //编码
                     RowLayout{
@@ -150,7 +155,6 @@ Item {
                         BaseTextField{
                             id:address
                             Layout.preferredWidth:280
-                            maximumLength: 16
                             validator: RegExpValidator {
                                 regExp: /^[a-zA-Z0-9]*$/ // 只允许输入字母和数字
                             }
@@ -158,9 +162,10 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                  App.protoManager.tunnelFanDevControl.address = text
+                                  App.protoManager.tunnelGasDevControl.address = text
                                 }
                             }
+                            text: App.protoManager.tunnelGasDevControl.address
                         }
                     }
                     RowLayout{
@@ -171,7 +176,7 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked:{
-                                    App.protoManager.tunnelFanDevControl.queryData()
+                                    App.protoManager.tunnelGasDevControl.queryData()
                             }
                         }
                         Rectangle {
@@ -193,7 +198,7 @@ Item {
                                     return
                                 }
                                 else{
-                                    App.protoManager.tunnelFanDevControl.setData()
+                                    App.protoManager.tunnelGasDevControl.setData()
                                 }
 
                             }

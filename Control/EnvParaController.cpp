@@ -19,7 +19,6 @@ EnvPara::EnvPara(int type,JsonFactGroup *regList)
     ,lowThresholdLimitLevel3_(0)
     ,keepThresholdLimit_(0)
 {
-    qmlRegisterUncreatableType<EnvPara>   ("App.ProtocolManager", 1, 0,"EnvPara","Reference only");
 }
 
 void EnvPara::queryData()
@@ -92,7 +91,7 @@ EnvParaController::EnvParaController(QObject *parent)
     ,envHumidity_(new EnvPara(Humidity,app()->paraFactMgr()->EnvParaHumidity()))
     ,envWaterLevel_(new EnvPara(WaterLevel,app()->paraFactMgr()->EnvParaWaterLevel()))
 {
-
+   qmlRegisterUncreatableType<EnvPara>   ("App.ProtocolManager", 1, 0,"EnvPara","Reference only");
 }
 
 void EnvParaController::queryData(EnvType type)

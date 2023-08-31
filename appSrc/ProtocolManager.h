@@ -201,8 +201,41 @@ public:
         }
         return QChar(unicode);
     }
+    //获取QChar 某一位的bit值
+    static bool getBitValue(const QChar& ch, int bitIndex)
+    {
+        int unicode = ch.unicode();
+        int mask = 1 << bitIndex;  // 创建一个只有特定位为1的掩码
+        bool bitValue = (unicode & mask) != 0;  // 通过位运算获取特定位的值
+        return bitValue;
+    }
 
+    static int getBitValue(char c, int position) {
+        // 创建一个位掩码，只有目标位为1，其余位为0
+        char mask = 1 << position;
+        // 将位掩码与字符进行按位与操作
+        // 如果目标位为1，结果不为0；如果目标位为0，结果为0
+        return (c & mask) >> position;
+    }
+    static int getShortBitValue(short value, int position) {
+            short mask = 1 << position;
+            return (value & mask) != 0 ? 1 : 0;
 
+    }
+    //两位拼接出整数
+    static int mergeBits(int bit1, int bit2) {
+        int result = (bit1 << 1) | bit2;
+        return result;
+    }
+    //char tos hort
+    static short CharsToShort(char highByte, char lowByte) {
+        short result = 0;
+        result |= highByte;                   // 将高字节赋值给结果
+        result = result << 8;                 // 将结果左移8位，腾出低字节的位置
+        result |= static_cast<short>(lowByte); // 将低字节赋值给结果
+
+        return result;
+    }
 public slots:
     //接收超速定时器
     QTimer *recvTimer() {return this->recvReadTimer;}

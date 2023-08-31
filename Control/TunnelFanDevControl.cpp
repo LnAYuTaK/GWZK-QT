@@ -5,7 +5,7 @@
 #include <QtQml>
 
 #include "appSrc/NetWorkManager.h"
-#include "appSrc/Utils.h"
+
 TunnelFanDevControl::TunnelFanDevControl(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->TunnelFan())
@@ -63,7 +63,6 @@ void TunnelFanDevControl::setData()
 void TunnelFanDevControl::handleRecv(ProtocolManager::ReccType type,QByteArray data)
 {
     if(type == ProtocolManager::HandleRead) {
-        qDebug() << data.size();
        //风机ID 地址 18 字节
         QByteArray address = data.left(18);
         setAddress(QString::fromUtf8(address));
@@ -72,12 +71,11 @@ void TunnelFanDevControl::handleRecv(ProtocolManager::ReccType type,QByteArray d
         int format = 0;
         formatdata.append(data.at(18)).append(data.at(19));
         format = formatdata.toHex().toInt(nullptr,16);
-        qDebug() << format;
         if(format  == 0){
-            setFormat(QString("递增").toLocal8Bit());
+            setFormat(QString::fromLocal8Bit("递增"));
         }
         else if(format  == 1){
-            setFormat(QString("递减").toLocal8Bit());
+            setFormat(QString::fromLocal8Bit("相同"));
         }
         //数量 2字节
         QByteArray countdata{};
@@ -85,9 +83,6 @@ void TunnelFanDevControl::handleRecv(ProtocolManager::ReccType type,QByteArray d
         countdata.append(data.at(20)).append(data.at(21));
         count =  countdata.toHex().toInt(nullptr,16);
         setCount(count);
-        qDebug() << count_;
-        qDebug() << format_;
-        qDebug() << address_;
     }
     else if(type == ProtocolManager::HandleWrite) {
         //

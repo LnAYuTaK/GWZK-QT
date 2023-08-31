@@ -48,9 +48,10 @@ Item {
                                     //验证通过写入
                                     if(acceptableInput)
                                     {
-                                        App.protoManager.WaterLevelCtrl.Count = text
+                                        App.protoManager.WaterLevelCtrl.count = text
                                     }
                                 }
+                                text:App.protoManager.WaterLevelCtrl.count
                             }
                         }
                         Row {
@@ -75,9 +76,10 @@ Item {
                                      //验证通过写入
                                      if(acceptableInput)
                                      {
-                                         App.protoManager.WaterLevelCtrl.Cycle = text
+                                         App.protoManager.WaterLevelCtrl.cycle = text
                                      }
                                  }
+                                 text:App.protoManager.WaterLevelCtrl.cycle
                             }
                         }
                         Row {
@@ -102,9 +104,10 @@ Item {
                                     //验证通过写入
                                     if(acceptableInput)
                                     {
-                                        App.protoManager.WaterLevelCtrl.Channel = text
+                                        App.protoManager.WaterLevelCtrl.channel = text
                                     }
                                 }
+                                text: App.protoManager.WaterLevelCtrl.channel
                             }
                         }
                     }
@@ -127,13 +130,14 @@ Item {
                           Layout.preferredWidth:120
                           Layout.preferredHeight: 40
                           model: ["递增", "相同"]
-                          onCurrentIndexChanged: {
-                            App.protoManager.WaterLevelCtrl.Format = currentIndex
+                          onCurrentTextChanged: {
+                            App.protoManager.WaterLevelCtrl.format = currentText
                           }
                         }
                         BaseTextField{
                             readOnly: true
                             Layout.preferredWidth:140
+                            text: App.protoManager.WaterLevelCtrl.format
                         }
                     }
                     //编码
@@ -156,9 +160,10 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                   App.protoManager.WaterLevelCtrl.Address = text
+                                   App.protoManager.WaterLevelCtrl.address = text
                                 }
                             }
+                            text:App.protoManager.WaterLevelCtrl.address
                         }
                     }
                     RowLayout{

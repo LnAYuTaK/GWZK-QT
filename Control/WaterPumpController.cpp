@@ -5,13 +5,13 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 #include "appSrc/NetWorkManager.h"
-#include "appSrc/Utils.h"
+
 WaterPumpController::WaterPumpController(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->WaterPump())
-    ,address_("DFEGWZD123456789")
-    ,format_(0)
     ,count_(0)
+    ,format_("递增")
+    ,address_("")
 {
 
 }
@@ -37,7 +37,14 @@ void WaterPumpController::setData()
         //地址 17字节
         QByteArray addressData =QByteArray(address_.toLatin1())+QByteArray(1, '\x00');
         //格式 2字节
-        auto formatData = ProtocolManager::intToHexByteArray(format_);
+        int format = 0;
+        if(format_ == "递增"){
+            format=0;
+        }
+        else if(format_ == "相同"){
+            format=0;
+        }
+        auto formatData = ProtocolManager::intToHexByteArray(format);
         //数量 2字节
         auto countData = ProtocolManager::intToHexByteArray(count_);
         //备用字节 6字节
@@ -57,10 +64,29 @@ void WaterPumpController::setData()
 void WaterPumpController::handleRecv(ProtocolManager::ReccType type,QByteArray data)
 {
     if(type == ProtocolManager::HandleRead) {
-        qDebug() << data.size();
-        qDebug() << data;
+        //水泵ID 地址 18 字节
+        QByteArray address = data.left(18);
+        setAddress(QString::fromUtf8(address));
+        //ID地址格式 2字节
+        QByteArray formatdata{};
+        int format = 0;
+        formatdata.append(data.at(18)).append(data.at(19));
+        format = formatdata.toHex().toInt(nullptr,16);
+        if(format  == 0){
+            setFormat(QString::fromLocal8Bit("递增"));
+        }
+        else if(format  == 1){
+            setFormat(QString::fromLocal8Bit("相同"));
+        }
+        //数量 2字节
+        QByteArray countdata{};
+        int count = 0;
+        countdata.append(data.at(20)).append(data.at(21));
+        count =  countdata.toHex().toInt(nullptr,16);
+        setCount(count);
     }
     else if(type == ProtocolManager::HandleWrite) {
+        //
         qDebug() << "Handle Write: "<< data;
     }
 }

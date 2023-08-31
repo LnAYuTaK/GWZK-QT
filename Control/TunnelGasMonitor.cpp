@@ -13,8 +13,8 @@ TunnelGasDevControl::TunnelGasDevControl(QObject *parent)
     ,count_(0)
     ,cycle_(0)
     ,channel_(0)
-    ,format_(0)
-    ,address_("00000000000000000")
+    ,format_("递增")
+    ,address_("")
 {
 
 }
@@ -39,7 +39,14 @@ void TunnelGasDevControl::setData()
         //地址 17字节
         QByteArray byteArray =QByteArray(address_.toLatin1())+QByteArray(1, '\x00');;
         //格式 2字节
-        auto formatData = ProtocolManager::intToHexByteArray(format_);
+        int format = 0;
+        if(format_ == "递增"){
+            format=0;
+        }
+        else if(format_ == "相同"){
+            format=0;
+        }
+        auto formatData = ProtocolManager::intToHexByteArray(format);
         //数量 2字节
         auto countData = ProtocolManager::intToHexByteArray(count_);
         //周期 2字节
@@ -65,8 +72,37 @@ void TunnelGasDevControl::setData()
 void TunnelGasDevControl::handleRecv(ProtocolManager::ReccType type,QByteArray data)
 {
     if(type == ProtocolManager::HandleRead) {
-        qDebug() << data.size();
-        qDebug() << data;
+        //气体ID 地址 18 字节
+        QByteArray address = data.left(18);
+        setAddress(QString::fromUtf8(address));
+        QByteArray formatdata{};
+        int format = 0;
+        formatdata.append(data.at(18)).append(data.at(19));
+        format = formatdata.toHex().toInt(nullptr,16);
+        if(format  == 0){
+            setFormat(QString::fromLocal8Bit("递增"));
+        }
+        else if(format  == 1){
+            setFormat(QString::fromLocal8Bit("相同"));
+        }
+        //数量 2字节
+        QByteArray countdata{};
+        int count = 0;
+        countdata.append(data.at(20)).append(data.at(21));
+        count =  countdata.toHex().toInt(nullptr,16);
+        setCount(count);
+        //周期 2字节
+        QByteArray cycledata{};
+        int cycle= 0;
+        cycledata.append(data.at(22)).append(data.at(23));
+        cycle =  cycledata.toHex().toInt(nullptr,16);
+        setCycle(cycle);
+        //通道 2字节
+        QByteArray channeldata{};
+        int channel= 0;
+        channeldata.append(data.at(24)).append(data.at(25));
+        channel=  channeldata.toHex().toInt(nullptr,16);
+        setChannel(channel);
     }
     else if(type == ProtocolManager::HandleWrite) {
         //

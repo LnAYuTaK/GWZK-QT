@@ -51,6 +51,7 @@ Item {
                                        App.protoManager.tunnelFanDevControl.count = text
                                     }
                                 }
+                                text:App.protoManager.tunnelFanDevControl.count
                             }
                         }
                     }
@@ -73,15 +74,15 @@ Item {
                           Layout.preferredWidth:120
                           Layout.preferredHeight: 40
                           model: ["递增", "相同"]
-                          onCurrentIndexChanged: {
-                             App.protoManager.tunnelFanDevControl.format = currentIndex
-
+                          onCurrentTextChanged: {
+                             App.protoManager.tunnelFanDevControl.format = currentText
                           }
                         }
                         BaseTextField{
                             id:format
                             readOnly: true
                             Layout.preferredWidth:140
+                            text:App.protoManager.tunnelFanDevControl.format
                         }
                     }
                     //编码
@@ -108,6 +109,7 @@ Item {
                                     App.protoManager.tunnelFanDevControl.address = text
                                 }
                             }
+                            text:App.protoManager.tunnelFanDevControl.address
                         }
                     }
                     RowLayout{
@@ -118,7 +120,6 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked:{
-
                                  App.protoManager.tunnelFanDevControl.queryData()
                             }
                         }

@@ -48,9 +48,10 @@ Item {
                                     //验证通过写入
                                     if(acceptableInput)
                                     {
-                                        App.protoManager.WaterPumpCtrl.Count = text
+                                        App.protoManager.WaterPumpCtrl.count = text
                                     }
                                 }
+                                text:App.protoManager.WaterPumpCtrl.count
                             }
                         }
                     }
@@ -73,13 +74,14 @@ Item {
                           Layout.preferredWidth:120
                           Layout.preferredHeight: 40
                           model: ["递增", "相同"]
-                          onCurrentIndexChanged: {
-                            App.protoManager.WaterPumpCtrl.Format = currentIndex
+                          onCurrentTextChanged: {
+                            App.protoManager.WaterPumpCtrl.format = currentText
                           }
                         }
                         BaseTextField{
                             readOnly: true
                             Layout.preferredWidth:140
+                            text:App.protoManager.WaterPumpCtrl.format
                         }
                     }
                     //编码
@@ -102,9 +104,10 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                   App.protoManager.WaterPumpCtrl.Address = text
+                                   App.protoManager.WaterPumpCtrl.address = text
                                 }
                             }
+                            text: App.protoManager.WaterPumpCtrl.address
                         }
                     }
                     RowLayout{
