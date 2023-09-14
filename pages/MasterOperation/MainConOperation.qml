@@ -34,17 +34,24 @@ Item {
                         }
                         BaseTextField{
                             id:systime
-                            Layout.preferredWidth:140
+                            Layout.preferredWidth:180
                             color: acceptableInput  ? "black" : "#ff0000"
-                            validator: RegExpValidator { regExp: /^[0-9]*$/ }
+                            validator: RegExpValidator { regExp: /(\d{4})\-(\d{1,2})\-(\d{1,2}) (\d{1,2}):(\d{1,2}):(\d{1,2})/ }
                             onEditingFinished:{
                                 if(acceptableInput)
                                 {
-                                   App.protoManager.MainOptCtrl.SysTime = text
+
                                 }
                             }
-                            text:App.protoManager.MainOptCtrl.SysTime
+
+
                         }
+                        YaheiText {
+                            text:qsTr("(格式:YYYY-MM-DD hh:mm:ss)")
+                            font.pixelSize: fontsize
+                            Layout.alignment: Qt.AlignLeft
+                        }
+
                     }
                     //时间查询
                     RowLayout{
@@ -55,7 +62,7 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked:{
-                              App.protoManager.MainOptCtrl.querySysTimeData()
+
                             }
                         }
                         Rectangle {
@@ -73,7 +80,7 @@ Item {
                                 }
                                 else
                                 {
-                                    App.protoManager.MainOptCtrl.setSysTimeData()
+
                                 }
                             }
                         }
@@ -91,7 +98,7 @@ Item {
                           Layout.preferredHeight: 40
                           model: ["系统重启","重新拨号"]
                           onCurrentIndexChanged: {
-                              App.protoManager.MainOptCtrl.SysOpsAble = currentIndex
+
                           }
                         }
                     }
@@ -103,14 +110,7 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked:{
-                                if(!(systime.acceptableInput))
-                                {
-                                    message("error","格式设置错误")
-                                }
-                                else
-                                {
-                                    App.protoManager.MainOptCtrl.setSysStateData()
-                                }
+
                             }
                         }
                     }

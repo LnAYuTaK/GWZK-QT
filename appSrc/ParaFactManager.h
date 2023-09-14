@@ -46,12 +46,14 @@ public:
     JsonFactGroup *GasParaCO2(){return this->GasParaCO2RegList_;}
     JsonFactGroup *EnvParaTemp(){return this->EnvParaTempRegList_;}
     JsonFactGroup *EnvParaHumidity(){return this->EnvParaHumidityRegList_;}
-    JsonFactGroup *EnvParaWaterLevel(){return this->WaterLevelRegList_;}
+    JsonFactGroup *EnvParaWaterLevel(){return this->EnvParaWaterLevelRegList_;}
     JsonFactGroup *MqttParaSet(){return this->MqttParaSetRegList_;}
+    JsonFactGroup *SensorEnable(){return this->SensorEnableRegList_;}
     //设置操作
     JsonFactGroup *MainControl(){return this->MainControlRegList_;}
     //数据召测
     JsonFactGroup *TunnelGasData(){return TunnelGasDataRegList_;}
+    JsonFactGroup *WaterLevelData(){return WaterLevelDataRegList_;}
 private:
     JsonFactGroup *TunnelGasRegList_;            //隧道气体装置寄存器列表
     JsonFactGroup *MainConParaSetRegList_;       //主控参数设置寄存器列表
@@ -73,6 +75,8 @@ private:
     JsonFactGroup *EnvParaHumidityRegList_;      //环境湿度参数设置寄存器列表
     JsonFactGroup *EnvParaWaterLevelRegList_;    //环境液位参数设置寄存器列表
     JsonFactGroup *TunnelGasDataRegList_;        //隧道气体数据寄存器列表
+    JsonFactGroup *SensorEnableRegList_;         //传感器使能寄存器列表
+    JsonFactGroup *WaterLevelDataRegList_;       //水位数据寄存器列表
 };
 
 #endif // PARAFACTMANAGER_H

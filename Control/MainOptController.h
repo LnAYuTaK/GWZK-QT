@@ -18,6 +18,7 @@ public:
     explicit MainOptController(QObject *parent = nullptr);
     Q_PROPERTY(QString   SysTime      READ SysTime     WRITE setSysTime    NOTIFY sysTimeChanged)
     Q_PROPERTY(int       SysOpsAble   READ SysOpsAble  WRITE setSysOpsAble NOTIFY sysOpsAbleChanged)
+
     //Read
     QString SysTime(){return this->sysTime_;}
     int  SysOpsAble(){return this->sysOpsAble_;}

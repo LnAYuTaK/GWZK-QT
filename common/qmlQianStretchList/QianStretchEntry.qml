@@ -53,16 +53,17 @@ Item {
                     name:"网络参数",
                 },
                 {
-                    name:"气体参数",
+                    name:"mqtt参数",
                 },
                 {
-                    name:"环境参数",
+                    name:"传感器使能",
+                },
+                { 
+                    name:"气体阈值",
                 },
                 {
-                    name:"mqtt参数"
+                    name:"环境阈值",
                 }
-
-
            ]
         },
         {
@@ -80,11 +81,13 @@ Item {
             subItem: [
                 {
                     name: "气体召测",
+                },
+                {
+                    name: "液位召测",
                 }
            ]
         }
     ]
-
     ListModel {
         id: stretchModel
         dynamicRoles : true
@@ -107,8 +110,6 @@ Item {
             idx = strechLength
             strechLength += 1
         }
-
-
         return {
             'name': target.name,
             'icon': checkUnknown(target.icon, ""),

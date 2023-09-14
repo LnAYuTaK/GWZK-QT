@@ -1,3 +1,4 @@
+﻿
 #include "Backed.h"
 #include <QFile>
 #include <QDebug>

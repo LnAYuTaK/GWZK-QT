@@ -23,6 +23,8 @@ ParaFactManager::ParaFactManager(QObject *parent)
     ,EnvParaTempRegList_(nullptr)
     ,EnvParaHumidityRegList_(nullptr)
     ,EnvParaWaterLevelRegList_(nullptr)
+    ,SensorEnableRegList_(nullptr)
+    ,WaterLevelDataRegList_(nullptr)
 {
     //隧道气体装置寄存器列表
     TunnelGasRegList_         = new JsonFactGroup("TunnelGasDevice",":/JsonProto/TunnelGasDevice.json");
@@ -51,7 +53,7 @@ ParaFactManager::ParaFactManager(QObject *parent)
     //氯气气体参数设置寄存器列表
     GasParaCl2RegList_        = new JsonFactGroup("GasParaCl2",":/JsonProto/GasPara.json");
     //硫化氢气体参数设置寄存器列表
-    GasParaH2SRegList_        = new JsonFactGroup("GasParaH2",":/JsonProto/GasPara.json");
+    GasParaH2SRegList_        = new JsonFactGroup("GasParaH2S",":/JsonProto/GasPara.json");
     //甲烷气体参数设置寄存器列表
     GasParaCH4RegList_        = new JsonFactGroup("GasParaCH4",":/JsonProto/GasPara.json");
     //一氧化碳气体参数设置寄存器列表
@@ -64,6 +66,10 @@ ParaFactManager::ParaFactManager(QObject *parent)
     EnvParaHumidityRegList_   = new JsonFactGroup("HumidityPara",":/JsonProto/EnvPara.json");
     //环境液位参数设置寄存器列表
     EnvParaWaterLevelRegList_ = new JsonFactGroup("WaterLevelPara",":/JsonProto/EnvPara.json");
+    //传感器使能寄存器列表
+    SensorEnableRegList_      = new JsonFactGroup("SensorEnable",":/JsonProto/SensorEnable.json");
+    //液位数据寄存器列表
+    WaterLevelDataRegList_    = new JsonFactGroup("WaterLevelData",":/JsonProto/WaterLevelData.json");
 }
 
 

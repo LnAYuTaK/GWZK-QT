@@ -26,7 +26,7 @@ Item {
                             spacing:10
                             Layout.fillWidth: true
                             YaheiText {
-                                text:qsTr("O2")
+                                text:qsTr("O2(VOL)")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
@@ -50,7 +50,7 @@ Item {
                             spacing:10
                             Layout.fillWidth: true
                             YaheiText {
-                                text:qsTr("CO")
+                                text:qsTr("CO(ppm)")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
@@ -74,7 +74,7 @@ Item {
                             spacing:10
                             Layout.fillWidth: true
                             YaheiText {
-                                text:qsTr("Cl2")
+                                text:qsTr("Cl2(ppm)")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
@@ -98,7 +98,7 @@ Item {
                             spacing:10
                             Layout.fillWidth: true
                             YaheiText {
-                                text:qsTr("H2S")
+                                text:qsTr("H2S(ppm)")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
@@ -122,7 +122,7 @@ Item {
                             spacing:10
                             Layout.fillWidth: true
                             YaheiText {
-                                text:qsTr("H2")
+                                text:qsTr("H2(ppm)")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
@@ -146,7 +146,7 @@ Item {
                             spacing:10
                             Layout.fillWidth: true
                             YaheiText {
-                                text:qsTr("CO2")
+                                text:qsTr("CO2(ppm))")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
@@ -170,7 +170,7 @@ Item {
                             spacing:10
                             Layout.fillWidth: true
                             YaheiText {
-                                text:qsTr("CO2")
+                                text:qsTr("CH4(%LEL)")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
@@ -194,7 +194,7 @@ Item {
                             spacing:10
                             Layout.fillWidth: true
                             YaheiText {
-                                text:qsTr("CH4")
+                                text:qsTr("环境温度(℃)")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
@@ -218,31 +218,7 @@ Item {
                             spacing:10
                             Layout.fillWidth: true
                             YaheiText {
-                                text:qsTr("环境温度")
-                                font.pixelSize: fontsize
-                                Layout.preferredWidth: leftWidth
-                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
-                            }
-                            BaseTextField{
-                                readOnly: true
-                                Layout.preferredWidth:100
-                            }
-                            YaheiText {
-                                text:qsTr("报警等级")
-                                font.pixelSize: fontsize
-                                Layout.preferredWidth: leftWidth
-                                Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
-                            }
-                            BaseTextField{
-                                readOnly: true
-                                Layout.preferredWidth:100
-                            }
-                        }
-                    RowLayout{
-                            spacing:10
-                            Layout.fillWidth: true
-                            YaheiText {
-                                text:qsTr("环境湿度")
+                                text:qsTr("环境湿度(%RH)")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment:  Qt.AlignTop |Qt.AlignLeft
@@ -268,7 +244,6 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked: {
-                                   App.protoManager.tunnelGasData.queryData()
                             }
                         }
                         Rectangle {

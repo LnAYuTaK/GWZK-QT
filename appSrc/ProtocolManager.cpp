@@ -12,19 +12,6 @@
 #include <QUrl>
 #include <QJsonObject>
 
-#include "Control/TunnelGasData.h"
-#include "Control/TunnelGasDevControl.h"
-#include "Control/TunnelFanDevControl.h"
-#include "Control/MainParaController.h"
-#include "Control/LocalNetParaController.h"
-#include "Control/NetParaController.h"
-#include "Control/MainOptController.h"
-#include "Control/MqttParaController.h"
-#include "Control/WaterLevelController.h"
-#include "Control/WaterPumpController.h"
-#include "Control/GasParaController.h"
-#include "Control/EnvParaController.h"
-
 //从站地址
 const QByteArray SlaveAddr {QByteArray::fromHex("FF")};
 //读取保持寄存器值功能码
@@ -36,59 +23,8 @@ const QByteArray WriteMultipleType {QByteArray::fromHex("10")};
 
 ProtocolManager::ProtocolManager(QObject *parent)
     : QObject{parent}
-    ,tunnelGasData_(new TunnelGasData(this))
-    ,tunnelGasDevControl_(new TunnelGasDevControl(this))
-    ,tunnelFanDevControl_(new TunnelFanDevControl(this))
-    ,mainParaController_(new MainParaController(this))
-    ,localNetParaController_(new LocalNetParaController(this))
-    ,netParaController_(new NetParaController(this))
-    ,mainOptController_(new MainOptController(this))
-    ,mqttParaController_(new MqttParaController(this))
-    ,waterLevelController_(new WaterLevelController(this))
-    ,waterPumpConrtroller_(new WaterPumpController(this))
-    ,gasParaController_(new GasParaController(this))
-    ,envParaController_(new EnvParaController(this))
-    ,recvReadTimer(new QTimer(this))
 {
-    //recv timer
-    recvReadTimer->setInterval(1000); // 设置1秒的时间间隔
-    connect(this->recvReadTimer, &QTimer::timeout, [=]() {
-        recvReadTimer->stop();
-    });
     //reg qml
-    qmlRegisterUncreatableType<TunnelGasDevControl>   ("App.ProtocolManager", 1, 0, "TunnelGasDevControl",   "Reference only");
-    qmlRegisterUncreatableType<TunnelFanDevControl>   ("App.ProtocolManager", 1, 0, "TunnelFanDevControl",   "Reference only");
-    qmlRegisterUncreatableType<MainParaController>    ("App.ProtocolManager", 1, 0, "MainParaController",    "Reference only");
-    qmlRegisterUncreatableType<LocalNetParaController>("App.ProtocolManager", 1, 0, "LocalNetParaController","Reference only");
-    qmlRegisterUncreatableType<NetParaController>     ("App.ProtocolManager", 1, 0, "NetParaController",     "Reference only");
-    qmlRegisterUncreatableType<MainOptController>     ("App.ProtocolManager", 1, 0, "MainOptController",     "Reference only");
-    qmlRegisterUncreatableType<MqttParaController>    ("App.ProtocolManager", 1, 0, "MqttParaController",    "Reference only");
-    qmlRegisterUncreatableType<WaterLevelController>  ("App.ProtocolManager", 1, 0, "WaterLevelController",  "Reference only");
-    qmlRegisterUncreatableType<WaterPumpController>   ("App.ProtocolManager", 1, 0, "WaterPumpController",   "Reference only");
-    qmlRegisterUncreatableType<GasParaController>     ("App.ProtocolManager", 1, 0, "GasParaController",     "Reference only");
-    qmlRegisterUncreatableType<EnvParaController>     ("App.ProtocolManager", 1, 0, "EnvParaController",     "Reference only");
-    qmlRegisterUncreatableType<TunnelGasData>         ("App.ProtocolManager", 1, 0, "TunnelGasData",         "Reference only");
-    //Connect//
-    connect(this,&ProtocolManager::TunnelGasDataSig,tunnelGasData_,&TunnelGasData::handleRecv);
-    connect(this,&ProtocolManager::TunnelGasDevSig, tunnelGasDevControl_,&TunnelGasDevControl::handleRecv);
-    connect(this,&ProtocolManager::TunnelFunDevSig,tunnelFanDevControl_,&TunnelFanDevControl::handleRecv);
-    connect(this,&ProtocolManager::WaterLevelDeviceSig,waterLevelController_,&WaterLevelController::handleRecv);
-    connect(this,&ProtocolManager::WaterPumpDeviceSig,waterPumpConrtroller_,&WaterPumpController::handleRecv);
-    connect(this,&ProtocolManager::MainControlOptsSig,mainOptController_,&MainOptController::handleRecv);
-    connect(this,&ProtocolManager::MainControlParaSig,mainParaController_,&MainParaController::handleRecv);
-    connect(this,&ProtocolManager::LoaclNetParaSig,localNetParaController_,&LocalNetParaController::handleRecv);
-    connect(this,&ProtocolManager::MqttParaSig,mqttParaController_,&MqttParaController::handleRecv);
-    connect(this,&ProtocolManager::NetparaSig,netParaController_,&NetParaController::handleRecv);
-    connect(this,&ProtocolManager::GasParaO2Sig,gasParaController_,&GasParaController::handleRecvO2);
-    connect(this,&ProtocolManager::GasParaH2Sig,gasParaController_,&GasParaController::handleRecvH2);
-    connect(this,&ProtocolManager::GasParaCl2Sig,gasParaController_,&GasParaController::handleRecvCl2);
-    connect(this,&ProtocolManager::GasParaH2SSig,gasParaController_,&GasParaController::handleRecvH2S);
-    connect(this,&ProtocolManager::GasParaCH4Sig,gasParaController_,&GasParaController::handleRecvCH4);
-    connect(this,&ProtocolManager::GasParaCOSig,gasParaController_,&GasParaController::handleRecvCO);
-    connect(this,&ProtocolManager::GasParaCO2Sig,gasParaController_,&GasParaController::handleRecvCO2);
-    connect(this,&ProtocolManager::EnvParaTempSig,envParaController_,&EnvParaController::handleRecvTemp);
-    connect(this,&ProtocolManager::EnvParaHumiditySig,envParaController_,&EnvParaController::handleRecvHumidity);
-    connect(this,&ProtocolManager::EnvParaWaterLevelSig,envParaController_,&EnvParaController::handleRecvWaterLevel);
 }
 //-----------------------------------------------------------------------------
 /**
@@ -96,7 +32,6 @@ ProtocolManager::ProtocolManager(QObject *parent)
  * @param sender
  * @param data
  */
-
 //分割quint16为高低位
 void splitQuint16(quint16 value, char& highByte, char& lowByte) {
     highByte = static_cast<char>((value >> 8) & 0xFF);
@@ -121,91 +56,6 @@ QVector<QByteArray> ProtocolManager::SpiltData(QByteArray byteArray)
         byteArrayGroups.append(group);
     }
     return byteArrayGroups;
-}
-
-ProtocolManager::ControllerType ProtocolManager::getProtoTypeByReg(QByteArray data)
-{
-    if(data == tunnelGasData_->getTunnelGasData())
-    {
-        return  TunnelGasData_t;
-    }
-    else if(data == tunnelGasDevControl_->getTunnelGasDev())
-    {
-        return TunnelGasDevControl_t;
-    }
-    else if(data == tunnelFanDevControl_->getTunnelFanReg())
-    {
-        return TunnelFanDevControl_t;
-    }
-    else if(data == mainParaController_->getMainParaReg())
-    {
-        return MainParaController_t;
-    }
-    else if(data == localNetParaController_->getLocalNetParaReg())
-    {
-        return  LocalNetParaController_t;
-    }
-    else if(data == netParaController_->getNetParaReg())
-    {
-        return NetParaController_t;
-    }
-    else if(data == mainOptController_->getMainOptReg())
-    {
-        return MainOptController_t;
-    }
-    else if(data == mqttParaController_->getMqttParaReg())
-    {
-        return MqttParaController_t;
-    }
-    else if(data == waterLevelController_->getWaterLevel())
-    {
-        return  WaterLevelController_t;
-    }
-    else if(data == waterPumpConrtroller_->getWaterPumpReg())
-    {
-        return WaterPumpController_t;
-    }
-    else if(data ==gasParaController_->getGasO2Reg())
-    {
-        return GasParaO2Controller_t;
-    }
-    else if(data == gasParaController_->getGasH2Reg())
-    {
-        return GasParaH2SController_t;
-    }
-    else if(data == gasParaController_->getGasCl2Reg())
-    {
-        return GasParaCl2Controller_t;
-    }
-    else if(data == gasParaController_->getGasH2SReg())
-    {
-        return GasParaH2SController_t;
-    }
-    else if(data == gasParaController_->getGasCH4Reg())
-    {
-        return GasParaCH4Controller_t;
-    }
-    else if(data == gasParaController_->getGasCOReg())
-    {
-        return GasParaCOController_t;
-    }
-    else if(data == gasParaController_->getGasCO2Reg())
-    {
-        return GasParaCO2Controller_t;
-    }
-    else if(data == envParaController_->getEnvTempReg())
-    {
-        return EnvTempController_t;
-    }
-    else if(data == envParaController_->getEnvHumidityReg())
-    {
-        return  EnvHumidityController_t;
-    }
-    else if(data == envParaController_->getEnvWaterLevelReg())
-    {
-        return  EnvWaterLevelController_t;
-    }
-    return UnknowType;
 }
 
 void ProtocolManager::sendSignal(ReccType recvType,ControllerType type,QByteArray data)
@@ -271,6 +121,12 @@ void ProtocolManager::sendSignal(ReccType recvType,ControllerType type,QByteArra
     case EnvWaterLevelController_t:
         emit EnvParaWaterLevelSig(recvType,data);
         break;
+    case WaterLevelDataController_t:
+        emit WaterLevelDataSig(recvType,data);
+        break;
+    case SensorEnableController_t:
+        emit SensorEnableSig(recvType,data);
+        break;
     case  UnknowType:
         break;
     default:
@@ -307,7 +163,7 @@ void ProtocolManager::ProtocolHandle(QObject *sender,QByteArray data)
                     //根据上次操作判断是什么类型的返回
 //                    if(this->recvReadTimer->isActive())
 //                    {
-                        qDebug() << "Recv 0x03";
+                        qDebug() << "Recv: "<< master_read << " Type: "<<nowType_;
                         //根据上次操作判断是
                         sendSignal(HandleRead,nowType_ ,master_read);
 //                    }
@@ -325,7 +181,6 @@ void ProtocolManager::ProtocolHandle(QObject *sender,QByteArray data)
                     byteArray.append(regStartHi);
                     byteArray.append(regStartLo);
                     qDebug() << "Recv 0x10" ;
-                    sendSignal(HandleWrite,getProtoTypeByReg(byteArray),master_write);
                 }
                 else
                 {
@@ -333,6 +188,11 @@ void ProtocolManager::ProtocolHandle(QObject *sender,QByteArray data)
                     return;
                 }
             }
+            else
+            {
+                qDebug() << "Check CRC Error";
+            }
+
         }
     }
 }
@@ -364,8 +224,6 @@ QByteArray ProtocolManager::makeReadRegProto(ProtocolManager::ControllerType typ
   crc.fill(0,2);
   crc[0] = (uchar)(0x00ff&checkData);
   crc[1] = (uchar)((0xff00&checkData)>>8);  //转换-存入QByteArray
-  //开启接收定时器
-  app()->protocolMgr()->recvTimer()->start();
   //记录一下当前正在准备接收的处理类型
   app()->protocolMgr()->setNowType(type);
   //记录一下 当前start地址类型
@@ -396,7 +254,6 @@ quint16 ProtocolManager::modbusCrc16(quint8 *data, qint16 length)
           }
       }
   }
-  //crc = ((crc >> 8) & 0xFF) | ((crc & 0xFF) << 8);
   return crc;
 }
 //-----------------------------------------------------------------------------

@@ -1,0 +1,83 @@
+﻿{
+
+    "header":{
+        "name":"TunnGasDev",
+        "slaveAddr": "0x00C0",
+        "count":16
+    },
+    "body":
+    [
+        {
+            "TunnelGasDevAddress":[
+                {
+                    "slaveAddr": "0x00C0",
+                    "count":9,
+                    "operate":"R/W",
+                    "unit":"",
+                    "valueType":"String",
+                    "describe":""
+                }
+            ],
+            "TunnelGasDevFormat":[
+                {
+                    "slaveAddr": "0x00E9",
+                    "count":1,
+                    "operate":"R/W",
+                    "valueType":"Bool",
+                    "unit":"",
+                    "describe":"0：递增；1：相同，默认为0"
+                }
+            ],
+            "TunnelGasCount":[
+                {
+                    "slaveAddr": "0x00EA",
+                    "count":1,
+                    "operate":"R/W",
+                    "valueType":"Uint8",
+                    "unit":"",
+                    "describe":"无量纲，默认为0"
+                }
+            ],
+            "TunnelGasDataCycle":[
+                {
+                    "slaveAddr": "0x00EB",
+                    "count":1,
+                    "operate":"R/W",
+                    "valueType":"Uint8",
+                    "unit":"min",
+                    "describe":"无量纲，默认为0"
+                }
+            ],
+            "TunnelGasStateCycle":[
+                {
+                    "slaveAddr": "0x00E",
+                    "count":1,
+                    "operate":"R/W",
+                    "valueType":"Uint8",
+                    "unit":"sec",
+                    "describe":"单位sec，默认为0"
+                }
+            ],
+            "TunnelGasChannel":[
+                {
+                    "slaveAddr": "0x00EA",
+                    "count":1,
+                    "operate":"R/W",
+                    "valueType":"Uint8",
+                    "unit":"sec",
+                    "describe":"单位sec，默认为0"
+                }
+            ],
+            "StandBy":[
+                {
+                    "slaveAddr": "0x00EE",
+                    "count":2,
+                    "operate":"R/W",
+                    "valueType":"ByteArray",
+                    "unit":"",
+                    "describe":"备用"
+                }
+            ]
+        }
+    ]
+}

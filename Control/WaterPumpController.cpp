@@ -10,7 +10,7 @@ WaterPumpController::WaterPumpController(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->WaterPump())
     ,count_(0)
-    ,format_("递增")
+    ,format_(QString::fromLocal8Bit("递增"))
     ,address_("")
 {
 
@@ -35,15 +35,13 @@ void WaterPumpController::setData()
         auto adressVector = regList_->getAddress();
         auto start =  QByteArray::fromHex(adressVector.at(0).toLatin1());
         //地址 17字节
-        QByteArray addressData =QByteArray(address_.toLatin1())+QByteArray(1, '\x00');
+        if(address_.size()<17){
+            return ;
+        }
+        QByteArray addressData =QByteArray(address_.left(17).toLatin1())+QByteArray(1, '\x00');
         //格式 2字节
         int format = 0;
-        if(format_ == "递增"){
-            format=0;
-        }
-        else if(format_ == "相同"){
-            format=0;
-        }
+        (format_==QString::fromLocal8Bit("递增"))?format = 0:format=1;
         auto formatData = ProtocolManager::intToHexByteArray(format);
         //数量 2字节
         auto countData = ProtocolManager::intToHexByteArray(count_);

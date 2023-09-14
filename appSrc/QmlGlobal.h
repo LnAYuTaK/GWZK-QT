@@ -1,10 +1,10 @@
-//*****************************************************************************
+﻿//*****************************************************************************
 // * Copyright 2023-xxxx xxx Co., Ltd.
 // * All right reserved. See COPYRIGHT for detailed Information.
 // *
 // * @file          QmlGlobal.h
 // * @brief         QmlGlobal
-// * @Description
+// * @Description   注册用于 QML前端属性
 // * @author        liukuan<807874484@qq.com>
 // * @date          2023/06/15
 // * @history
@@ -21,7 +21,7 @@ class QmlGlobal : public QObject
 public:
     explicit QmlGlobal(QObject *parent = nullptr);
 
-    Q_PROPERTY(NetWorkManager  * netWorkManager  READ   netWorkManager CONSTANT)
+    Q_PROPERTY(NetWorkManager  * netWorkManager  READ   netWorkManager  CONSTANT)
     Q_PROPERTY(ProtocolManager * protoManager    READ   protoManager    CONSTANT)
 
     NetWorkManager       * netWorkManager(){return this->_netWorkManager;}

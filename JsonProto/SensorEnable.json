@@ -1,0 +1,31 @@
+﻿{
+    "version":      1.0,
+    "componentid":  3,
+    "SensorEnable":
+    [
+        {
+            "address":     "0x0454",
+            "operate":     "R/W",
+            "content":     "传感器使能",
+            "format" :     "2字节 按照位高低使能（8+2 高位的高字节是O2，最后是液位"
+        },
+        {
+            "address":     "0x0455",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     "单位:ppm;扩大100倍"
+        },
+        {
+            "address":     "0x0456",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0457",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     ""
+        }
+    ]
+}

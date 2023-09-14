@@ -19,7 +19,7 @@ public:
     //通讯方式
     Q_PROPERTY(QString commType    READ commType    WRITE setCommType    NOTIFY commTypeChanged)
     //是否加密
-    Q_PROPERTY(int encrypted       READ encrypted   WRITE setEncrypt     NOTIFY encryptedChanged)
+    Q_PROPERTY(bool encrypted      READ encrypted   WRITE setEncrypt     NOTIFY encryptedChanged)
     //加密类型
     Q_PROPERTY(QString encrypType  READ encrypType  WRITE setEncrypType  NOTIFY encrypTypeChanged)
     //软件版本地址
@@ -27,7 +27,7 @@ public:
     //read
     QString address ()const{return  address_;}
     QString commType()const{return commType_;}
-    int     encrypted(){return isEncrypted_;}
+    bool    encrypted(){return isEncrypted_;}
     QString encrypType (){return encrypType_;}
     QString softVersion(){return softVersion_;}
     //Set
@@ -43,7 +43,7 @@ public:
         this->softVersion_ = softVersion;
         emit softVersionChanged(softVersion_);
     }
-    void    setEncrypt(int isEncrypted) {
+    void    setEncrypt(bool isEncrypted) {
         this->isEncrypted_ = isEncrypted;
         emit encryptedChanged(isEncrypted_);
     }
@@ -63,14 +63,14 @@ public slots:
 signals:
     void  addressChanged(QString address);
     void  commTypeChanged(QString commType);
-    void  encryptedChanged(int isEncrypted);
+    void  encryptedChanged(bool isEncrypted);
     void  encrypTypeChanged(QString encrypType);
     void  softVersionChanged(QString softVersion);
 private:
     JsonFactGroup *regList_;
     QString        address_;
     QString        commType_;
-    int            isEncrypted_;
+    bool           isEncrypted_;
     QString        encrypType_;
     QString        softVersion_;
 

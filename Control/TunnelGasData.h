@@ -14,41 +14,40 @@ class TunnelGas :public  QObject
     Q_OBJECT
 public:
     explicit TunnelGas(QObject *parent = nullptr);
-    Q_PROPERTY(int       rawData      READ rawData      WRITE setRawData      NOTIFY rawDataChanged)
+    Q_PROPERTY(QString   rawData      READ rawData      WRITE setRawData      NOTIFY rawDataChanged)
     Q_PROPERTY(QString   unit         READ unit         CONSTANT)
-    Q_PROPERTY(int       alarmLevel   READ alarmLevel   WRITE setAlarmLevel   NOTIFY alarmLevelChanged)
+    Q_PROPERTY(QString   alarmLevel   READ alarmLevel   WRITE setAlarmLevel   NOTIFY alarmLevelChanged)
     Q_PROPERTY(int       enable       READ enable       WRITE setEnable       NOTIFY enableChanged)
     //Read
-    int     rawData() const {return rawData_;}
+    QString rawData() const {return rawData_;}
     QString unit()const {return unit_;}
-    int     alarmLevel() const {return alarmLevel_;}
+    QString alarmLevel() const {return alarmLevel_;}
     int     enable()const {return enable_;}
     //Set
-    void   setRawData(int rawData){
+    void   setRawData(QString rawData){
         rawData_ = rawData;
         emit rawDataChanged(rawData_);
     }
     //Set
-    void   setAlarmLevel(int alarmLevel ){
+    void   setAlarmLevel(QString alarmLevel ){
         alarmLevel_ = alarmLevel ;
         emit  alarmLevelChanged(alarmLevel_);
     }
     void setEnable(int enable) {
        enable_ = enable;
-       emit  enableChanged(alarmLevel_);
+       enableChanged(enable_);
     }
-
 signals:
-    void rawDataChanged(int rawData);
-    void alarmLevelChanged(int alarmLevel);
+    void rawDataChanged(QString rawData);
+    void alarmLevelChanged(QString alarmLevel);
     void enableChanged(int enable);
 private:
     //原始值//
-    int  rawData_;
+    QString rawData_;
     //单位
     QString unit_;
     //报警等级
-    int alarmLevel_;
+    QString alarmLevel_;
     //是否使能
     int enable_;
 };
@@ -62,8 +61,6 @@ public:
                                     "CH4","温度","湿度"};
 
     explicit TunnelGasData(QObject *parent = nullptr);
-
-
     Q_PROPERTY(TunnelGas   *GasO2    READ GasO2     CONSTANT)
     Q_PROPERTY(TunnelGas   *GasCO    READ GasCO     CONSTANT)
     Q_PROPERTY(TunnelGas   *GasCl2   READ GasCl2    CONSTANT)
@@ -73,7 +70,6 @@ public:
     Q_PROPERTY(TunnelGas   *GasCH4   READ GasCH4    CONSTANT)
     Q_PROPERTY(TunnelGas   *EnvTemp  READ EnvTemp   CONSTANT)
     Q_PROPERTY(TunnelGas   *EnvHumi  READ EnvHumi   CONSTANT)
-
     //Function//
     Q_INVOKABLE void queryData();
     Q_INVOKABLE void setData();
@@ -87,7 +83,7 @@ public:
     TunnelGas *GasCH4(){return GasCH4_;}
     TunnelGas *EnvTemp(){return EnvTemp_;}
     TunnelGas *EnvHumi(){return EnvHumi_;}
-
+    //Get Reg
     QByteArray getTunnelGasData() {
         return QByteArray::fromHex(regList_->getAddress().at(0).toLatin1());
     }

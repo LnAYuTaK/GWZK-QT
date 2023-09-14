@@ -10,9 +10,9 @@ MainParaController::MainParaController(QObject *parent)
     : QObject{parent}
     ,regList_(app()->paraFactMgr()->MainConParaSet())
     ,address_("")
-    ,commType_("GPRS")
-    ,isEncrypted_(0)
-    ,encrypType_("")
+    ,commType_(QString::fromLocal8Bit("GPRS"))
+    ,isEncrypted_(false)
+    ,encrypType_(QString::fromLocal8Bit("南瑞"))
     ,softVersion_("")
 {
 
@@ -40,49 +40,43 @@ void MainParaController::setData()
         QByteArray addressData  = QByteArray(18,'\x00');
         //通讯方式 2字节
         int commRes = 0 ;
-        if(commType_ == ""){
-            return ;
-        }
-        else if(commType_ == "GPRS"){
+        if(commType_ == QString::fromLocal8Bit("GPRS")){
             commRes = 0;
         }
-        else if(commType_ == "本地串口"){
+        else if(commType_ == QString::fromLocal8Bit("本地串口")){
             commRes = 1;
         }
-        else if(commType_ == "本地网络"){
+        else if(commType_ == QString::fromLocal8Bit("本地网络")){
             commRes = 2;
         }
-        else if(commType_ == "其他"){
+        else if(commType_ == QString::fromLocal8Bit("其他")){
             commRes = 3;
         }
-        auto commTypeData = ProtocolManager::intToHexByteArray(commRes);
-        qDebug() <<commType_;
-        //是否加密 2字节
-        auto encryptedData = ProtocolManager::intToHexByteArray(isEncrypted_);
-        //加密类型 2字节
-        qDebug()<< encrypType_;
+        QByteArray commTypeTemp = ProtocolManager::intToHexByteArray(commRes);
+        QByteArray  commTypeData{};
+        commTypeData.append(commTypeTemp.at(1)).append(commTypeTemp.at(0));
         QByteArray encType{};
-        //如果加密
+        //如果是加密状态
         if(isEncrypted_){
+            //加密状态//高字节01 加密
             encType.append('\x01');
-            if(encrypType_ == "南瑞"){
+            if(encrypType_ == QString::fromLocal8Bit("南瑞")){
                 encType.append('\x00');
             }
-            else if(encrypType_ == "普华"){
+            else if(encrypType_ == QString::fromLocal8Bit("普华")){
                 encType.append('\x01');
             }
-            else if(encrypType_ == "SD卡加密"){
+            else if(encrypType_ == QString::fromLocal8Bit("SD卡加密")){
                 encType.append('\x02');
             }
-            else if(encrypType_ == "其他"){
+            else if(encrypType_ == QString::fromLocal8Bit("其他")){
                 encType.append('\x03');
             }
         }
         //如果不加密
         else{
-            encType.append('\x01').append('\x00');
+            encType.append('\x00').append('\x00');
         }
-        //auto encrypType = ProtocolManager::intToHexByteArray(encrypType_.toint());
         //软件版本地址 4字节
         QByteArray softVersion(4, '\x00');
         //备用字节 6字节
@@ -90,7 +84,6 @@ void MainParaController::setData()
         //数据包共33字节
         QByteArray packData  = addressData+
                                commTypeData+
-                               encryptedData+
                                encType +
                                softVersion +
                                standby;
@@ -107,7 +100,7 @@ void MainParaController::handleRecv(ProtocolManager::ReccType type,QByteArray da
     //先获取18个字节
     QByteArray  address = data.left(18);
     //19 20 字节// 通讯方式
-    short commType = ProtocolManager::bytesToshort(data.mid(18,2),ProtocolManager::LittileEndian);
+    short commType = ProtocolManager::bytesToshort(data.mid(18,2),ProtocolManager::BigEndian);
     if(commType == 0){
         setCommType(QString::fromLocal8Bit("GPRS"));
     }
@@ -120,6 +113,7 @@ void MainParaController::handleRecv(ProtocolManager::ReccType type,QByteArray da
     else if(commType == 3){
         setCommType(QString::fromLocal8Bit("其他"));
     }
+    qDebug() << commType <<"类型";
     //是否加密 /加密方式20 21字节//
     int isEncrypted =data.mid(20,1).toHex().toInt();
     setEncrypt(isEncrypted);
@@ -143,7 +137,6 @@ void MainParaController::handleRecv(ProtocolManager::ReccType type,QByteArray da
     }
     //版本地址1 高位
     QString version1Hi =QString::number(QChar(data.at(22)).unicode());
-    qDebug() << version1Hi;
     //版本地址1 高位
     QString version1Low =QString::number(QChar(data.at(23)).unicode());
     qDebug() << version1Low;

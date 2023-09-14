@@ -1,4 +1,4 @@
-
+﻿
 #include "JsonFactGroup.h"
 JsonFactGroup::JsonFactGroup(QString  jsonObjName ,QString jsonfile)
 {
@@ -21,7 +21,6 @@ JsonFactGroup::JsonFactGroup(QString  jsonObjName ,QString jsonfile)
     }
     QJsonObject  jsonObj = jsonDoc.object();
     _jsonArrayObj = jsonObj[jsonObjName].toArray();
-
 }
 //-----------------------------------------------------------------------------
 QVector<QString> JsonFactGroup::getAddress()

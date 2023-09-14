@@ -68,21 +68,27 @@ StackLayout {
        width: stack.width
        height: stack.height
    }
-   GasParaSetting {
-       property string name: "气体参数"
-       width: stack.width
-       height: stack.height
-   }
-   EnvPara{
-       property string name: "环境参数"
-       width: stack.width
-       height: stack.height
-   }
    MqttPara {
        property string name: "mqtt参数"
        width: stack.width
        height: stack.height
    }
+   SensorEnableSetting{
+       property string name: "传感器使能"
+       width: stack.width
+       height: stack.height
+   }
+   GasParaSetting {
+       property string name: "气体阈值"
+       width: stack.width
+       height: stack.height
+   }
+   EnvParaSettting{
+       property string name: "环境阈值"
+       width: stack.width
+       height: stack.height
+   }
+
    /**********************************************************************
                 设置操作   /pages/OperationSet/
    /**********************************************************************/
@@ -96,6 +102,11 @@ StackLayout {
    /**********************************************************************/
    GasDataAcquisition {
        property string name: "气体召测"
+       width: stack.width
+       height: stack.height
+   }
+   WaterLevelDataAcquistion{
+       property string name: "液位召测"
        width: stack.width
        height: stack.height
    }

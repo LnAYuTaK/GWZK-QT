@@ -22,19 +22,24 @@ SOURCES += \
     Control/MainParaController.cpp \
     Control/MqttParaController.cpp \
     Control/NetParaController.cpp \
+    Control/SensorEnableController.cpp \
     Control/TunnelFanDevControl.cpp \
     Control/TunnelGasData.cpp \
     Control/WaterLevelController.cpp \
+    Control/WaterLevelDataController.cpp \
     Control/WaterPumpController.cpp \
     appSrc/Application.cpp \
+    appSrc/ControllerManager.cpp \
     appSrc/NetWorkManager.cpp \
     appSrc/ParaFactManager.cpp \
-    appSrc/ProtocolEvent.cpp \
     appSrc/ProtocolManager.cpp \
     appSrc/QmlGlobal.cpp \
     Control/TunnelGasMonitor.cpp \
     appSrc/Utils.cpp \
+    fact/Fact.cpp \
+    fact/FactGroup.cpp \
     fact/JsonFactGroup.cpp \
+    groups/TunnelGasDevFactGroup.cpp \
         main.cpp \
 
 
@@ -42,9 +47,8 @@ RESOURCES += qml.qrc
 include(./common/Frameless/frameless.pri)
 include(./common/Backed/Backed.pri)
 
-win32 {
-    RC_FILE += ./windowRes/Icon.rc
-}
+
+RC_FILE += ./windowRes/Icon.rc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -67,16 +71,21 @@ HEADERS += \
     Control/MainParaController.h \
     Control/MqttParaController.h \
     Control/NetParaController.h \
+    Control/SensorEnableController.h \
     Control/TunnelFanDevControl.h \
     Control/TunnelGasData.h \
     Control/TunnelGasDevControl.h \
     Control/WaterLevelController.h \
+    Control/WaterLevelDataController.h \
     Control/WaterPumpController.h \
     appSrc/Application.h \
+    appSrc/ControllerManager.h \
     appSrc/NetWorkManager.h \
     appSrc/ParaFactManager.h \
-    appSrc/ProtocolEvent.h \
     appSrc/ProtocolManager.h \
     appSrc/QmlGlobal.h \
     appSrc/Utils.h \
-    fact/JsonFactGroup.h
+    fact/Fact.h \
+    fact/FactGroup.h \
+    fact/JsonFactGroup.h \
+    groups/TunnelGasDevFactGroup.h

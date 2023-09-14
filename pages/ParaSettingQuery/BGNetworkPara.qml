@@ -43,12 +43,11 @@ Item {
                           }
                           onEditingFinished: {
                               //验证通过写入
-                              if(acceptableInput)
-                              {
-                                  App.protoManager.netParaController.MasterIp = text
+                              if(acceptableInput){
+
                               }
                           }
-                          text:App.protoManager.netParaController.MasterIp
+
                         }
                     }
                     RowLayout{
@@ -71,10 +70,10 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                    App.protoManager.netParaController.MasterPort = text
+
                                 }
                             }
-                            text:App.protoManager.netParaController.MasterPort
+
                         }
                     }
                     RowLayout{
@@ -91,12 +90,12 @@ Item {
                           Layout.preferredHeight: 45
                           model: ["TCP","UDP"]
                           onCurrentTextChanged: {
-                              App.protoManager.netParaController.LinkType = currentText
+
                           }
                         }
                         BaseTextField{
                           Layout.preferredWidth:140
-                          text:App.protoManager.netParaController.LinkType
+
                         }
                     }
                     RowLayout{
@@ -118,10 +117,10 @@ Item {
                           }
                           onEditingFinished: {
                               if(acceptableInput){
-                                 App.protoManager.netParaController.SIMAPN = text
+
                               }
                           }
-                          text:App.protoManager.netParaController.SIMAPN
+
                         }
                     }
                     RowLayout{
@@ -142,10 +141,10 @@ Item {
                             }
                             onEditingFinished: {
                                 if(acceptableInput){
-                                   App.protoManager.netParaController.SIMUserName = text
+
                                 }
                             }
-                            text:App.protoManager.netParaController.SIMUserName
+
 
                         }
                     }
@@ -168,10 +167,10 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                   App.protoManager.netParaController.SIMPasswd = text
+
                                 }
                             }
-                            text:App.protoManager.netParaController.SIMPasswd
+
                         }
                     }
                     RowLayout{
@@ -194,10 +193,10 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                    App.protoManager.netParaController.AlternateIp = text
+
                                 }
                             }
-                            text:App.protoManager.netParaController.AlternateIp
+
                         }
                     }
                     RowLayout{
@@ -220,10 +219,10 @@ Item {
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                    App.protoManager.netParaController.AlternatePort = text
+
                                 }
                             }
-                            text:App.protoManager.netParaController.AlternatePort
+
                         }
                     }
                     RowLayout{
@@ -240,13 +239,13 @@ Item {
                           Layout.preferredHeight: 45
                           model: [ "TCP","UDP"]
                           onCurrentTextChanged: {
-                              App.protoManager.netParaController.AlternateLinktype = currentText
+
                           }
                         }
                         BaseTextField{
                           readOnly: true
                           Layout.preferredWidth:140
-                          text:App.protoManager.netParaController.AlternateLinktype
+
                         }
                     }
                     RowLayout{
@@ -257,7 +256,7 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked: {
-                                App.protoManager.netParaController.queryData()
+
                             }
                         }
                         Rectangle {
@@ -279,7 +278,7 @@ Item {
                                 }
                                 else
                                 {
-                                  App.protoManager.netParaController.setData()
+
                                 }
                             }
                         }

@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+﻿#include <QGuiApplication>
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include "frameless.h"
@@ -7,7 +7,7 @@
 #include <QDir>
 #include "appSrc/Application.h"
 #include <QTextCodec>
-
+#include <QIcon>
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

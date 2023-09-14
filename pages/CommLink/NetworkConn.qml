@@ -84,14 +84,23 @@ Item {
                     bckcolor:  App.netWorkManager.IsTcpConnected ? "#4785FF" : "gray"
                     Layout.alignment:Qt.AlignBottom
                     onClicked: {
-                        if((hostField.text.length ===0)&&(portField.text.length===0))
-                        {
+                        if((hostField.text.length ===0)&&(portField.text.length===0)) {
                             message("error","IP或端口号为空")
                             return
                         }
                         if(commSelct.currentText == "TCP")
                         {
-                            App.netWorkManager.tcpConnect(hostField.text,portField.text)
+                            if(App.netWorkManager.IsTcpConnected) {
+                                message("info","请勿重复连接")
+                            }
+                            else {
+                                if(App.netWorkManager.tcpConnect(hostField.text,portField.text)) {
+                                   message("success","连接成功")
+                                }
+                                else {
+                                   message("error","连接失败")
+                                }
+                            }
                         }
                     }
                 }
@@ -115,10 +124,17 @@ Item {
              }
         }
     }
-
+    function handleSocketStat(state) {
+        if(state){
+            message("success","连接成功")
+        }
+        else{
+           message("info","断开连接")
+        }
+    }
     Component.onCompleted: {
         //连接后端服务与qml的MSG 提示
-        App.netWorkManager.InfoMsg.connect(message)
+        App.netWorkManager.ConnectedChanged.connect(handleSocketStat)
         //连接后端网络连接部分
     }
     Message{

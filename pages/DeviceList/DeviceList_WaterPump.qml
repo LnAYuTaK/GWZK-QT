@@ -46,12 +46,10 @@ Item {
                                 }
                                 onEditingFinished: {
                                     //验证通过写入
-                                    if(acceptableInput)
-                                    {
-                                        App.protoManager.WaterPumpCtrl.count = text
+                                    if(acceptableInput){
+
                                     }
                                 }
-                                text:App.protoManager.WaterPumpCtrl.count
                             }
                         }
                     }
@@ -75,13 +73,12 @@ Item {
                           Layout.preferredHeight: 40
                           model: ["递增", "相同"]
                           onCurrentTextChanged: {
-                            App.protoManager.WaterPumpCtrl.format = currentText
                           }
                         }
                         BaseTextField{
                             readOnly: true
                             Layout.preferredWidth:140
-                            text:App.protoManager.WaterPumpCtrl.format
+
                         }
                     }
                     //编码
@@ -97,17 +94,15 @@ Item {
                         BaseTextField{
                             id:address
                             Layout.preferredWidth:280
-                            maximumLength: 17
+                            color: acceptableInput  ? "black" : "#ff0000"
                             validator: RegExpValidator {
                                 regExp: /^[a-zA-Z0-9]*$/ // 只允许输入字母和数字
                             }
+                            maximumLength: 17
                             onEditingFinished: {
-                                if(acceptableInput)
-                                {
-                                   App.protoManager.WaterPumpCtrl.address = text
+                                if(acceptableInput){
                                 }
                             }
-                            text: App.protoManager.WaterPumpCtrl.address
                         }
                     }
                     RowLayout{
@@ -118,7 +113,7 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked:{
-                                App.protoManager.WaterPumpCtrl.queryData()
+
                             }
                         }
                         Rectangle {
@@ -138,7 +133,7 @@ Item {
                                 }
                                 else
                                 {
-                                    App.protoManager.WaterPumpCtrl.setData()
+
                                 }
                             }
                         }

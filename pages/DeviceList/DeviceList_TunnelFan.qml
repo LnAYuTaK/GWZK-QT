@@ -46,12 +46,11 @@ Item {
                                 }
                                 onEditingFinished: {
                                     //验证通过写入
-                                    if(acceptableInput)
-                                    {
-                                       App.protoManager.tunnelFanDevControl.count = text
+                                    if(acceptableInput){
+
                                     }
                                 }
-                                text:App.protoManager.tunnelFanDevControl.count
+
                             }
                         }
                     }
@@ -75,14 +74,14 @@ Item {
                           Layout.preferredHeight: 40
                           model: ["递增", "相同"]
                           onCurrentTextChanged: {
-                             App.protoManager.tunnelFanDevControl.format = currentText
+
                           }
                         }
                         BaseTextField{
                             id:format
                             readOnly: true
                             Layout.preferredWidth:140
-                            text:App.protoManager.tunnelFanDevControl.format
+
                         }
                     }
                     //编码
@@ -90,7 +89,7 @@ Item {
                         spacing:10
                         YaheiText {
                             anchors.centerIn: parent.Center
-                            text: qsTr("风机装置监测编码")
+                            text: qsTr("风机装置编码")
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
@@ -98,18 +97,16 @@ Item {
                         BaseTextField{
                             id:address
                             Layout.preferredWidth:280
-                            maximumLength: 16
                             color: acceptableInput  ? "black" : "#ff0000"
                             validator: RegExpValidator {
                                 regExp: /^[a-zA-Z0-9]*$/ // 只允许输入字母和数字
                             }
                             onEditingFinished: {
-                                if(acceptableInput)
-                                {
-                                    App.protoManager.tunnelFanDevControl.address = text
+                                if(acceptableInput) {
+
                                 }
                             }
-                            text:App.protoManager.tunnelFanDevControl.address
+
                         }
                     }
                     RowLayout{
@@ -120,7 +117,7 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked:{
-                                 App.protoManager.tunnelFanDevControl.queryData()
+
                             }
                         }
                         Rectangle {
@@ -132,14 +129,15 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked: {
-                                if(!(count.acceptableInput&&address.acceptableInput&&format.acceptableInput))
-                                {
+                                if(!(count.acceptableInput
+                                     &&address.acceptableInput
+                                     &&format.acceptableInput
+                                     )){
                                     message("error","格式设置错误")
                                     return
                                 }
-                                else
-                                {
-                                    App.protoManager.tunnelFanDevControl.setData()
+                                else{
+
                                 }
                             }
                         }

@@ -5,6 +5,8 @@
 #include "QmlGlobal.h"
 #include "ParaFactManager.h"
 #include "ProtocolManager.h"
+
+#include "groups/TunnelGasDevFactGroup.h"
 Application* Application::_app = nullptr;
 Application::Application(int &argc, char* argv[])
     :QApplication(argc, argv)

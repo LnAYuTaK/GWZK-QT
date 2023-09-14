@@ -63,8 +63,8 @@ void LocalNetParaController::setData()
         QByteArray wifiName(8,'\x00');
         wifiName.replace(0,wifiNameSource.size(),wifiNameSource);
         //备用字节12个
-        QByteArray standby(12,'\x00');
-        //数据包总共 56
+        QByteArray standby(4,'\x00');
+        //数据包总共 48
         QByteArray packData = ipAdd1Data+
                               gateway1Data+
                               mask1Data+
@@ -98,7 +98,7 @@ void LocalNetParaController::handleRecv(ProtocolManager::ReccType type,QByteArra
                         + QString::number(QChar(data.at(2)).unicode())
                         +"."
                         + QString::number(QChar(data.at(3)).unicode());
-            qDebug() << localIp1_;
+            setLocalIp1(localIp1_);
             //本地IP网关地址1
             localGateway1_ =   QString::number(QChar(data.at(4)).unicode())
                              +"."
@@ -107,7 +107,8 @@ void LocalNetParaController::handleRecv(ProtocolManager::ReccType type,QByteArra
                              + QString::number(QChar(data.at(6)).unicode())
                              +"."
                              + QString::number(QChar(data.at(7)).unicode());
-            qDebug() << localGateway1_;
+           // qDebug() << localGateway1_;
+            setLocalGateway1(localGateway1_);
             //子网掩码1
             localMask1_ =   QString::number(QChar(data.at(8)).unicode())
                           +"."
@@ -116,7 +117,8 @@ void LocalNetParaController::handleRecv(ProtocolManager::ReccType type,QByteArra
                           + QString::number(QChar(data.at(10)).unicode())
                           +"."
                           + QString::number(QChar(data.at(11)).unicode());
-            qDebug() << localMask1_;
+            //qDebug() << localMask1_;
+            setLocalMask1(localMask1_);
             //本地IPMAC地址1
             localMACAddr1_ =   QString::number(QChar(data.at(12)).unicode())
                              +":"
@@ -129,16 +131,17 @@ void LocalNetParaController::handleRecv(ProtocolManager::ReccType type,QByteArra
                              + QString::number(QChar(data.at(16)).unicode())
                              +":"
                              + QString::number(QChar(data.at(17)).unicode());
-            qDebug() << localMACAddr1_;
-
-            QString localIp2_  = QString::number(QChar(data.at(18)).unicode())
+            //qDebug() << localMACAddr1_;
+            setLocalMACAddr1(localMACAddr1_);
+            localIp2_        =  QString::number(QChar(data.at(18)).unicode())
                                 +"."
                                 + QString::number(QChar(data.at(19)).unicode())
                                 +"."
                                 + QString::number(QChar(data.at(20)).unicode())
                                 +"."
                                 + QString::number(QChar(data.at(21)).unicode());
-            qDebug() << localIp2_;
+            //qDebug() << localIp2_;
+            setLocalIp2(localIp2_);
             //本地IP网关地址1
             localGateway2_=   QString::number(QChar(data.at(22)).unicode())
                              +"."
@@ -147,7 +150,8 @@ void LocalNetParaController::handleRecv(ProtocolManager::ReccType type,QByteArra
                              + QString::number(QChar(data.at(24)).unicode())
                              +"."
                              + QString::number(QChar(data.at(25)).unicode());
-            qDebug() << localGateway2_;
+           // qDebug() << localGateway2_;
+            setLocalGateway2(localGateway2_);
             //子网掩码1
             localMask2_ =   QString::number(QChar(data.at(26)).unicode())
                           +"."
@@ -156,7 +160,8 @@ void LocalNetParaController::handleRecv(ProtocolManager::ReccType type,QByteArra
                           + QString::number(QChar(data.at(28)).unicode())
                           +"."
                           + QString::number(QChar(data.at(29)).unicode());
-            qDebug() << localMask2_;
+            //qDebug() << localMask2_;
+            setLocalMask2(localMask2_);
             //本地IPMAC地址1
             localMACAddr2_=   QString::number(QChar(data.at(30)).unicode())
                              +":"
@@ -169,15 +174,16 @@ void LocalNetParaController::handleRecv(ProtocolManager::ReccType type,QByteArra
                              + QString::number(QChar(data.at(34)).unicode())
                              +":"
                              + QString::number(QChar(data.at(35)).unicode());
-            qDebug() << localMACAddr2_;
+           // qDebug() << localMACAddr2_;
+            setLocalMACAddr2(localMACAddr2_);
             //八个字符添加到
             auto i = 8;
             QByteArray wifiBytes{};
-            while(i--)
-            {
+            while(i--){
                 wifiBytes.prepend(data.at(36+i));
             }
-            localWifiName_  = QString::fromUtf8(wifiBytes);
+            setLocalWifiName(QString::fromUtf8(wifiBytes));
+            //qDebug() << QString::fromUtf8(wifiBytes);
         }
     }
     else if(type == ProtocolManager::HandleWrite) {

@@ -4,7 +4,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
-#include "appSrc/Utils.h"
 #include "appSrc/NetWorkManager.h"
 
 WaterLevelController::WaterLevelController(QObject *parent)
@@ -12,8 +11,9 @@ WaterLevelController::WaterLevelController(QObject *parent)
     ,regList_(app()->paraFactMgr()->WaterLevel())
     ,count_(0)
     ,cycle_(0)
+    ,stateCycle_(0)
     ,channel_(0)
-    ,format_("递增")
+    ,format_(QString::fromLocal8Bit("递增"))
     ,address_("")
 {
 
@@ -37,31 +37,31 @@ void WaterLevelController::setData()
         auto adressVector = regList_->getAddress();
         auto start =  QByteArray::fromHex(adressVector.at(0).toLatin1());
         //地址 17字节
-        QByteArray byteArray =QByteArray(address_.toUtf8())+QByteArray(1, '\x00');;
+        if(address_.size()<17){
+            return ;
+        }
+        QByteArray byteArray =QByteArray(address_.left(17).toLatin1())+QByteArray(1, '\x00');;
         //格式 2字节
         int format = 0;
-        if(format_ == "递增"){
-            format=0;
-        }
-        else if(format_ == "相同"){
-            format=0;
-        }
+        (format_==QString::fromLocal8Bit("递增"))?format = 0:format=1;
         auto formatData = ProtocolManager::intToHexByteArray(format);
-        //数量 2字节
         auto countData = ProtocolManager::intToHexByteArray(count_);
-        //周期 2字节
+        //数据周期 2字节
         auto cycleData = ProtocolManager::intToHexByteArray(cycle_);
-        //通道 2字节
+        //状态周期 2字节
+        auto stateCycleData = ProtocolManager::intToHexByteArray(stateCycle_);
+        //通道
         auto channelData = ProtocolManager::intToHexByteArray(channel_);
-        //备用 6字节
-        QByteArray standby(6, '\x00');
+        //备用 4字节
+        QByteArray standby(4, '\x00');
         //数据包总共 31字节
-        QByteArray packData  = byteArray +
-                               formatData +
-                               countData +
-                               cycleData +
-                               channelData +
-                               standby;
+        QByteArray packData = byteArray +
+                              formatData +
+                              countData +
+                              cycleData +
+                              stateCycleData +
+                              channelData +
+                              standby;
         qDebug() << "WaterLevelControllerSendPack Size: " << packData.size();
         auto sendMsg = ProtocolManager::makeWriteRegProto(start,adressVector.count(),packData);
         qDebug() << "WaterLevelController SendMsg Size: " <<sendMsg.size();
@@ -91,16 +91,22 @@ void WaterLevelController::handleRecv(ProtocolManager::ReccType type,QByteArray 
         countdata.append(data.at(20)).append(data.at(21));
         count =  countdata.toHex().toInt(nullptr,16);
         setCount(count);
-        //周期 2字节
+        //数据周期 2字节
         QByteArray cycledata{};
         int cycle= 0;
         cycledata.append(data.at(22)).append(data.at(23));
         cycle =  cycledata.toHex().toInt(nullptr,16);
         setCycle(cycle);
+        //状态周期 2字节
+        QByteArray stateCycledata{};
+        int stateCycle= 0;
+        stateCycledata.append(data.at(24)).append(data.at(25));
+        stateCycle  =  stateCycledata.toHex().toInt(nullptr,16);
+        setStateCycle(stateCycle);
         //通道 2字节
         QByteArray channeldata{};
         int channel= 0;
-        channeldata.append(data.at(24)).append(data.at(25));
+        channeldata.append(data.at(26)).append(data.at(27));
         channel=  channeldata.toHex().toInt(nullptr,16);
         setChannel(channel);
     }

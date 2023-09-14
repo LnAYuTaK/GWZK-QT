@@ -14,13 +14,13 @@
 #include <QObject>
 #include <QTcpSocket>
 #include <QThread>
+
 class ProtocolManager;
 enum LinkType{
     TCP_LINK,
     MQTT_LINK,
     UDP_LINK
 };
-
 class NetWorkManager : public QObject
 {
     Q_OBJECT
@@ -28,26 +28,24 @@ public:
     Q_ENUM(LinkType)
     explicit NetWorkManager(QObject *parent = nullptr);
     ~NetWorkManager();
-
-    Q_PROPERTY(bool  IsTcpConnected READ IsTcpConnected NOTIFY ConnectedChanged);
+    Q_PROPERTY(bool  IsTcpConnected READ IsTcpConnected WRITE setTcpConnected NOTIFY ConnectedChanged);
 public:
+
     bool IsTcpConnected ()const{ return this->_socketIsConnected;}
-    //*********TCP*********//
-    //连接函数
+    void setTcpConnected(bool connect);
+
     Q_INVOKABLE bool tcpConnect(QString IP,QString port);
-    //断开函数
     Q_INVOKABLE void tcpDisConnect();
 signals:
-    void InfoMsg            (QString  type,QString Msg);
     void bytesReceived      (QObject* link, QByteArray data);
     void bytesSent          (QObject* link, QByteArray data);
     void ConnectedChanged (bool isconnect);
 public  slots:
+     void _tcpWriteBytes (const QByteArray data);
+private slots:
     //*********TCP*********//
     bool _tcpConnect(QString IP,qint16 port);
     void _tcpReadBytes  ();
-    void _tcpWriteBytes (const QByteArray data);
-    void _tcpDisConnect();
 private:
     bool              _socketIsConnected;
     QTcpSocket *      _socket;

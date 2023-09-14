@@ -72,19 +72,19 @@
         {
             "address":     "0x00EB",
             "operate":     "R/W",
-            "content":     "气体单元周期",
+            "content":     "气体单元数据周期",
             "format" :     "单位min，默认为0"
         },
         {
             "address":     "0x00EC",
             "operate":     "R/W",
-            "content":     "气体单元通道",
+            "content":     "气体单元状态周期",
             "format" :     "无量纲,默认为0,备用"
         },
         {
             "address":     "0x00ED",
             "operate":     "R/W",
-            "content":     "",
+            "content":     "单元通道",
             "format" :     "备用"
         },
         {

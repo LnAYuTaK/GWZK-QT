@@ -36,7 +36,7 @@ Item {
                         BaseCheckBox{
                             id  :checkbox
                             onClicked: {
-                                  App.protoManager.mainParaController.encrypted= checkState
+
                             }
                         }
                         YaheiText {
@@ -47,16 +47,16 @@ Item {
                         BaseComboBox{
                           Layout.preferredWidth:120
                           Layout.preferredHeight: 40
-                          model: ["南瑞", "中普","SD卡加密","其他"]
+                          model: ["南瑞", "普华","SD卡加密","其他"]
                            onCurrentTextChanged: {
-                            App.protoManager.mainParaController.encrypType = currentText
+
                           }
                           enabled: checkbox.checkState
                         }
                         BaseTextField{
                             readOnly: true
                             Layout.preferredWidth:140
-                            text: App.protoManager.mainParaController.encrypType
+
                         }
                     }
                     RowLayout{
@@ -72,13 +72,13 @@ Item {
                           Layout.preferredHeight: 40
                           model: ["GPRS", "本地串口","本地网络","其他"]
                            onCurrentTextChanged: {
-                              App.protoManager.mainParaController.commType = currentText
+
                           }
                         }
                         BaseTextField{
                             readOnly:  true
                             Layout.preferredWidth:140
-                            text:App.protoManager.mainParaController.commType
+
                         }
                     }
                     RowLayout{
@@ -97,9 +97,9 @@ Item {
                             }
                             maximumLength: 16
                             onTextChanged: {
-                                App.protoManager.mainParaController.address = text
+
                             }
-                            text : App.protoManager.mainParaController.address
+
                         }
                     }
                     RowLayout{
@@ -113,7 +113,7 @@ Item {
                         BaseTextField{
                             readOnly: true
                             Layout.preferredWidth:280
-                            text: App.protoManager.mainParaController.softVersion
+
                         }
                     }
                     RowLayout{
@@ -124,7 +124,7 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked:{
-                                 App.protoManager.mainParaController.queryData()
+
                             }
                         }
                         Rectangle {
@@ -141,7 +141,6 @@ Item {
                                    message("error","主控地址设置错误")
                                    return
                                 }
-                                App.protoManager.mainParaController.setData()
                             }
                         }
                     }

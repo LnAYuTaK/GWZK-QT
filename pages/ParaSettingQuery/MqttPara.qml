@@ -42,13 +42,10 @@ Item {
                                 regExp: /^((([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.){3})([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$/
                             }
                             onEditingFinished: {
-                                if(acceptableInput)
-                                {
-                                   App.protoManager.MqttParaCtrl.MqttIp = text
+                                if(acceptableInput){
+
                                 }
                             }
-                            text : App.protoManager.MqttParaCtrl.MqttIp
-
                         }
                     }
                     RowLayout{
@@ -69,12 +66,11 @@ Item {
                                   top: 65535
                             }
                             onEditingFinished: {
-                                if(acceptableInput)
-                                {
-                                    App.protoManager.MqttParaCtrl.MqttPort = text
+                                if(acceptableInput){
+
                                 }
                             }
-                            text : App.protoManager.MqttParaCtrl.MqttPort
+
                         }
                     }
                     RowLayout{
@@ -92,12 +88,10 @@ Item {
                             color: acceptableInput  ? "black" : "#ff0000"
                             maximumLength: 32
                             onEditingFinished: {
-                                if(acceptableInput)
-                                {
-                                   App.protoManager.MqttParaCtrl.MqttClientId = text
+                                if(acceptableInput){
+
                                 }
                             }
-                            text: App.protoManager.MqttParaCtrl.MqttClientId
                         }
                     }
                     RowLayout{
@@ -115,12 +109,10 @@ Item {
                             color: acceptableInput  ? "black" : "#ff0000"
                             maximumLength: 32
                             onEditingFinished: {
-                                if(acceptableInput)
-                                {
-                                    App.protoManager.MqttParaCtrl.MqttUserName = text
+                                if(acceptableInput){
+
                                 }
                             }
-                            text: App.protoManager.MqttParaCtrl.MqttUserName
                         }
                     }
                     RowLayout{
@@ -138,12 +130,10 @@ Item {
                             color: acceptableInput  ? "black" : "#ff0000"
                             maximumLength: 32
                             onEditingFinished: {
-                                if(acceptableInput)
-                                {
-                                    App.protoManager.MqttParaCtrl.MqttPasswd = text
+                                if(acceptableInput){
+
                                 }
                             }
-                            text:App.protoManager.MqttParaCtrl.MqttPasswd
                         }
                     }
                     RowLayout{
@@ -154,7 +144,7 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked: {
-                                App.protoManager.MqttParaCtrl.queryData()
+
                             }
                         }
                         Rectangle {
@@ -175,9 +165,7 @@ Item {
                                           message("error","格式设置错误")
                                           return
                                     }
-                                    else
-                                    {
-                                       App.protoManager.netParaController.setData()
+                                    else {
                                     }
                             }
 

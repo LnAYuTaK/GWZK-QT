@@ -10,13 +10,13 @@
 GasPara::GasPara(int type,JsonFactGroup *regList)
     :type_(type)
     ,regList_(regList)
-    ,upThresholdLimitLevel1_(0)
-    ,lowThresholdLimitLevel1_(0)
-    ,upThresholdLimitLevel2_(0)
-    ,lowThresholdLimitLevel2_(0)
-    ,upThresholdLimitLevel3_(0)
-    ,lowThresholdLimitLevel3_(0)
-    ,keepThresholdLimit_(0)
+    ,upThresholdLimitLevel1_("")
+    ,lowThresholdLimitLevel1_("")
+    ,upThresholdLimitLevel2_("")
+    ,lowThresholdLimitLevel2_("")
+    ,upThresholdLimitLevel3_("")
+    ,lowThresholdLimitLevel3_("")
+    ,keepThresholdLimit_("")
 {
     qmlRegisterUncreatableType<GasPara>("App.ProtocolManager", 1, 0,"GasPara","Reference only");
 }
@@ -62,22 +62,23 @@ void GasPara::setData()
 {
     if(app()->netWorkMgr()->IsTcpConnected())
     {
+        int multiple  = 100;
         auto adressVector  = regList_->getAddress();
         auto start =  QByteArray::fromHex(adressVector.at(0).toLatin1());
         //报警阈值上限等级1 2字节
-        auto uplimit1  = ProtocolManager::intToHexByteArray(upThresholdLimitLevel1_);
+        auto uplimit1  = ProtocolManager::intToHexByteArray(upThresholdLimitLevel1_.toFloat()*multiple);
         //报警阈值下限等级1 2字节
-        auto lowlimit1 = ProtocolManager::intToHexByteArray(lowThresholdLimitLevel1_);
+        auto lowlimit1 = ProtocolManager::intToHexByteArray(lowThresholdLimitLevel1_.toFloat()*multiple);
         //报警阈值上限等级2 2字节
-        auto uplimit2  = ProtocolManager::intToHexByteArray(upThresholdLimitLevel2_);
+        auto uplimit2  = ProtocolManager::intToHexByteArray(upThresholdLimitLevel2_.toFloat()*multiple);
         //报警阈值下限等级2 2字节
-        auto lowlimit2 = ProtocolManager::intToHexByteArray(lowThresholdLimitLevel2_);
+        auto lowlimit2 = ProtocolManager::intToHexByteArray(lowThresholdLimitLevel2_.toFloat()*multiple);
         //报警阈值上限等级3 2字节
-        auto uplimit3  = ProtocolManager::intToHexByteArray(upThresholdLimitLevel3_);
+        auto uplimit3  = ProtocolManager::intToHexByteArray(upThresholdLimitLevel3_.toFloat()*multiple);
         //报警阈值下限等级3 2字节
-        auto lowlimit3 = ProtocolManager::intToHexByteArray(lowThresholdLimitLevel3_);
+        auto lowlimit3 = ProtocolManager::intToHexByteArray(lowThresholdLimitLevel3_.toFloat()*multiple);
         //防抖阈值 2字节
-        auto keeplimit = ProtocolManager::intToHexByteArray(keepThresholdLimit_);
+        auto keeplimit = ProtocolManager::intToHexByteArray(keepThresholdLimit_.toFloat()*multiple);
         //备用字节 4字节
         QByteArray standby(4, '\x00');
         //数据包共 16字节
@@ -169,79 +170,218 @@ void GasParaController::setData(GasType type)
 void GasParaController::recvSeleteType(GasType type,GasPara *target,QByteArray data)
 {
     auto resdata = ProtocolManager::SpiltData(data);
-    if(resdata.size()==9)
+    if(resdata.size() == 9)
     {
         switch (type) {
         case O2:
-            gasO2_->setUpThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[0]));
-            gasO2_->setLowThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[1]));
-            gasO2_->setUpThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[2]));
-            gasO2_->setLowThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[3]));
-            gasO2_->setUpThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[4]));
-            gasO2_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[5]));
-            gasO2_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[6]));
-            gasO2_->setKeepThresholdLimit((int)ProtocolManager::bytesToshort(resdata[7]));
+            gasO2_->setUpThresholdLimitLevel1(
+                QString::number(
+                    resdata[0].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasO2_->setLowThresholdLimitLevel1(
+                QString::number(
+                    resdata[1].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasO2_->setUpThresholdLimitLevel2(
+                QString::number(
+                    resdata[2].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasO2_->setLowThresholdLimitLevel2(
+                QString::number(
+                    resdata[3].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasO2_->setUpThresholdLimitLevel3(
+                QString::number(
+                    resdata[4].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasO2_->setLowThresholdLimitLevel3(
+                QString::number(
+                    resdata[5].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasO2_->setKeepThresholdLimit(
+                QString::number(
+                    resdata[6].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
             break;
         case H2:
-            gasH2_->setUpThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[0]));
-            gasH2_->setLowThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[1]));
-            gasH2_->setUpThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[2]));
-            gasH2_->setLowThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[3]));
-            gasH2_->setUpThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[4]));
-            gasH2_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[5]));
-            gasH2_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[6]));
-            gasH2_->setKeepThresholdLimit((int)ProtocolManager::bytesToshort(resdata[7]));
+            gasH2_->setUpThresholdLimitLevel1(
+                QString::number(
+                    resdata[0].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasH2_->setLowThresholdLimitLevel1(
+                QString::number(
+                    resdata[1].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasH2_->setUpThresholdLimitLevel2(
+                QString::number(
+                    resdata[2].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasH2_->setLowThresholdLimitLevel2(
+                QString::number(
+                    resdata[3].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasH2_->setUpThresholdLimitLevel3(
+                QString::number(
+                    resdata[4].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasH2_->setLowThresholdLimitLevel3(
+                QString::number(
+                    resdata[5].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasH2_->setKeepThresholdLimit(
+                QString::number(
+                    resdata[6].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
             break;
         case Cl2:
-            gasCl2_->setUpThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[0]));
-            gasCl2_->setLowThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[1]));
-            gasCl2_->setUpThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[2]));
-            gasCl2_->setLowThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[3]));
-            gasCl2_->setUpThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[4]));
-            gasCl2_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[5]));
-            gasCl2_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[6]));
-            gasCl2_->setKeepThresholdLimit((int)ProtocolManager::bytesToshort(resdata[7]));
+            gasCl2_->setUpThresholdLimitLevel1(
+                QString::number(
+                    resdata[0].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCl2_->setLowThresholdLimitLevel1(
+                QString::number(
+                    resdata[1].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCl2_->setUpThresholdLimitLevel2(
+                QString::number(
+                    resdata[2].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCl2_->setLowThresholdLimitLevel2(
+                QString::number(
+                    resdata[3].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCl2_->setUpThresholdLimitLevel3(
+                QString::number(
+                    resdata[4].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCl2_->setLowThresholdLimitLevel3(
+                QString::number(
+                    resdata[5].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCl2_->setKeepThresholdLimit(
+                QString::number(
+                    resdata[6].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
             break;
         case H2S:
-             qDebug() << "Handle H2S1111: "<< data;
-            gasH2S_->setUpThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[0]));
-            gasH2S_->setLowThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[1]));
-            gasH2S_->setUpThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[2]));
-            gasH2S_->setLowThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[3]));
-            gasH2S_->setUpThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[4]));
-            gasH2S_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[5]));
-            gasH2S_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[6]));
-            gasH2S_->setKeepThresholdLimit((int)ProtocolManager::bytesToshort(resdata[7]));
+            gasH2S_->setUpThresholdLimitLevel1(
+                QString::number(
+                    resdata[0].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasH2S_->setLowThresholdLimitLevel1(
+                QString::number(
+                    resdata[1].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasH2S_->setUpThresholdLimitLevel2(
+                QString::number(
+                    resdata[2].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasH2S_->setLowThresholdLimitLevel2(
+                QString::number(
+                    resdata[3].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasH2S_->setUpThresholdLimitLevel3(
+                QString::number(
+                    resdata[4].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasH2S_->setLowThresholdLimitLevel3(
+                QString::number(
+                    resdata[5].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasH2S_->setKeepThresholdLimit(
+                QString::number(
+                    resdata[6].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
             break;
         case CH4:
-            gasCH4_->setUpThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[0]));
-            gasCH4_->setLowThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[1]));
-            gasCH4_->setUpThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[2]));
-            gasCH4_->setLowThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[3]));
-            gasCH4_->setUpThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[4]));
-            gasCH4_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[5]));
-            gasCH4_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[6]));
-            gasCH4_->setKeepThresholdLimit((int)ProtocolManager::bytesToshort(resdata[7]));
+            gasCH4_->setUpThresholdLimitLevel1(
+                QString::number(
+                    resdata[0].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCH4_->setLowThresholdLimitLevel1(
+                QString::number(
+                    resdata[1].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCH4_->setUpThresholdLimitLevel2(
+                QString::number(
+                    resdata[2].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCH4_->setLowThresholdLimitLevel2(
+                QString::number(
+                    resdata[3].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCH4_->setUpThresholdLimitLevel3(
+                QString::number(
+                    resdata[4].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCH4_->setLowThresholdLimitLevel3(
+                QString::number(
+                    resdata[5].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCH4_->setKeepThresholdLimit(
+                QString::number(
+                    resdata[6].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
             break;
         case CO:
-            gasCO_->setUpThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[0]));
-            gasCO_->setLowThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[1]));
-            gasCO_->setUpThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[2]));
-            gasCO_->setLowThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[3]));
-            gasCO_->setUpThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[4]));
-            gasCO_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[5]));
-            gasCO_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[6]));
-            gasCO_->setKeepThresholdLimit((int)ProtocolManager::bytesToshort(resdata[7]));
+            gasCO_->setUpThresholdLimitLevel1(
+                QString::number(
+                    resdata[0].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCO_->setLowThresholdLimitLevel1(
+                QString::number(
+                    resdata[1].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCO_->setUpThresholdLimitLevel2(
+                QString::number(
+                    resdata[2].toHex().toInt(nullptr,16)/100.0,'f',2)
+             );
+            gasCO_->setLowThresholdLimitLevel2(
+                QString::number(
+                    resdata[3].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCO_->setUpThresholdLimitLevel3(
+                QString::number(
+                    resdata[4].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCO_->setLowThresholdLimitLevel3(
+                QString::number(
+                    resdata[5].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCO_->setKeepThresholdLimit(
+                QString::number(
+                    resdata[6].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
             break;
         case CO2:
-            gasCO2_->setUpThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[0]));
-            gasCO2_->setLowThresholdLimitLevel1((int)ProtocolManager::bytesToshort(resdata[1]));
-            gasCO2_->setUpThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[2]));
-            gasCO2_->setLowThresholdLimitLevel2((int)ProtocolManager::bytesToshort(resdata[3]));
-            gasCO2_->setUpThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[4]));
-            gasCO2_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[5]));
-            gasCO2_->setLowThresholdLimitLevel3((int)ProtocolManager::bytesToshort(resdata[6]));
-            gasCO2_->setKeepThresholdLimit((int)ProtocolManager::bytesToshort(resdata[7]));
+            gasCO2_->setUpThresholdLimitLevel1(
+                QString::number(
+                    resdata[0].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCO2_->setLowThresholdLimitLevel1(
+                QString::number(
+                    resdata[1].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCO2_->setUpThresholdLimitLevel2(
+                QString::number(
+                    resdata[2].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCO2_->setLowThresholdLimitLevel2(
+                QString::number(
+                    resdata[3].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCO2_->setUpThresholdLimitLevel3(
+                QString::number(
+                    resdata[4].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCO2_->setLowThresholdLimitLevel3(
+                QString::number(
+                    resdata[5].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
+            gasCO2_->setKeepThresholdLimit(
+                QString::number(
+                    resdata[6].toHex().toInt(nullptr,16)/100.0,'f',2)
+            );
             break;
         default:
             break;

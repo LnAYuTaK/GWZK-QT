@@ -16,8 +16,8 @@ Frameless {
             Qt.rect(0, 0, 99999, 42)
     ]
     property int skintype :0
-    height:    Screen.height/1.5
-    width:    Screen.width/1.5
+    height:    Screen.height/1.7
+    width:    Screen.width/1.2
     x: (Screen.width - width) / 2
     y: (Screen.height - height) / 2
     property color accentColor: SkinSingleton.skins[skintype].accentColor              // 皮肤深色
@@ -89,5 +89,4 @@ Frameless {
         property string skinCustomFile: ""
         fileName: "app.ini"
     }
-
 }

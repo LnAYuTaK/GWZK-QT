@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtGraphicalEffects 1.12
 Slider {
@@ -20,7 +20,6 @@ Slider {
 
          }
      }
-
      handle: Rectangle {
          x: _slider.leftPadding + _slider.visualPosition * (_slider.availableWidth - width)
          y: _slider.topPadding + _slider.availableHeight / 2 - height / 2

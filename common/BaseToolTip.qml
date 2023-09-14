@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Controls.Material 2.12
 import QtQuick.Controls 2.12
 
@@ -10,7 +10,6 @@ ToolTip {
     leftPadding: 3
     rightPadding: 3
     Material.foreground: "#EEE"
-
     font.family: "Microsoft Yahei"
     delay: 1000
 }

@@ -24,14 +24,14 @@ Item {
                     anchors.margins: 30
                     anchors.fill: parent
                     spacing: 20
-                    //数量--周期--通道
+                    //数量-状态周期-数据周期-通道
                     RowLayout {
                         Layout.fillWidth: true  // 外部 Row，子项填充水平空间
                         Row{
                             spacing:10
                             YaheiText {
                                 anchors.centerIn: parent.Center
-                                text: "数量"
+                                text: qsTr("数量")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment: Qt.AlignTop | Qt.AlignLeft
@@ -48,10 +48,9 @@ Item {
                                 onEditingFinished: {
                                     //验证通过写入
                                     if(acceptableInput){
-                                       App.protoManager.tunnelGasDevControl.count = text
+
                                     }
                                 }
-                                text:App.protoManager.tunnelGasDevControl.count
 
                             }
                         }
@@ -59,7 +58,7 @@ Item {
                             spacing:10
                             YaheiText {
                                 anchors.centerIn: parent.Center
-                                text: "周期"
+                                text: qsTr("数据周期(min)")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment: Qt.AlignTop | Qt.AlignLeft
@@ -77,17 +76,46 @@ Item {
                                      //验证通过写入
                                      if(acceptableInput)
                                      {
-                                         App.protoManager.tunnelGasDevControl.cycle = text
+
                                      }
                                  }
-                                 text :App.protoManager.tunnelGasDevControl.cycle
+
                             }
                         }
                         Row {
                             spacing:10
                             YaheiText {
                                 anchors.centerIn: parent.Center
-                                text: "通道"
+                                text: qsTr("状态周期(sec)")
+                                font.pixelSize: fontsize
+                                Layout.preferredWidth: leftWidth
+                                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                            }
+                            BaseTextField {
+                                id: stateCycle
+                                 width :90
+                                 color: acceptableInput  ? "black" : "#ff0000"
+                                 //0-65535
+                                 validator: IntValidator {
+                                       bottom: 0
+                                       top: 65535
+                                 }
+                                 onEditingFinished: {
+                                     //验证通过写入
+                                     if(acceptableInput)
+                                     {
+
+                                     }
+                                 }
+
+                            }
+                        }
+
+                        Row {
+                            spacing:10
+                            YaheiText {
+                                anchors.centerIn: parent.Center
+                                text: qsTr("通道")
                                 font.pixelSize: fontsize
                                 Layout.preferredWidth: leftWidth
                                 Layout.alignment: Qt.AlignTop | Qt.AlignLeft
@@ -105,10 +133,10 @@ Item {
                                     //验证通过写入
                                     if(acceptableInput)
                                     {
-                                         App.protoManager.tunnelGasDevControl.channel = text
+
                                     }
                                 }
-                                text:App.protoManager.tunnelGasDevControl.channel
+
                             }
                         }
                     }
@@ -132,13 +160,13 @@ Item {
                           Layout.preferredHeight: 40
                           model: ["递增", "相同"]
                           onCurrentTextChanged: {
-                             App.protoManager.tunnelGasDevControl.format = currentText
+
                           }
                         }
                         BaseTextField{
                             readOnly: true
                             Layout.preferredWidth:140
-                            text: App.protoManager.tunnelGasDevControl.format
+
                         }
 
                     }
@@ -155,17 +183,18 @@ Item {
                         BaseTextField{
                             id:address
                             Layout.preferredWidth:280
+                            color: acceptableInput  ? "black" : "#ff0000"
                             validator: RegExpValidator {
                                 regExp: /^[a-zA-Z0-9]*$/ // 只允许输入字母和数字
                             }
-                            color: acceptableInput  ? "black" : "#ff0000"
+                            maximumLength: 17
                             onEditingFinished: {
                                 if(acceptableInput)
                                 {
-                                  App.protoManager.tunnelGasDevControl.address = text
+
                                 }
                             }
-                            text: App.protoManager.tunnelGasDevControl.address
+
                         }
                     }
                     RowLayout{
@@ -176,7 +205,7 @@ Item {
                             backRadius: 4
                             bckcolor: "#4785FF"
                             onClicked:{
-                                    App.protoManager.tunnelGasDevControl.queryData()
+
                             }
                         }
                         Rectangle {
@@ -191,6 +220,7 @@ Item {
                                 //校验输入数据
                                 if(!(count.acceptableInput&&
                                      cycle.acceptableInput&&
+                                     stateCycle.acceptableInput &&
                                      address.acceptableInput&&
                                      channel.acceptableInput))
                                 {
@@ -198,7 +228,7 @@ Item {
                                     return
                                 }
                                 else{
-                                    App.protoManager.tunnelGasDevControl.setData()
+
                                 }
 
                             }

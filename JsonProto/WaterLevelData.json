@@ -1,0 +1,37 @@
+﻿{
+    "version":      1.0,
+    "componentid":  3,
+    "WaterLevelData":
+    [
+        {
+            "address":     "0x0171",
+            "operate":     "R/W",
+            "content":     "液位数据",
+            "format" :     "单位：cm；扩大10倍"
+        },
+        {
+            "address":     "0x0172",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0173",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0174",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     ""
+        },
+        {
+            "address":     "0x0175",
+            "operate":     "R/W",
+            "content":     "备用",
+            "format" :     ""
+        }
+    ]
+}

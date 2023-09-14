@@ -19,194 +19,223 @@ Item {
         clip:         true
         ScrollBar.vertical.interactive: true
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-                ColumnLayout {
-                    id: contents
-                    anchors.margins: 30
-                    anchors.fill: parent
-                    spacing: 20
-                    //数量--周期--通道
-                    RowLayout {
-                        Layout.fillWidth: true  // 外部 Row，子项填充水平空间
-                        Row{
-                            spacing:10
-                            YaheiText {
-                                anchors.centerIn: parent.Center
-                                text: qsTr("数量")
-                                font.pixelSize: fontsize
-                                Layout.preferredWidth: leftWidth
-                                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                            }
-                            BaseTextField{
-                                width :90
-                                id:count
-                                color: acceptableInput  ? "black" : "#ff0000"
-                                validator: IntValidator {
-                                      bottom: 0
-                                      top: 65535
-                                }
-                                onEditingFinished: {
-                                    //验证通过写入
-                                    if(acceptableInput)
-                                    {
-                                        App.protoManager.WaterLevelCtrl.count = text
-                                    }
-                                }
-                                text:App.protoManager.WaterLevelCtrl.count
-                            }
-                        }
-                        Row {
-                            spacing:10
-                            YaheiText {
-                                anchors.centerIn: parent.Center
-                                text: qsTr("周期")
-                                font.pixelSize: fontsize
-                                Layout.preferredWidth: leftWidth
-                                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                            }
-                            BaseTextField {
-                                id: cycle
-                                 width :90
-                                 color: acceptableInput  ? "black" : "#ff0000"
-                                 //0-65535
-                                 validator: IntValidator {
-                                       bottom: 0
-                                       top: 65535
-                                 }
-                                 onEditingFinished: {
-                                     //验证通过写入
-                                     if(acceptableInput)
-                                     {
-                                         App.protoManager.WaterLevelCtrl.cycle = text
-                                     }
-                                 }
-                                 text:App.protoManager.WaterLevelCtrl.cycle
-                            }
-                        }
-                        Row {
-                            spacing:10
-                            YaheiText {
-                                anchors.centerIn: parent.Center
-                                text: "通道"
-                                font.pixelSize: fontsize
-                                Layout.preferredWidth: leftWidth
-                                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                            }
-                            BaseTextField{
-                                id:channel
-                                width:90
-                                color: acceptableInput  ? "black" : "#ff0000"
-                                //0-65535
-                                validator: IntValidator {
-                                      bottom: 0
-                                      top: 65535
-                                }
-                                onEditingFinished: {
-                                    //验证通过写入
-                                    if(acceptableInput)
-                                    {
-                                        App.protoManager.WaterLevelCtrl.channel = text
-                                    }
-                                }
-                                text: App.protoManager.WaterLevelCtrl.channel
-                            }
-                        }
-                    }
-                    Rectangle {
-                        height: 1
-                        color: tingeOpacityColor
-                        Layout.fillWidth: true
-                    }
-                    RowLayout{
-                        spacing:10
-                        Layout.fillWidth: true
-                        YaheiText {
-                            anchors.centerIn: parent.Center
-                            text:qsTr("液位地址格式")
-                            font.pixelSize: fontsize
-                            Layout.preferredWidth: leftWidth
-                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                        }
-                        BaseComboBox{
-                          Layout.preferredWidth:120
-                          Layout.preferredHeight: 40
-                          model: ["递增", "相同"]
-                          onCurrentTextChanged: {
-                            App.protoManager.WaterLevelCtrl.format = currentText
-                          }
-                        }
-                        BaseTextField{
-                            readOnly: true
-                            Layout.preferredWidth:140
-                            text: App.protoManager.WaterLevelCtrl.format
-                        }
-                    }
-                    //编码
-                    RowLayout{
+        ColumnLayout {
+                id: contents
+                anchors.margins: 30
+                anchors.fill: parent
+                spacing: 20
+                //数量--数据周期-状态周期-通道
+                Grid {
+                    Layout.fillWidth: true  // 外部 Row，子项填充水平空间
+                    Row{
                         spacing:10
                         YaheiText {
                             anchors.centerIn: parent.Center
-                            text: qsTr("液位装置检测编码")
+                            text: qsTr("数量")
                             font.pixelSize: fontsize
                             Layout.preferredWidth: leftWidth
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                         }
                         BaseTextField{
-                            id:address
-                            Layout.preferredWidth:280
-                            maximumLength: 17
-                            validator: RegExpValidator {
-                                regExp: /^[a-zA-Z0-9]*$/ // 只允许输入字母和数字
+                            width :90
+                            id:count
+                            color: acceptableInput  ? "black" : "#ff0000"
+                            validator: IntValidator {
+                                  bottom: 0
+                                  top: 65535
                             }
                             onEditingFinished: {
+                                //验证通过写入
                                 if(acceptableInput)
                                 {
-                                   App.protoManager.WaterLevelCtrl.address = text
-                                }
-                            }
-                            text:App.protoManager.WaterLevelCtrl.address
-                        }
-                    }
-                    RowLayout{
-                        Layout.fillWidth: true
-                        BaseButton {
-                            text: qsTr("查询")
-                            font.pixelSize:  20
-                            backRadius: 4
-                            bckcolor: "#4785FF"
-                            onClicked:{
-                                App.protoManager.WaterLevelCtrl.queryData()
-                            }
-                        }
-                        Rectangle {
-                             width: 200
-                        }
-                        BaseButton {
-                            text: qsTr("设置")
-                            font.pixelSize:  20
-                            backRadius: 4
-                            bckcolor: "#4785FF"
-                            onClicked: {
-                                if(!(address.acceptableInput
-                                     &&count.acceptableInput
-                                     &&cycle.acceptableInput
-                                     &&channel.acceptableInput))
-                                {
-                                    message("error","格式设置错误")
-                                    return
-                                }
-                                else
-                                {
-                                    App.protoManager.WaterLevelCtrl.setData()
+
                                 }
                             }
                         }
                     }
-                    //填充最底部
-                    Rectangle {
-                         width: parent.width
-                         height: 10
-                     }
+                    Row {
+                        spacing:10
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text: qsTr("数据周期(min)")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField {
+                            id: cycle
+                             width :90
+                             color: acceptableInput  ? "black" : "#ff0000"
+                             //0-65535
+                             validator: IntValidator {
+                                   bottom: 0
+                                   top: 65535
+                             }
+                             onEditingFinished: {
+                                 //验证通过写入
+                                 if(acceptableInput)
+                                 {
+
+                                 }
+                             }
+
+                        }
+                    }
+                    Row {
+                        spacing:10
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text: qsTr("状态周期(sec)")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField {
+                            id: stateCycle
+                             width :90
+                             color: acceptableInput  ? "black" : "#ff0000"
+                             //0-65535
+                             validator: IntValidator {
+                                   bottom: 0
+                                   top: 65535
+                             }
+                             onEditingFinished: {
+                                 //验证通过写入
+                                 if(acceptableInput)
+                                 {
+
+                                 }
+                             }
+
+                        }
+                    }
+                    Row {
+                        spacing:10
+                        YaheiText {
+                            anchors.centerIn: parent.Center
+                            text: qsTr("通道")
+                            font.pixelSize: fontsize
+                            Layout.preferredWidth: leftWidth
+                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        }
+                        BaseTextField{
+                            id:channel
+                            width:90
+                            color: acceptableInput  ? "black" : "#ff0000"
+                            //0-65535
+                            validator: IntValidator {
+                                  bottom: 0
+                                  top: 65535
+                            }
+                            onEditingFinished: {
+                                //验证通过写入
+                                if(acceptableInput)
+                                {
+
+                                }
+                            }
+
+                        }
+                    }
                 }
+                Rectangle {
+                    height: 1
+                    color: tingeOpacityColor
+                    Layout.fillWidth: true
+                }
+                RowLayout{
+                    spacing:10
+                    Layout.fillWidth: true
+                    YaheiText {
+                        anchors.centerIn: parent.Center
+                        text:qsTr("液位地址格式")
+                        font.pixelSize: fontsize
+                        Layout.preferredWidth: leftWidth
+                        Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                    }
+                    BaseComboBox{
+                      Layout.preferredWidth:120
+                      Layout.preferredHeight: 40
+                      model: ["递增", "相同"]
+                      onCurrentTextChanged: {
+
+                      }
+                    }
+                    BaseTextField{
+                        readOnly: true
+                        Layout.preferredWidth:140
+
+                    }
+                }
+                //编码
+                RowLayout{
+                    spacing:10
+                    YaheiText {
+                        anchors.centerIn: parent.Center
+                        text: qsTr("液位装置编码")
+                        font.pixelSize: fontsize
+                        Layout.preferredWidth: leftWidth
+                        Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                    }
+                    BaseTextField{
+                        id:address
+                        Layout.preferredWidth:280
+                        color: acceptableInput  ? "black" : "#ff0000"
+                        validator: RegExpValidator {
+                            regExp: /^[a-zA-Z0-9]*$/ // 只允许输入字母和数字
+                        }
+                        maximumLength: 17
+                        onEditingFinished: {
+                            if(acceptableInput)
+                            {
+
+                            }
+                        }
+
+                    }
+                }
+                RowLayout{
+                    Layout.fillWidth: true
+                    BaseButton {
+                        text: qsTr("查询")
+                        font.pixelSize:  20
+                        backRadius: 4
+                        bckcolor: "#4785FF"
+                        onClicked:{
+
+                        }
+                    }
+                    Rectangle {
+                         width: 200
+                    }
+                    BaseButton {
+                        text: qsTr("设置")
+                        font.pixelSize:  20
+                        backRadius: 4
+                        bckcolor: "#4785FF"
+                        onClicked: {
+                            if(!(address.acceptableInput
+                                 &&count.acceptableInput
+                                 &&cycle.acceptableInput
+                                 &&stateCycle.acceptableInput
+                                 &&channel.acceptableInput))
+                            {
+                                message("error","格式设置错误")
+                                return
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                }
+                //填充最底部
+                Rectangle {
+                     width: parent.width
+                     height: 10
+                 }
+            }
         }
         Message{
             id:messageTip

@@ -16,7 +16,6 @@
         <file>windowRes/close.png</file>
         <file>windowRes/close_hover.png</file>
         <file>windowRes/close2.png</file>
-        <file>windowRes/icon.png</file>
         <file>windowRes/max.png</file>
         <file>windowRes/minimize.png</file>
         <file>windowRes/normal.png</file>
@@ -45,15 +44,6 @@
         <file>common/qmlQianDialog/ok.png</file>
         <file>common/qmlQianDialog/question.png</file>
         <file>common/qmlQianDialog/BlogDialog.qml</file>
-        <file>pages/DeviceList/DeviceList_Dance.qml</file>
-        <file>pages/DeviceList/DeviceList_Image.qml</file>
-        <file>pages/DeviceList/DeviceList_MeteoView.qml</file>
-        <file>pages/DeviceList/DeviceList_TowerIncline.qml</file>
-        <file>pages/DeviceList/DeviceList_WindYaw.qml</file>
-        <file>pages/DeviceList/DeviceList_WireSag.qml</file>
-        <file>pages/DeviceList/DeviceList_WireTemp.qml</file>
-        <file>pages/DeviceList/DevicerList_BreezeScope.qml</file>
-        <file>pages/DeviceList/DevicerList_FrostySensor.qml</file>
         <file>common/BaseComboBox.qml</file>
         <file>pages/ParaSettingQuery/BGNetworkPara.qml</file>
         <file>pages/ParaSettingQuery/LocalNetPara.qml</file>
@@ -79,6 +69,13 @@
         <file>pages/DeviceList/DeviceList_WaterPump.qml</file>
         <file>pages/ParaSettingQuery/MqttPara.qml</file>
         <file>JsonProto/EnvPara.json</file>
-        <file>pages/ParaSettingQuery/EnvPara.qml</file>
+        <file>pages/ParaSettingQuery/EnvParaSettting.qml</file>
+        <file>pages/ParaSettingQuery/SensorEnableSetting.qml</file>
+        <file>pages/DataAcquisition/WaterLevelDataAcquistion.qml</file>
+        <file>JsonProto/SensorEnable.json</file>
+        <file>JsonProto/WaterLevelData.json</file>
+        <file>windowRes/icon.ico</file>
+        <file>windowRes/icon.png</file>
+        <file>JsonProto/TunnelGasTest.json</file>
     </qresource>
 </RCC>
